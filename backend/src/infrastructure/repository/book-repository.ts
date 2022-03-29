@@ -4,6 +4,9 @@ import { IBookRepository } from 'src/domain/book/__interface__/book-repository-i
 import { Tag } from 'src/domain/book/tag';
 import { TagList } from 'src/domain/book/tag-list';
 import { BookId } from 'src/domain/book/book-id';
+import { books as IPrismaBooks ,tags as IPrismaTags} from '@prisma/client';
+
+export type PrismaBook = IPrismaBooks & { tags: IPrismaTags[]; }
 
 export class BookRepository implements IBookRepository {
   private readonly prisma: PrismaService;
@@ -13,7 +16,7 @@ export class BookRepository implements IBookRepository {
   }
 
   async findAll(): Promise<Book[]> {
-    const allBooks = await this.prisma.books.findMany({
+    const allBooks:PrismaBook[] = await this.prisma.books.findMany({
       include: { tags: true },
     });
 
@@ -31,7 +34,7 @@ export class BookRepository implements IBookRepository {
   }
 
   async findOne(bookId: BookId): Promise<Book> {
-    const book = await this.prisma.books.findUnique({
+    const book:PrismaBook = await this.prisma.books.findUnique({
       where: { id: bookId.toString() },
       include: { tags: true },
     });

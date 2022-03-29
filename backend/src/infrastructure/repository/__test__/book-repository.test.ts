@@ -46,15 +46,15 @@ describe('bookRepository', () => {
   describe('findOne', () => {
     test('データが１件もない', async () => {
       const bookId = BookId.reBuild('aaa');
-      const result = () => bookRepository.findOne(bookId);
+      const result = async () => await bookRepository.findOne(bookId);
       await expect(result).rejects.toThrow('idに合致する書籍がありません');
     });
     test('データが合致する', async () => {
-      const bookId = BookId.reBuild('aaa');
       await prismaService.books.createMany({ data: [insertBook1] });
       await prismaService.tags.createMany({ data: [insertTag1, insertTag2] });
-      const result = bookRepository.findOne(bookId);
-      await expect(result).rejects.toThrow('idに合致する書籍がありません');
+      const result = await bookRepository.findOne(bookId1);
+      expect(result).toEqual(book1);
+      expect(result.equals(book1)).toBe(true)
     });
   });
 });
