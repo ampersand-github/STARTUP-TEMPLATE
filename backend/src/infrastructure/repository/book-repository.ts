@@ -6,6 +6,7 @@ import { TagList } from 'src/domain/book/tag-list';
 import { BookId } from 'src/domain/book/book-id';
 import { books as IPrismaBooks ,tags as IPrismaTags} from '@prisma/client';
 
+
 export type PrismaBook = IPrismaBooks & { tags: IPrismaTags[]; }
 
 export class BookRepository implements IBookRepository {
@@ -15,21 +16,28 @@ export class BookRepository implements IBookRepository {
     this.prisma = _prisma;
   }
 
+  // prismaから取得した値を値オブジェクトに変換する
+  private converter(prismaBook:PrismaBook):Book {
+    const tags: Tag[] = prismaBook.tags.map((one) => {
+      return new Tag({ name: one.name });
+    });
+    const props: IBook = {
+      name: prismaBook.name,
+      tagList: new TagList({ tags: tags }),
+    };
+    const bookId = BookId.reBuild(prismaBook.id)
+    return Book.reBuild(props,bookId );
+  }
+
   async findAll(): Promise<Book[]> {
+    // データの取得
     const allBooks:PrismaBook[] = await this.prisma.books.findMany({
       include: { tags: true },
     });
 
-    return allBooks.map((one): Book => {
-      const bookId: BookId = BookId.reBuild(one.id);
-      const tags: Tag[] = one.tags.map((one) => {
-        return new Tag({ name: one.name });
-      });
-      const props: IBook = {
-        name: one.name,
-        tagList: new TagList({ tags: tags }),
-      };
-      return Book.reBuild(props, bookId);
+    // データの加工
+    return allBooks.map((one:PrismaBook): Book => {
+     return  this.converter(one)
     });
   }
 
@@ -43,13 +51,6 @@ export class BookRepository implements IBookRepository {
       throw new Error('idに合致する書籍がありません');
     }
 
-    const tags: Tag[] = book.tags.map((one) => {
-      return new Tag({ name: one.name });
-    });
-    const props: IBook = {
-      name: book.name,
-      tagList: new TagList({ tags: tags }),
-    };
-    return Book.reBuild(props, bookId);
+    return this.converter(book);
   }
 }
