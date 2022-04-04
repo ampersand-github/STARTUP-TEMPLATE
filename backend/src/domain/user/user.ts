@@ -16,12 +16,6 @@ export class User extends AggregateRoot<IUser, UserId> {
     return this.props.email.value;
   }
 
-  /*
-  public get tags():string[] {
-    return this.props.tags;
-  }
- */
-
   public static create(props: IUser): User {
     return new User(props, UserId.create());
   }
