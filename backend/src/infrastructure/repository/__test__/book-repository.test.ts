@@ -54,7 +54,7 @@ describe('bookRepository', () => {
       await prismaService.tags.createMany({ data: [insertTag1, insertTag2] });
       const result = await bookRepository.findOne(bookId1);
       expect(result).toEqual(book1);
-      expect(result.equals(book1)).toBe(true)
+      expect(result.equals(book1)).toBe(true);
     });
   });
 });

@@ -4,10 +4,9 @@ import { IBookRepository } from 'src/domain/book/__interface__/book-repository-i
 import { Tag } from 'src/domain/book/tag';
 import { TagList } from 'src/domain/book/tag-list';
 import { BookId } from 'src/domain/book/book-id';
-import { books as IPrismaBooks ,tags as IPrismaTags} from '@prisma/client';
+import { books as IPrismaBooks, tags as IPrismaTags } from '@prisma/client';
 
-
-export type PrismaBook = IPrismaBooks & { tags: IPrismaTags[]; }
+export type IPrismaBook = IPrismaBooks & { tags: IPrismaTags[] };
 
 export class BookRepository implements IBookRepository {
   private readonly prisma: PrismaService;
@@ -17,7 +16,7 @@ export class BookRepository implements IBookRepository {
   }
 
   // prismaから取得した値を値オブジェクトに変換する
-  private converter(prismaBook:PrismaBook):Book {
+  private converter(prismaBook: IPrismaBook): Book {
     const tags: Tag[] = prismaBook.tags.map((one) => {
       return new Tag({ name: one.name });
     });
@@ -25,24 +24,24 @@ export class BookRepository implements IBookRepository {
       name: prismaBook.name,
       tagList: new TagList({ tags: tags }),
     };
-    const bookId = BookId.reBuild(prismaBook.id)
-    return Book.reBuild(props,bookId );
+    const bookId = BookId.reBuild(prismaBook.id);
+    return Book.reBuild(props, bookId);
   }
 
   async findAll(): Promise<Book[]> {
     // データの取得
-    const allBooks:PrismaBook[] = await this.prisma.books.findMany({
+    const allBooks: IPrismaBook[] = await this.prisma.books.findMany({
       include: { tags: true },
     });
 
     // データの加工
-    return allBooks.map((one:PrismaBook): Book => {
-     return  this.converter(one)
+    return allBooks.map((one: IPrismaBook): Book => {
+      return this.converter(one);
     });
   }
 
   async findOne(bookId: BookId): Promise<Book> {
-    const book:PrismaBook = await this.prisma.books.findUnique({
+    const book: IPrismaBook = await this.prisma.books.findUnique({
       where: { id: bookId.toString() },
       include: { tags: true },
     });
