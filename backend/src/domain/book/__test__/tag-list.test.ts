@@ -2,9 +2,9 @@ import { Tag } from 'src/domain/book/tag';
 import { ITagList, TagList } from '../tag-list';
 
 describe('TagList', () => {
-  const tag1 = new Tag({ name: 'tag1' });
-  const tag2 = new Tag({ name: 'tag2' });
-  const tag3 = new Tag({ name: 'tag3' });
+  const tag1 = new Tag({ name: '技術書' });
+  const tag2 = new Tag({ name: '小説' });
+  const tag3 = new Tag({ name: '図鑑' });
   const props: ITagList = { tags: [tag1, tag2, tag3] };
 
   describe('constructor()', () => {
