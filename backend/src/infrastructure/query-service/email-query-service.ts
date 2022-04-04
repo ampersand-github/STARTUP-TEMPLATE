@@ -9,7 +9,8 @@ export class EmailQueryService implements IEmailQueryService {
   }
 
   public async matchEmail(email: string): Promise<boolean> {
-    const result = await this.prisma.user_profiles.findMany({
+    // todo リポジトリから全件とってきていい
+    const result = await this.prisma.users.findMany({
       where: { email: email },
     });
     // 合致0件 -> false, 合致あればtrue
