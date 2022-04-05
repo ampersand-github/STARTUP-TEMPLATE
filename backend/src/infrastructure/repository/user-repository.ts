@@ -12,12 +12,12 @@ export class UserRepository implements IUserRepository {
     this.prisma = _prisma;
   }
 
-  // prismaから取得した値を値オブジェクトに変換する
-  private converter(prismaUser: IPrismaUsers): User {
+  // prismaから取得した値をドメインオブジェクトに変換する
+  private static converter(prismaUser: IPrismaUsers): User {
     const userId = UserId.reBuild(prismaUser.id);
     const props: IUser = {
+      name: prismaUser.name,
       email: new Email({ email: prismaUser.email }),
-      name: prismaUser.email,
     };
     return User.reBuild(props, userId);
   }
@@ -28,14 +28,14 @@ export class UserRepository implements IUserRepository {
 
     // データの加工
     return allUsers.map((one: IPrismaUsers): User => {
-      return this.converter(one);
+      return UserRepository.converter(one);
     });
   }
 
-  async findOne(UserId: UserId): Promise<User> {
-    const User: IPrismaUsers = await this.prisma.users.findUnique({
+  async findOne(UserId: UserId): Promise<User | null> {
+    const user: IPrismaUsers = await this.prisma.users.findUnique({
       where: { id: UserId.toString() },
     });
-    return this.converter(User);
+    return user ? UserRepository.converter(user) : null;
   }
 }
