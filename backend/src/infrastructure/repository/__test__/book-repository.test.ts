@@ -46,8 +46,8 @@ describe('bookRepository', () => {
   describe('findOne', () => {
     test('データが１件もない', async () => {
       const bookId = BookId.reBuild('aaa');
-      const result = async () => await bookRepository.findOne(bookId);
-      await expect(result).rejects.toThrow('idに合致する書籍がありません');
+      const result = await bookRepository.findOne(bookId);
+      expect(result).toEqual(null);
     });
     test('データが合致する', async () => {
       await prismaService.books.createMany({ data: [insertBook1] });

@@ -15,7 +15,7 @@ export class BookRepository implements IBookRepository {
     this.prisma = _prisma;
   }
 
-  // prismaから取得した値を値オブジェクトに変換する
+  // prismaから取得した値をドメインオブジェクトに変換する
   private converter(prismaBook: IPrismaBook): Book {
     const tags: Tag[] = prismaBook.tags.map((one) => {
       return new Tag({ name: one.name });
@@ -33,23 +33,17 @@ export class BookRepository implements IBookRepository {
     const allBooks: IPrismaBook[] = await this.prisma.books.findMany({
       include: { tags: true },
     });
-
     // データの加工
     return allBooks.map((one: IPrismaBook): Book => {
       return this.converter(one);
     });
   }
 
-  async findOne(bookId: BookId): Promise<Book> {
-    const book: IPrismaBook = await this.prisma.books.findUnique({
+  async findOne(bookId: BookId): Promise<Book | null> {
+    const book: IPrismaBook | null = await this.prisma.books.findUnique({
       where: { id: bookId.toString() },
       include: { tags: true },
     });
-
-    if (!book) {
-      throw new Error('idに合致する書籍がありません');
-    }
-
-    return this.converter(book);
+    return book ? this.converter(book) : null;
   }
 }
