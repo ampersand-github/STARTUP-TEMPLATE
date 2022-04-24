@@ -5,10 +5,9 @@ WORKDIR /backend-server
 
 COPY package*.json ./
 COPY prisma ./prisma
-
+COPY src ./src
 
 RUN npm install
 RUN npx prisma generate
 
-# CMD [ "npm", "run", "start:debug" ]
-
+CMD [ "npm", "run", "start:debug" ]

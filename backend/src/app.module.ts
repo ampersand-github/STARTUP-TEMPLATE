@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { SampleController } from './presentation/controller/sample/sample.controller';
-
+import { BookController } from './presentation/controller/book.controller';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -9,7 +8,7 @@ import { SampleController } from './presentation/controller/sample/sample.contro
       envFilePath: `.env`, // NODE_ENVの値によって読み込むファイルを変更する
     }),
   ],
-  controllers: [SampleController],
+  controllers: [BookController],
   providers: [],
 })
 export class AppModule {}

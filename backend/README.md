@@ -14,4 +14,27 @@ npm run start:dev
 cd backend
 npm run test:watch
 ```
-sss
+
+### テストどうする？
+- backend
+  - domain
+    - 単体テスト
+  - usecase
+    - 単体テスト
+    - DBはmockDBを用意する
+  - repository
+    - 単体テスト
+    - prisma含めたテスト
+  - controller
+    - 結合テスト
+    - requestからresponseまで
+    - DBはmockしない
+- frontend
+  - ビジュアルリグレッションテスト
+    - seedを使う
+  - e2eテスト
+    - seedを使う
+- その他
+  - 普通に動作確認
+    - seeder
+  - storybook
