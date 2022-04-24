@@ -1,9 +1,9 @@
 import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
-import { User, IUser } from 'src/domain/User/User';
-import { IUserRepository } from 'src/domain/User/__interface__/User-repository-interface';
-import { UserId } from 'src/domain/User/User-id';
 import { users as IPrismaUsers } from '@prisma/client';
 import { Email } from 'src/domain/user/email';
+import {IUser, User} from "../../domain/user/user";
+import {UserId} from "../../domain/user/user-id";
+import {IUserRepository} from "../../domain/user/__interface__/user-repository-interface";
 
 export class UserRepository implements IUserRepository {
   private readonly prisma: PrismaService;
