@@ -1,6 +1,6 @@
-import { BookId } from 'src/domain/Book/Book-id';
 import { AggregateRoot } from 'src/domain/__shared__/aggregate-root';
 import { TagList } from './tag-list';
+import {BookId} from "./book-id";
 
 export interface IBook {
   name: string;

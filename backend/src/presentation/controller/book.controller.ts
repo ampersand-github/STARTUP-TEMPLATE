@@ -10,7 +10,7 @@ export class BookController {
   private bookRepository = new BookRepository(this.prisma);
 
   @Get()
-  //  curl http://localhost:3005/book
+  //  curl http://localhost:3001/book
   public async getHello() {
     const allBooks = await findAllBooks(this.bookRepository);
     return findAllBooksDto(allBooks);
