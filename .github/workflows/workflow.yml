@@ -50,10 +50,6 @@ jobs:
         run: echo "${{ secrets.DB_DATABASE }}"
         working-directory: ./backend
 
-      - name: Run Docker2
-        run: echo "${{ .env.development.DB_DATABASE }}"
-        working-directory: ./backend
-
       - name: Run Docker
         run: docker-compose --env-file .env.development up -d
         working-directory: ./backend
