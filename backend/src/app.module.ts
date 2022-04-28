@@ -8,7 +8,7 @@ const ENV = process.env.NODE_ENV;
   imports: [
     ConfigModule.forRoot({
       isGlobal: true, // 全てのmoduleで使用できるように
-      envFilePath: !ENV ? '.env' : `.env.${ENV}`, // NODE_ENVの値によって読み込むファイルを変更する
+      envFilePath: ENV === "development" ? '.env' : `.env.${ENV}`, // NODE_ENVの値によって読み込むファイルを変更する
     }),
   ],
   controllers: [BookController],

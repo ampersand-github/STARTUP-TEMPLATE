@@ -9,7 +9,6 @@ services:
     container_name: postgres
     image: postgres:14
     env_file:
-      - .env.development
       - .env
     ports:
       - ${POSTGRES_PORT}:${POSTGRES_PORT}
