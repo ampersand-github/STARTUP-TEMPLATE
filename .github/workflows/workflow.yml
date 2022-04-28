@@ -32,18 +32,17 @@ jobs:
       - name: Touch .env.development
         run: |
           touch .env
-          echo "API_CLIENT_URL=${{ secrets.API_CLIENT_URL }}" >> .env
-          echo "BACKEND_PORT=${{ secrets.BACKEND_PORT }}" >> .env
-          echo "DB_CONNECTION=${{ secrets.DB_CONNECTION }}" >> .env
-          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
-          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
-          echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
-          echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
-          echo "DB_LOCAL=${{ secrets.DB_CONNECTION }}://${{ secrets.DB_USERNAME }}:${{ secrets.DB_PASSWORD }}@localhost:${{ secrets.DB_PORT }}/${{ secrets.DB_DATABASE }}" >> .env
+          echo "BACKEND_PORT=${{ secrets.BACKEND_PORT }}" >> .env.development
+          echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" >> .env.development
+          echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env.development
+          echo "DB_CONNECTION=${{ secrets.DB_CONNECTION }}" >> .env.development
+          echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}" >> .env.development
+          echo "POSTGRES_PORT=${{ secrets.POSTGRES_PORT }}" >> .env.development
+          echo "DB_LOCAL=${{ secrets.DB_CONNECTION }}://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:${{ secrets.POSTGRES_PORT }}/${{ secrets.POSTGRES_DB }}" >> .env.development
         working-directory: ./backend
 
       - name: Run Docker
-        run: docker-compose up -d
+        run: docker-compose --env-file .env.development up -d
         working-directory: ./backend
 
       - name: Use Node.js
@@ -63,6 +62,10 @@ jobs:
           reporter: github-check
           eslint_flags: "{src,test}/**/*.ts"
           workdir: ./backend
+
+      - name: dotenv
+        run: npm install -g dotenv-cli
+        working-directory: ./backend
 
       - name: Run migrations
         run: yarn prisma:migration

@@ -3,12 +3,12 @@ import { ConfigModule } from '@nestjs/config';
 import { BookController } from './presentation/controller/book.controller';
 
 const ENV = process.env.NODE_ENV;
-
+console.log(ENV)
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true, // 全てのmoduleで使用できるように
-      envFilePath: !ENV ? '.env' : `.env.${ENV}`, // NODE_ENVの値によって読み込むファイルを変更する
+      envFilePath: ENV === "development" ? '.env.development' : `.env.${ENV}`, // NODE_ENVの値によって読み込むファイルを変更する
     }),
   ],
   controllers: [BookController],
