@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { BookController } from './presentation/controller/book.controller';
 
 const ENV = process.env.NODE_ENV;
-
+console.log(ENV)
 @Module({
   imports: [
     ConfigModule.forRoot({
