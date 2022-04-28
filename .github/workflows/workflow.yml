@@ -32,7 +32,6 @@ jobs:
       - name: Touch .env
         run: |
           touch .env
-          echo "API_CLIENT_URL=${{ secrets.API_CLIENT_URL }}" >> .env
           echo "BACKEND_PORT=${{ secrets.BACKEND_PORT }}" >> .env
           echo "DB_CONNECTION=${{ secrets.DB_CONNECTION }}" >> .env
           echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
