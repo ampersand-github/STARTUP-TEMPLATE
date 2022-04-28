@@ -16,11 +16,11 @@
     "docker:down": "docker-compose -p STARTUP --env-file .env.development down",
     "lint": "eslint src --ext .ts,tsx,js",
     "format": "prettier --write 'src/**/*.{ts,tsx}'",
-    "test": "DB_LOCAL=postgresql://sample_root:sample_password@localhost:5432/dev_db jest --forceExit --detectOpenHandles --runInBand",
-    "test:watch": "DB_LOCAL=postgresql://sample_root:sample_password@localhost:5432/dev_db jest --watch --forceExit --detectOpenHandles --runInBand",
-    "test:cov": "DB_LOCAL=postgresql://sample_root:sample_password@localhost:5432/dev_db jest --coverage --forceExit --detectOpenHandles --runInBand",
+    "test": "dotenv -e .env.development jest --forceExit --detectOpenHandles --runInBand",
+    "test:watch": "dotenv -e .env.development jest --watch --forceExit --detectOpenHandles --runInBand",
+    "test:cov": "dotenv -e .env.development jest --coverage --forceExit --detectOpenHandles --runInBand",
     "prisma:studio": "prisma studio",
-    "prisma:migration": "dotenv -e .env.development -- npx prisma migrate dev"
+    "prisma:migration": "dotenv -e .env.development npx prisma migrate dev"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
