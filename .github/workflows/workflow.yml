@@ -43,7 +43,11 @@ jobs:
         working-directory: ./backend
 
       - name: Run Docker
-        run: docker-compose -p STARTUP --env-file ./.env.development up -d
+        run: ls -a
+        working-directory: ./backend
+
+      - name: Run Docker
+        run: docker-compose --env-file ./.env.development up -d
         working-directory: ./backend
 
       - name: Use Node.js
