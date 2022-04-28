@@ -32,14 +32,14 @@ jobs:
       - name: Touch .env.development
         run: |
           touch .env.development
-          echo "API_CLIENT_URL=${{ secrets.API_CLIENT_URL }}" >> .env
-          echo "BACKEND_PORT=${{ secrets.BACKEND_PORT }}" >> .env
-          echo "DB_CONNECTION=${{ secrets.DB_CONNECTION }}" >> .env
-          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
-          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
-          echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
-          echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
-          echo "DB_LOCAL=${{ secrets.DB_CONNECTION }}://${{ secrets.DB_USERNAME }}:${{ secrets.DB_PASSWORD }}@localhost:${{ secrets.DB_PORT }}/${{ secrets.DB_DATABASE }}" >> .env
+          echo "API_CLIENT_URL=${{ secrets.API_CLIENT_URL }}" >> .env.development
+          echo "BACKEND_PORT=${{ secrets.BACKEND_PORT }}" >> .env.development
+          echo "DB_CONNECTION=${{ secrets.DB_CONNECTION }}" >> .env.development
+          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env.development
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env.development
+          echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env.development
+          echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env.development
+          echo "DB_LOCAL=${{ secrets.DB_CONNECTION }}://${{ secrets.DB_USERNAME }}:${{ secrets.DB_PASSWORD }}@localhost:${{ secrets.DB_PORT }}/${{ secrets.DB_DATABASE }}" >> .env.development
         working-directory: ./backend
 
       - name: Run Docker
