@@ -34,19 +34,15 @@ jobs:
           touch .env
           echo "BACKEND_PORT=${{ secrets.BACKEND_PORT }}" >> .env
           echo "DB_CONNECTION=${{ secrets.DB_CONNECTION }}" >> .env
-          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
-          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
-          echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
-          echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
+          echo "POSTGRES_USER=${{ secrets.DB_USERNAME }}" >> .env
+          echo "POSTGRES_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+          echo "POSTGRES_PORT=${{ secrets.DB_PORT }}" >> .env
+          echo "POSTGRES_DB=${{ secrets.DB_DATABASE }}" >> .env
           echo "DB_LOCAL=${{ secrets.DB_CONNECTION }}://${{ secrets.DB_USERNAME }}:${{ secrets.DB_PASSWORD }}@localhost:${{ secrets.DB_PORT }}/${{ secrets.DB_DATABASE }}" >> .env
         working-directory: ./backend
 
       - name: Run Docker1
         run: cat .env
-        working-directory: ./backend
-
-      - name: Run Docker2
-        run: echo "${{ secrets.DB_DATABASE }}"
         working-directory: ./backend
 
       - name: Run Docker
