@@ -43,7 +43,7 @@ jobs:
         working-directory: ./backend
 
       - name: Run Docker
-        run: ls -a
+        run: cat .env.development
         working-directory: ./backend
 
       - name: Run Docker
