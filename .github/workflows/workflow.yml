@@ -41,10 +41,6 @@ jobs:
           echo "DB_LOCAL=${{ secrets.DB_CONNECTION }}://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:${{ secrets.POSTGRES_PORT }}/${{ secrets.POSTGRES_DB }}" >> .env.development
         working-directory: ./backend
 
-      - name: Run Docker1
-        run: cat .env.development
-        working-directory: ./backend
-
       - name: Run Docker
         run: docker-compose --env-file .env.development up -d
         working-directory: ./backend
