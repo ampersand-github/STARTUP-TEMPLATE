@@ -29,7 +29,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Touch .env
+      - name: Touch .env.development
         run: |
           touch .env
           echo "API_CLIENT_URL=${{ secrets.API_CLIENT_URL }}" >> .env
@@ -39,12 +39,10 @@ jobs:
           echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
           echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
           echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
-          echo "AWS_S3_BUCKET=${{ secrets.AWS_S3_BUCKET }}" >> .env
-          echo "AWS_S3_BUCKET_SECRET=${{ secrets.AWS_S3_BUCKET_SECRET }}" >> .env
           echo "DB_LOCAL=${{ secrets.DB_CONNECTION }}://${{ secrets.DB_USERNAME }}:${{ secrets.DB_PASSWORD }}@localhost:${{ secrets.DB_PORT }}/${{ secrets.DB_DATABASE }}" >> .env
         working-directory: ./backend
 
-      - name: Run Dcoker
+      - name: Run Docker
         run: docker-compose up -d
         working-directory: ./backend
 
