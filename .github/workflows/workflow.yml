@@ -29,24 +29,24 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Touch .env
+      - name: Touch .env.development
         run: |
           touch .env
-          echo "BACKEND_PORT=${{ secrets.BACKEND_PORT }}" >> .env
-          echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" >> .env
-          echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env
-          echo "DB_CONNECTION=${{ secrets.DB_CONNECTION }}" >> .env
-          echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}" >> .env
-          echo "POSTGRES_PORT=${{ secrets.POSTGRES_PORT }}" >> .env
-          echo "DB_LOCAL=${{ secrets.DB_CONNECTION }}://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:${{ secrets.POSTGRES_PORT }}/${{ secrets.POSTGRES_DB }}" >> .env
+          echo "BACKEND_PORT=${{ secrets.BACKEND_PORT }}" >> .env.development
+          echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" >> .env.development
+          echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env.development
+          echo "DB_CONNECTION=${{ secrets.DB_CONNECTION }}" >> .env.development
+          echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}" >> .env.development
+          echo "POSTGRES_PORT=${{ secrets.POSTGRES_PORT }}" >> .env.development
+          echo "DB_LOCAL=${{ secrets.DB_CONNECTION }}://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:${{ secrets.POSTGRES_PORT }}/${{ secrets.POSTGRES_DB }}" >> .env.development
         working-directory: ./backend
 
       - name: Run Docker1
-        run: cat .env
+        run: cat .env.development
         working-directory: ./backend
 
       - name: Run Docker
-        run: docker-compose up -d
+        run: docker-compose --env-file .env.development up -d
         working-directory: ./backend
 
       - name: Use Node.js
