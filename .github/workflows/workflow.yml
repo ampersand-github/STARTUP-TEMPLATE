@@ -42,8 +42,16 @@ jobs:
           echo "DB_LOCAL=${{ secrets.DB_CONNECTION }}://${{ secrets.DB_USERNAME }}:${{ secrets.DB_PASSWORD }}@localhost:${{ secrets.DB_PORT }}/${{ secrets.DB_DATABASE }}" >> .env.development
         working-directory: ./backend
 
-      - name: Run Docker
+      - name: Run Docker1
         run: cat .env.development
+        working-directory: ./backend
+
+      - name: Run Docker2
+        run: echo "${{ secrets.DB_DATABASE }}"
+        working-directory: ./backend
+
+      - name: Run Docker2
+        run: echo "${{ .env.development.DB_DATABASE }}"
         working-directory: ./backend
 
       - name: Run Docker
