@@ -38,7 +38,7 @@ jobs:
           echo "DB_CONNECTION=${{ secrets.DB_CONNECTION }}" >> .env.development
           echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}" >> .env.development
           echo "POSTGRES_PORT=${{ secrets.POSTGRES_PORT }}" >> .env.development
-          echo "DB_LOCAL=${{ secrets.DB_CONNECTION }}://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:${{ secrets.POSTGRES_PORT }}/${{ secrets.POSTGRES_DB }}" >> .env.development
+          echo "DATABASE_URL=${{ secrets.DB_CONNECTION }}://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:${{ secrets.POSTGRES_PORT }}/${{ secrets.POSTGRES_DB }}" >> .env.development
         working-directory: ./backend
 
       - name: Run Docker
