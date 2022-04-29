@@ -1,4 +1,4 @@
-import {BookId} from "src/domain/book/book-id";
+import { BookId } from 'src/domain/book/book-id';
 
 describe('BookId', () => {
   describe('create()', () => {

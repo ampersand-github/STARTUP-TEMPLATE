@@ -9,10 +9,10 @@ export class BookController {
   private prisma = new PrismaService();
   private bookRepository = new BookRepository(this.prisma);
 
-  @Get("pass")
+  @Get('pass')
   //  curl http://localhost:3001/book
   public async pass() {
-    return "passed!"
+    return 'passed!';
   }
 
   @Get()
