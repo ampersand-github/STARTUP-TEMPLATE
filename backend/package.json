@@ -16,9 +16,9 @@
     "docker:db:down": "docker-compose -p STARTUP-DB --env-file .env.development down",
     "lint": "eslint src --ext .ts,tsx,js",
     "format": "prettier --write 'src/**/*.{ts,tsx}'",
-    "test": "dotenv -e .env.development jest --forceExit --detectOpenHandles --runInBand",
-    "test:watch": "dotenv -e .env.development jest --watch --forceExit --detectOpenHandles --runInBand",
-    "test:cov": "dotenv -e .env.development jest --coverage --forceExit --detectOpenHandles --runInBand",
+    "test": "dotenv -e .env.development -- jest --forceExit --detectOpenHandles --runInBand",
+    "test:watch": "dotenv -e .env.development -- jest --watch --forceExit --detectOpenHandles --runInBand",
+    "test:cov": "dotenv -e .env.development -- jest --coverage --forceExit --detectOpenHandles --runInBand",
     "prisma:studio": "prisma studio",
     "prisma:migration": "dotenv -e .env.development npx prisma migrate dev"
   },
