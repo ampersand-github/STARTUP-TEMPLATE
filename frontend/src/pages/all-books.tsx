@@ -1,7 +1,7 @@
 import {GetServerSideProps, NextPage} from "next";
 import React from "react";
 
-const AllBooks: NextPage = (props:any ) => {
+const AllBooks: NextPage = (props:any) => {
     const data = props.data
     console.log(data[0].name)
     return <div>
