@@ -1,7 +1,8 @@
-import {NextPage} from "next";
-import React from "react";
+import { NextPage } from 'next';
+import React from 'react';
+import {BaseLayout} from "../../component/templete/base-layout";
 
 const SignUp: NextPage = () => {
-    return <div>SignUp</div>
+  return  <BaseLayout>sign-up</BaseLayout>;
 };
 export default SignUp;
