@@ -8,8 +8,8 @@ export default {
 } as ComponentMeta<typeof BaseLayout>;
 
 const TemplateStory: ComponentStory<typeof BaseLayout> = (
-    args: IBaseLayout,
-) => <BaseLayout {...args}/>;
+  args: IBaseLayout,
+) => <BaseLayout {...args} />;
 
 export const Default = TemplateStory.bind({});
-Default.args = { children: (<div>aaa</div>) };
+Default.args = { children: <div>aaa</div> };

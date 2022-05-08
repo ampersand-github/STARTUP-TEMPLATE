@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app';
 import { getApps, initializeApp } from 'firebase/app';
 import { Auth, getAuth } from '@firebase/auth';
 import CssBaseline from '@mui/material/CssBaseline';
+import { AuthProvider } from '../util/auth/auth-context';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Firebase設定
@@ -20,16 +21,15 @@ const getFirebaseApp = () => getApps()[0] || initializeApp(config);
 
 export const app = getFirebaseApp();
 export const auth: Auth = getAuth(app);
-
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // 全体設定
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <AuthProvider firebaseAuth={auth}>
       <CssBaseline />
       <Component {...pageProps} />
-    </>
+    </AuthProvider>
   );
 }
 

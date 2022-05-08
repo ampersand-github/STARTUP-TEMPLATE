@@ -7,8 +7,6 @@ export default {
   component: Header,
 } as ComponentMeta<typeof Header>;
 
-const TemplateStory: ComponentStory<typeof Header> = () => (
-  <Header/>
-);
+const TemplateStory: ComponentStory<typeof Header> = () => <Header />;
 
 export const Default = TemplateStory.bind({});
