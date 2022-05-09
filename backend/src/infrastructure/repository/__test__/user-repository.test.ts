@@ -1,7 +1,6 @@
 import { truncateAllTable } from 'src/infrastructure/__shared__/truncate-all-table';
 import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
 import { UserRepository } from 'src/infrastructure/repository/user-repository';
-import { Email } from 'src/domain/user/email';
 import { IUser, User } from 'src/domain/user/user';
 import { UserId } from 'src/domain/user/user-id';
 
@@ -55,21 +54,17 @@ const convertToPrismaData = (user: User) => {
   return {
     id: user.id.toString(),
     name: user.name,
-    email: user.email,
   };
 };
 //
 const userId1 = UserId.reBuild('2422c514-4b06-aced-5ef3-3f869d299bd8');
-const email1 = new Email({ email: 'aaa@gmail.com' });
-const props1: IUser = { name: '山田太郎', email: email1 };
+const props1: IUser = { name: '山田太郎' };
 const user1 = User.reBuild(props1, userId1);
 //
 const userId2 = UserId.reBuild('43145f95-2034-4fae-b88f-ca0bdf7890bd');
-const email2 = new Email({ email: 'bbb@gmail.com' });
-const props2: IUser = { name: '鈴木次郎', email: email2 };
+const props2: IUser = { name: '鈴木次郎' };
 const user2 = User.reBuild(props2, userId2);
 //
 const userId3 = UserId.reBuild('6c2faf45-8fae-48ad-e660-c5d1c92920c2');
-const email3 = new Email({ email: 'ccc@gmail.com' });
-const props3: IUser = { name: '田中三郎', email: email3 };
+const props3: IUser = { name: '田中三郎' };
 const user3 = User.reBuild(props3, userId3);

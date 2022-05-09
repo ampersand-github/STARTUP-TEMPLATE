@@ -18,11 +18,13 @@ export class BookRepository implements IBookRepository {
   // prismaから取得した値をドメインオブジェクトに変換する
   private converter(prismaBook: IPrismaBook): Book {
     const tags: Tag[] = prismaBook.tags.map((one) => {
-      return new Tag({ name: one.name });
+      return new Tag({ name: one.tag_name });
     });
     const props: IBook = {
       name: prismaBook.name,
       tagList: new TagList({ tags: tags }),
+      author:prismaBook.author,
+      rating:prismaBook.rating
     };
     const bookId = BookId.reBuild(prismaBook.id);
     return Book.reBuild(props, bookId);

@@ -9,7 +9,7 @@ describe('Book', () => {
   const tag2 = new Tag({ name: '小説' });
   const tag3 = new Tag({ name: '図鑑' });
   const tagList = new TagList({ tags: [tag1, tag2, tag3] });
-  const props: IBook = { name: name, tagList: tagList };
+  const props: IBook = { name: name, tagList: tagList,author:"",rating:3 };
 
   describe('constructor', () => {
     it('createできる', () => {

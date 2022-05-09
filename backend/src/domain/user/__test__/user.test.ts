@@ -1,11 +1,9 @@
 import { UserId } from 'src/domain/user/user-id';
 import { IUser, User } from 'src/domain/user/user';
-import { Email } from 'src/domain/user/email';
 
 describe('User', () => {
-  const email = new Email({ email: 'aaa@gmail.com' });
   const name = '田中太郎';
-  const props: IUser = { name: name, email: email };
+  const props: IUser = { name: name };
 
   describe('constructor', () => {
     it('createできる', () => {
@@ -24,9 +22,6 @@ describe('User', () => {
     const user = User.create(props);
     it('nameが正しく取得できる', () => {
       expect(user.name).toEqual(props.name);
-    });
-    it('emailが正しく取得できる', () => {
-      expect(user.email).toEqual(props.email.value);
     });
   });
 });

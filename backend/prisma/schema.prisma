@@ -13,7 +13,6 @@ datasource db {
 model users {
     id          String  @id
     name        String
-    email       String
     updated_at  DateTime    @updatedAt
     created_at  DateTime    @default(now())
     //
@@ -26,6 +25,8 @@ model users {
 model books {
     id          String  @id
     name        String
+    author      String
+    rating      Int
     updated_at  DateTime   @updatedAt
     created_at  DateTime   @default(now())
     //
@@ -36,22 +37,18 @@ model books {
 // One-to-many relations
 // https://www.prisma.io/docs/concepts/components/prisma-schema/relations/one-to-many-relations
 model tags {
-    id          String  @id
-    name        String
+    tag_name    String
     book_id     String
-    updated_at  DateTime   @updatedAt
-    created_at  DateTime   @default(now())
     //
     books   books @relation(fields: [book_id], references: [id])
+    @@id([tag_name, book_id])
 }
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// 履歴集約
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 model lendingHistories {
     id          String  @id // 必要ないけどprismaの制約上必須
-    user_id     String
     book_id     String
-    checkoutAt  DateTime
+    user_id     String
+    checkoutAt  DateTime @default(now())
     returnAt    DateTime
     //
     users   users @relation(fields: [user_id], references: [id])

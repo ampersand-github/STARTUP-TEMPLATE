@@ -73,23 +73,43 @@ const newBookSize = new Tag({ name: TAG.newBookSize });
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 const bookId1 = BookId.reBuild('2422c514-4b06-aced-5ef3-3f869d299bd8');
 const tagList1 = new TagList({ tags: [tech, bigSize] });
-const props1: IBook = { name: 'セキュア・バイ・デザイン', tagList: tagList1 };
+const props1: IBook = {
+  name: 'セキュア・バイ・デザイン',
+  tagList: tagList1,
+  author: 'author1',
+  rating: 1,
+};
 const book1 = Book.reBuild(props1, bookId1);
 //
 const bookId2 = BookId.reBuild('43145f95-2034-4fae-b88f-ca0bdf7890bd');
 const tagList2 = new TagList({ tags: [tech] });
-const props2: IBook = { name: '監視入門', tagList: tagList2 };
+const props2: IBook = {
+  name: '監視入門',
+  tagList: tagList2,
+  author: 'author2',
+  rating: 2,
+};
 const book2 = Book.reBuild(props2, bookId2);
 //
 const bookId3 = BookId.reBuild('6c2faf45-8fae-48ad-e660-c5d1c92920c2');
 const tagList3 = new TagList({ tags: [novel, newBookSize] });
-const props3: IBook = { name: '三体', tagList: tagList3 };
+const props3: IBook = {
+  name: '三体',
+  tagList: tagList3,
+  author: 'author3',
+  rating: 3,
+};
 const book3 = Book.reBuild(props3, bookId3);
 
 //
 const bookId4 = BookId.reBuild('ab442d20-5e7a-2058-5a93-48bb1e4fe4ab');
 const tagList4 = new TagList({ tags: [bigSize, picture] });
-const props4: IBook = { name: 'よく分かる恐竜図鑑', tagList: tagList4 };
+const props4: IBook = {
+  name: 'よく分かる恐竜図鑑',
+  tagList: tagList4,
+  author: 'author4',
+  rating: 4,
+};
 const book4 = Book.reBuild(props4, bookId4);
 
 // - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -98,53 +118,54 @@ const book4 = Book.reBuild(props4, bookId4);
 const insertBook1 = {
   id: book1.id.toString(),
   name: book1.name,
+  author:book1.author,
+  rating:book1.rating
 };
 const insertBook2 = {
   id: book2.id.toString(),
   name: book2.name,
+  author:book2.author,
+  rating:book2.rating
 };
 const insertBook3 = {
   id: book3.id.toString(),
   name: book3.name,
+  author:book3.author,
+  rating:book3.rating
 };
 const insertBook4 = {
   id: book4.id.toString(),
   name: book4.name,
+  author:book4.author,
+  rating:book4.rating
 };
 
 const insertTag1 = {
-  id: '98ca519b-e2e7-e11e-12ef-fe1cfa93acfd',
   book_id: insertBook1.id.toString(),
-  name: tech.value,
+  tag_name: tech.value,
 };
 const insertTag2 = {
-  id: '5f744263-10ba-4f10-bf35-cfb0c9877d1f',
   book_id: insertBook1.id.toString(),
-  name: bigSize.value,
+  tag_name: bigSize.value,
 };
 const insertTag3 = {
-  id: 'a35d2a89-4e17-9fd6-143e-0cd21f3a146b',
   book_id: insertBook2.id.toString(),
-  name: tech.value,
+  tag_name: tech.value,
 };
 
 const insertTag4 = {
-  id: 'ebf9508d-5d06-9ec6-78f2-dbac37fefcd3',
   book_id: insertBook3.id.toString(),
-  name: novel.value,
+  tag_name: novel.value,
 };
 const insertTag5 = {
-  id: '67738582-00a6-678d-b86c-7bbd03d9bc1b',
   book_id: insertBook3.id.toString(),
-  name: newBookSize.value,
+  tag_name: newBookSize.value,
 };
 const insertTag6 = {
-  id: 'c12900ef-7e4f-eec0-dc94-5bdd50e24042',
   book_id: insertBook4.id.toString(),
-  name: bigSize.value,
+  tag_name: bigSize.value,
 };
 const insertTag7 = {
-  id: 'adc4396a-e361-d193-9a32-1db9de5053b1',
   book_id: insertBook4.id.toString(),
-  name: picture.value,
+  tag_name: picture.value,
 };

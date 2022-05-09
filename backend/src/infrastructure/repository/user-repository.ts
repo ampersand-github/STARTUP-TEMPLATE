@@ -1,6 +1,5 @@
 import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
 import { users as IPrismaUsers } from '@prisma/client';
-import { Email } from 'src/domain/user/email';
 import { IUser, User } from 'src/domain/user/user';
 import { UserId } from 'src/domain/user/user-id';
 import { IUserRepository } from 'src/domain/user/__interface__/user-repository-interface';
@@ -17,7 +16,6 @@ export class UserRepository implements IUserRepository {
     const userId = UserId.reBuild(prismaUser.id);
     const props: IUser = {
       name: prismaUser.name,
-      email: new Email({ email: prismaUser.email }),
     };
     return User.reBuild(props, userId);
   }
