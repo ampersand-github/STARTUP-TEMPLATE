@@ -6,6 +6,14 @@ export const TAG = {
   picture: '図鑑',
   bigSize: '大判',
   newBookSize: '新書',
+  design:"設計",
+  ui:"デザイン",
+  ts:"TypeScript",
+  ops:"運用",
+  java:"Java",
+  attitude: "心構え",
+  html :"HTML",
+  go:"Go"
 } as const;
 
 export type tagType = typeof TAG[keyof typeof TAG];
@@ -23,7 +31,8 @@ export class Tag extends ValueObject<ITag> {
     super(props);
     const tagList = Object.values(TAG);
     if (!tagList.find((plan: tagType) => plan === props.name)) {
-      throw new Error('タグが存在しません');
+      console.log("aaa")
+      throw new Error(`${props.name}のタグが存在しません`);
     }
   }
 }

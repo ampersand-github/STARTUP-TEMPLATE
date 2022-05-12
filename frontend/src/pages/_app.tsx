@@ -4,6 +4,7 @@ import { getApps, initializeApp } from 'firebase/app';
 import { Auth, getAuth } from '@firebase/auth';
 import CssBaseline from '@mui/material/CssBaseline';
 import { AuthProvider } from '../util/auth/auth-context';
+import { BaseLayout } from '../component/template/base-layout';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Firebase設定
@@ -28,7 +29,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider firebaseAuth={auth}>
       <CssBaseline />
-      <Component {...pageProps} />
+      <BaseLayout>
+        {' '}
+        <Component {...pageProps} />
+      </BaseLayout>
     </AuthProvider>
   );
 }

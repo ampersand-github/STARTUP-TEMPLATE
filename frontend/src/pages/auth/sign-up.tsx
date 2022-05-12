@@ -8,7 +8,7 @@ import { PasswordTextField } from 'component/atom/password-text-field';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useRouter } from 'next/router';
 import { auth } from '../_app';
-import { CustomSnackbar } from 'component/custom-snack-bar';
+import { CustomSnackbar } from 'component/atom/custom-snack-bar';
 import { LinkText } from 'component/atom/link-text';
 import { ISignUpResult, signUp } from 'util/auth/sign-up';
 import { useAuthContext } from 'util/auth/auth-context';

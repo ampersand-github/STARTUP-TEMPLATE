@@ -12,7 +12,7 @@ import { useRouter } from 'next/router';
 import { useAuthContext } from 'util/auth/auth-context';
 import { ISignInResult, signIn } from 'util/auth/sign-in';
 import { auth } from '../_app';
-import { CustomSnackbar } from 'component/custom-snack-bar';
+import { CustomSnackbar } from 'component/atom/custom-snack-bar';
 import { LinkText } from 'component/atom/link-text';
 import { CenterLoading } from 'component/atom/center-loading';
 

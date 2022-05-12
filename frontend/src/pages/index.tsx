@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 import { BaseLayout } from 'component/template/base-layout';
 import { Box } from '@mui/material';
 import { useAuthContext } from 'util/auth/auth-context';
-import { CustomSnackbar } from 'component/custom-snack-bar';
+import { CustomSnackbar } from 'component/atom/custom-snack-bar';
 import { CenterLoading } from 'component/atom/center-loading';
 
 const WaitingEmailVerifiedCustomSnackbar = (): JSX.Element => {

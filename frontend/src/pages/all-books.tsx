@@ -7,10 +7,12 @@ const AllBooks: NextPage = (props: any) => {
   return (
     <div>
       <div>AllBooks</div>
-      {data.map((one: { name: any }) => {
+      {data.map((one: { name: string; author: string }) => {
         return (
           <div key={one.name}>
-            <div key={one.name}>{one.name}</div>
+            <div key={one.name}>
+              {one.name}/{one.author}
+            </div>
           </div>
         );
       })}
@@ -22,7 +24,7 @@ export default AllBooks;
 
 // サーバサイドで実行する処理(getServerSideProps)を定義する
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const res: Response = await fetch(`http://localhost:3005/book`);
+  const res: Response = await fetch('http://localhost:3001/book');
   const data = await res.json();
   return { props: { data } };
 };
