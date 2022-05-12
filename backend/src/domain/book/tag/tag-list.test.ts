@@ -1,5 +1,5 @@
-import { Tag } from 'src/domain/book/tag';
-import { ITagList, TagList } from '../tag-list';
+import { Tag } from 'src/domain/book/tag/tag';
+import { ITagList, TagList } from './tag-list';
 
 describe('TagList', () => {
   const tag1 = new Tag({ name: '技術書' });

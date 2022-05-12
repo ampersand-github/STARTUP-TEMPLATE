@@ -1,4 +1,4 @@
-import { ITag, TAG, Tag } from 'src/domain/book/tag';
+import { ITag, TAG, Tag } from 'src/domain/book/tag/tag';
 
 describe('Tag', () => {
   const props: ITag = { name: TAG.tech };
