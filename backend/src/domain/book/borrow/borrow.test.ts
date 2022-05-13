@@ -1,6 +1,6 @@
 import { Borrow, IBorrow } from './borrow';
 import { BookId } from '../book-id/book-id';
-import { UserId } from '../../user/user-id';
+import { UserId } from '../../user/user-id/user-id';
 
 describe('Book', () => {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -33,12 +33,12 @@ describe('Book', () => {
     describe('canBorrow()', () => {
       it('借りることができる', () => {
         const notReturnedBook = new Borrow(notReturnedBookProps);
-        const actual = notReturnedBook.canBorrow()
+        const actual = notReturnedBook.canBorrow();
         expect(actual).toStrictEqual(true);
       });
       it('すでに誰かに借りられているのでレンタルできない', () => {
         const returnedBook = new Borrow(returnedBookProps);
-        const actual = returnedBook.returnBook()
+        const actual = returnedBook.returnBook();
         expect(actual).toStrictEqual(false);
       });
     });
@@ -46,12 +46,12 @@ describe('Book', () => {
     describe('returnBook()', () => {
       it('返却できる', () => {
         const notReturnedBook = new Borrow(notReturnedBookProps);
-        const actual = notReturnedBook.returnBook()
+        const actual = notReturnedBook.returnBook();
         expect(actual).toEqual(expect.any(Borrow));
       });
       it('返却済みは返却できない', () => {
         const returnedBook = new Borrow(returnedBookProps);
-        const actual = () => returnedBook.returnBook()
+        const actual = () => returnedBook.returnBook();
         expect(actual).toThrowError('返却済みです。');
       });
     });

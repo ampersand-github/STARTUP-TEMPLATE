@@ -1,5 +1,5 @@
 import { ValueObject } from '../../__shared__/value-object';
-import { UserId } from '../../user/user-id';
+import { UserId } from '../../user/user-id/user-id';
 import { BookId } from '../book-id/book-id';
 
 export interface IBorrow {
