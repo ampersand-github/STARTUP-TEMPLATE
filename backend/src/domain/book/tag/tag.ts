@@ -18,10 +18,10 @@ export interface ITag {
 }
 
 export class Tag extends ValueObject<ITag> {
-  private readonly value:string
+  private readonly value: string;
 
   public getValue() {
-   return this.value
+    return this.value;
   }
 
   public constructor(props: ITag) {
@@ -30,6 +30,6 @@ export class Tag extends ValueObject<ITag> {
     if (!tagList.find((plan: tagType) => plan === props.name)) {
       throw new Error(`${props.name}のタグが存在しません`);
     }
-    this.value = props.name
+    this.value = props.name;
   }
 }

@@ -1,7 +1,6 @@
 import { ITag, TAG, Tag } from 'src/domain/book/tag/tag';
 
 describe('Tag', () => {
-
   describe('constructor', () => {
     it('オブジェクトの生成ができる', () => {
       const props: ITag = { name: TAG.ui };
