@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
-import {CustomLoggerService} from "./__shared__/logger/custom-logger.service";
+import { CustomLoggerService } from './__shared__/logger/custom-logger.service';
 
 async function bootstrap() {
   // logger: false モジュール初期化時のログが出力されなくなる
