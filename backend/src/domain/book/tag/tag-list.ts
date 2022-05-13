@@ -17,7 +17,7 @@ export class TagList extends ValueObject<ITagList> {
     this.collection = props.tagsList;
   }
 
-/*
+  /*
   public add(tag: Tag): TagList {
     const tagList = [...this.collection].concat(tag);
     return new TagList({ tagsList: tagList });

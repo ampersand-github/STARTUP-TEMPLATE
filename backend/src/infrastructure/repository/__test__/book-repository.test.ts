@@ -1,9 +1,9 @@
 import { truncateAllTable } from 'src/infrastructure/__shared__/truncate-all-table';
 import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
-import { BookId } from 'src/domain/book/book-id';
+import { BookId } from 'src/domain/book/book-id/book-id';
 import { Book, IBook } from 'src/domain/book/book';
-import { TAG, Tag } from 'src/domain/book/tag';
-import { TagList } from 'src/domain/book/tag-list';
+import { TAG, Tag } from 'src/domain/book/tag/tag';
+import { TagList } from 'src/domain/book/tag/tag-list';
 import { BookRepository } from 'src/infrastructure/repository/book-repository';
 
 describe('bookRepository', () => {
@@ -118,26 +118,26 @@ const book4 = Book.reBuild(props4, bookId4);
 const insertBook1 = {
   id: book1.id.toString(),
   name: book1.name,
-  author:book1.author,
-  rating:book1.rating
+  author: book1.author,
+  rating: book1.rating,
 };
 const insertBook2 = {
   id: book2.id.toString(),
   name: book2.name,
-  author:book2.author,
-  rating:book2.rating
+  author: book2.author,
+  rating: book2.rating,
 };
 const insertBook3 = {
   id: book3.id.toString(),
   name: book3.name,
-  author:book3.author,
-  rating:book3.rating
+  author: book3.author,
+  rating: book3.rating,
 };
 const insertBook4 = {
   id: book4.id.toString(),
   name: book4.name,
-  author:book4.author,
-  rating:book4.rating
+  author: book4.author,
+  rating: book4.rating,
 };
 
 const insertTag1 = {

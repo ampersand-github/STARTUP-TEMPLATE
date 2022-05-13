@@ -1,5 +1,5 @@
 import { User } from '../user';
-import { UserId } from '../user-id';
+import { UserId } from '../user-id/user-id';
 
 export interface IUserRepository {
   findAll(): Promise<User[]>;

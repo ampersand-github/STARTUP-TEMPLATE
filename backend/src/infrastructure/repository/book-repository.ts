@@ -1,9 +1,9 @@
 import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
 import { Book, IBook } from 'src/domain/book/book';
 import { IBookRepository } from 'src/domain/book/__interface__/book-repository-interface';
-import { Tag } from 'src/domain/book/tag';
-import { TagList } from 'src/domain/book/tag-list';
-import { BookId } from 'src/domain/book/book-id';
+import { Tag } from 'src/domain/book/tag/tag';
+import { TagList } from 'src/domain/book/tag/tag-list';
+import { BookId } from 'src/domain/book/book-id/book-id';
 import { books as IPrismaBooks, tags as IPrismaTags } from '@prisma/client';
 
 export type IPrismaBook = IPrismaBooks & { tags: IPrismaTags[] };
@@ -23,8 +23,8 @@ export class BookRepository implements IBookRepository {
     const props: IBook = {
       name: prismaBook.name,
       tagList: new TagList({ tags: tags }),
-      author:prismaBook.author,
-      rating:prismaBook.rating
+      author: prismaBook.author,
+      rating: prismaBook.rating,
     };
     const bookId = BookId.reBuild(prismaBook.id);
     return Book.reBuild(props, bookId);

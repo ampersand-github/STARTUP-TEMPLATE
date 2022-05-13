@@ -2,7 +2,7 @@ import { truncateAllTable } from 'src/infrastructure/__shared__/truncate-all-tab
 import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
 import { UserRepository } from 'src/infrastructure/repository/user-repository';
 import { IUser, User } from 'src/domain/user/user';
-import { UserId } from 'src/domain/user/user-id';
+import { UserId } from 'src/domain/user/user-id/user-id';
 
 describe('userRepository', () => {
   const prismaService = new PrismaService();
