@@ -1,4 +1,4 @@
-import { UserId } from '../user-id';
+import { UserId } from './user-id';
 
 describe('UserId', () => {
   describe('create()', () => {
