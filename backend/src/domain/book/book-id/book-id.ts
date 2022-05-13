@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import { UniqueEntityId } from '../__shared__/unique-entity-id';
+import { UniqueEntityId } from '../../__shared__/unique-entity-id';
 
 export class BookId extends UniqueEntityId {
   private constructor(value: string) {
