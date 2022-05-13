@@ -1,4 +1,4 @@
-import { UserId } from 'src/domain/user/user-id';
+import { UserId } from 'src/domain/user/user-id/user-id';
 import { IUser, User } from 'src/domain/user/user';
 
 describe('User', () => {
