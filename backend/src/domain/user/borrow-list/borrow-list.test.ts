@@ -8,6 +8,7 @@ describe('BorrowList', () => {
     bookId: BookId.create(),
     userId: UserId.create(),
     startAt: new Date(),
+    endAt:undefined
   });
   const borrow2 = new Borrow({
     bookId: BookId.create(),
@@ -19,21 +20,25 @@ describe('BorrowList', () => {
     bookId: BookId.create(),
     userId: UserId.create(),
     startAt: new Date(),
+    endAt:undefined
   });
   const borrow4 = new Borrow({
     bookId: BookId.create(),
     userId: UserId.create(),
     startAt: new Date(),
+    endAt:undefined
   });
   const borrow5 = new Borrow({
     bookId: BookId.create(),
     userId: UserId.create(),
     startAt: new Date(),
+    endAt:undefined
   });
   const borrow6 = new Borrow({
     bookId: BookId.create(),
     userId: UserId.create(),
     startAt: new Date(),
+    endAt:undefined
   });
 
   describe('constructor()', () => {
@@ -51,7 +56,7 @@ describe('BorrowList', () => {
     });
     it('6冊のレンタルはできない', () => {
       const actual = () => {
-        new BorrowingList({
+        const result = new BorrowingList({
           borrowList: [borrow1, borrow2, borrow3, borrow4, borrow5, borrow6],
         });
       };

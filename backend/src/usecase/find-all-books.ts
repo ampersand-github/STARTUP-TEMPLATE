@@ -1,4 +1,4 @@
-import { BookRepository } from '../infrastructure/repository/book-repository';
+import { BookRepository } from '../infrastructure/repository/book/book-repository';
 import { Book } from '../domain/book/book';
 
 export const findAllBooks = async (
