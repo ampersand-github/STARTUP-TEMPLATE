@@ -3,6 +3,7 @@ import { users as IPrismaUsers } from '@prisma/client';
 import { IUser, User } from 'src/domain/user/user';
 import { UserId } from 'src/domain/user/user-id/user-id';
 import { IUserRepository } from 'src/domain/user/__interface__/user-repository-interface';
+import {BorrowingList} from "../../domain/user/borrow-list/borrow-list";
 
 export class UserRepository implements IUserRepository {
   private readonly prisma: PrismaService;
@@ -16,6 +17,7 @@ export class UserRepository implements IUserRepository {
     const userId = UserId.reBuild(prismaUser.id);
     const props: IUser = {
       name: prismaUser.name,
+      borrowingList:new BorrowingList({borrowList:[]})
     };
     return User.reBuild(props, userId);
   }
