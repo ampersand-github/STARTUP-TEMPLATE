@@ -38,7 +38,7 @@ describe('Book', () => {
       });
       it('すでに誰かに借りられているのでレンタルできない', () => {
         const returnedBook = new Borrow(returnedBookProps);
-        const actual = returnedBook.returnBook();
+        const actual = returnedBook.canBorrow();
         expect(actual).toStrictEqual(false);
       });
     });

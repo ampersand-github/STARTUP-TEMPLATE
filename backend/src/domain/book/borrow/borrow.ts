@@ -6,14 +6,27 @@ export interface IBorrow {
   bookId: BookId;
   userId: UserId;
   startAt: Date;
-  endAt?: Date;
+  endAt: Date | undefined;
 }
 
 export class Borrow extends ValueObject<IBorrow> {
   private readonly bookId: BookId;
   private readonly userId: UserId;
   private readonly startAt: Date;
-  private readonly endAt?: Date;
+  private readonly endAt: Date | undefined;
+
+  public getBookId() {
+    return this.bookId;
+  }
+  public getUserId() {
+    return this.userId;
+  }
+  public getStartAt() {
+    return this.startAt;
+  }
+  public getEndAt() {
+    return this.endAt;
+  }
 
   public constructor(props: IBorrow) {
     super(props);
