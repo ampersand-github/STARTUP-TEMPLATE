@@ -45,85 +45,94 @@ export class BookRepository implements IBookRepository {
   }
 
   async register(entity: Book): Promise<void> {
-    await this.prisma.books.create({
-      data: {
-        id: entity.id.toString(),
-        name: entity.getName(),
-        author: entity.getAuthor(),
-        is_privates:entity.getIsPrivate(),
-        is_losting:entity.getIsLost()
-      },
-    });
-    await this.prisma.tags.createMany({
-      data: entity
-        .getTagList()
-        .getCollection()
-        .map((one) => {
-          return {
-            tag_name: one.getValue(),
-            book_id: entity.id.toString(),
-          };
-        }),
-    });
-    if (entity.getLatestBorrow()) {
-      await this.prisma.borrow_histories.create({
+    await this.prisma.$transaction(async (prisma) => {
+      // - - - - - books - - - - -
+      await prisma.books.create({
         data: {
-          user_id: entity.getLatestBorrow().getUserId().toString(),
-          book_id: entity.id.toString(),
-          start_at: entity.getLatestBorrow().getStartAt(),
-          end_at: entity.getLatestBorrow().getEndAt(),
+          id: entity.id.toString(),
+          name: entity.getName(),
+          author: entity.getAuthor(),
+          is_privates: entity.getIsPrivate(),
+          is_losting: entity.getIsLost(),
         },
       });
-    }
+      // - - - - - tags - - - - -
+      await prisma.tags.createMany({
+        data: entity
+          .getTagList()
+          .getCollection()
+          .map((one) => {
+            return {
+              tag_name: one.getValue(),
+              book_id: entity.id.toString(),
+            };
+          }),
+      });
+      // - - - - - borrow_histories - - - - -
+      if (entity.getLatestBorrow()) {
+        await this.prisma.borrow_histories.create({
+          data: {
+            user_id: entity.getLatestBorrow().getUserId().toString(),
+            book_id: entity.id.toString(),
+            start_at: entity.getLatestBorrow().getStartAt(),
+            end_at: entity.getLatestBorrow().getEndAt(),
+          },
+        });
+      }
+    });
   }
 
   async update(entity: Book): Promise<void> {
     const id = entity.id.toString();
     // idを消すと外部キーで繋がっているレコードがカスケードで削除されてしまうのでそれはしない。
     // しかしただの値であれば削除してから新規作成する
-    await this.prisma.books.update({
-      where: { id: id },
-      data: {
-        name: entity.getName(),
-        author: entity.getAuthor(),
-        is_privates:entity.getIsPrivate(),
-        is_losting:entity.getIsLost()
-      },
-    });
 
-    await this.prisma.tags.deleteMany({ where: { book_id: id } });
-    await this.prisma.tags.createMany({
-      data: entity
-        .getTagList()
-        .getCollection()
-        .map((one) => {
-          return {
-            tag_name: one.getValue(),
-            book_id: entity.id.toString(),
-          };
-        }),
-    });
-
-    await this.prisma.borrow_histories.upsert({
-      where: {
-        book_id_user_id_start_at: {
-          book_id: id,
-          user_id: entity.getLatestBorrow().getUserId().toString(),
-          start_at: entity.getLatestBorrow().getStartAt()
-        }
-      },
-      create: {
+    await this.prisma.$transaction(async (prisma) => {
+      // - - - - - books - - - - -
+      await prisma.books.update({
+        where: { id: id },
+        data: {
+          name: entity.getName(),
+          author: entity.getAuthor(),
+          is_privates: entity.getIsPrivate(),
+          is_losting: entity.getIsLost(),
+        },
+      });
+      // - - - - - tags - - - - -
+      await prisma.tags.deleteMany({ where: { book_id: id } });
+      await prisma.tags.createMany({
+        data: entity
+          .getTagList()
+          .getCollection()
+          .map((one) => {
+            return {
+              tag_name: one.getValue(),
+              book_id: entity.id.toString(),
+            };
+          }),
+      });
+      // - - - - - borrow_histories - - - - -
+      await this.prisma.borrow_histories.upsert({
+        where: {
+          book_id_user_id_start_at: {
+            book_id: id,
+            user_id: entity.getLatestBorrow().getUserId().toString(),
+            start_at: entity.getLatestBorrow().getStartAt(),
+          },
+        },
+        create: {
           user_id: entity.getLatestBorrow().getUserId().toString(),
           book_id: entity.id.toString(),
           start_at: entity.getLatestBorrow().getStartAt(),
           end_at: entity.getLatestBorrow().getEndAt(),
-      },
-      update: {
-        user_id: entity.getLatestBorrow().getUserId().toString(),
-        book_id: entity.id.toString(),
-        start_at: entity.getLatestBorrow().getStartAt(),
-        end_at: entity.getLatestBorrow().getEndAt(),
-      }
-    })
-    }
+        },
+        update: {
+          user_id: entity.getLatestBorrow().getUserId().toString(),
+          book_id: entity.id.toString(),
+          start_at: entity.getLatestBorrow().getStartAt(),
+          end_at: entity.getLatestBorrow().getEndAt(),
+        },
+      });
+    });
+  }
 }

@@ -29,7 +29,7 @@ describe('bookRepository', () => {
 
     test('データが合致する', async () => {
       //  ■ データ生成
-      await createPrismaUser1(prismaService)
+      await createPrismaUser1(prismaService);
       // 本来であればテスト内容が重複してしまうため良くないやり方だが、prisma.book.create()をすると記述量が膨大になるのでやらない
       await bookRepository.register(book1);
       //  ■ テスト
@@ -60,7 +60,7 @@ describe('bookRepository', () => {
     });
     test('正常に全件取得できる', async () => {
       //  ■ データ生成
-      await createPrismaUser1(prismaService)
+      await createPrismaUser1(prismaService);
       await bookRepository.register(book1);
       await bookRepository.register(book2);
       await bookRepository.register(book3);
@@ -74,7 +74,7 @@ describe('bookRepository', () => {
   describe('register', () => {
     test('登録できる', async () => {
       //  ■ データ生成
-      await createPrismaUser1(prismaService)
+      await createPrismaUser1(prismaService);
       await bookRepository.register(book1);
       //  ■ テスト
       const actual = await prismaService.books.findUnique({
@@ -89,19 +89,18 @@ describe('bookRepository', () => {
   });
 
   describe('update', () => {
-   test('更新できる', async () => {
-     await createPrismaUser1(prismaService)
-     await bookRepository.register(book1);
-     // 間違って消していないことを確認するために登録
-     await bookRepository.register(book2);
-     await bookRepository.update(book1Updated)
-     const remainBook2 = await bookRepository.findOne(book2.id)
-     //
-     const actual =await bookRepository.findOne(book1.id)
-     expect(actual).toStrictEqual(book1Updated);
-     expect(remainBook2).toStrictEqual(book2)
-
-   });
+    test('更新できる', async () => {
+      await createPrismaUser1(prismaService);
+      await bookRepository.register(book1);
+      // 間違って消していないことを確認するために登録
+      await bookRepository.register(book2);
+      await bookRepository.update(book1Updated);
+      const remainBook2 = await bookRepository.findOne(book2.id);
+      //
+      const actual = await bookRepository.findOne(book1.id);
+      expect(actual).toStrictEqual(book1Updated);
+      expect(remainBook2).toStrictEqual(book2);
+    });
   });
 });
 // - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -118,14 +117,14 @@ const attitude = new Tag({ name: TAG.attitude });
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 const userId1 = UserId.reBuild('25344cca-440f-3ef9-3c83-ab8f9b1b784f');
 
-const createPrismaUser1 = async (prismaService:PrismaService) => {
+const createPrismaUser1 = async (prismaService: PrismaService) => {
   await prismaService.users.create({
     data: {
       id: userId1.toString(),
       name: '',
     },
   });
-}
+};
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 // BOOK
 // - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -146,7 +145,7 @@ const props1: IBook = {
 
 const props1Updated: IBook = {
   name: 'セキュア・バイ・デザインupdated',
-  tagList: new TagList({ tagsList: [ops,ui] }),
+  tagList: new TagList({ tagsList: [ops, ui] }),
   author: 'author1-updated',
   isLost: false,
   isPrivate: true,
