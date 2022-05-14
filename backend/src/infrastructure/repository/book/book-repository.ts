@@ -5,16 +5,12 @@ import { BookId } from 'src/domain/book/book-id/book-id';
 import {
   books as IPrismaBooks,
   tags as IPrismaTags,
-  lostings as IPrismaLostings,
-  privates as IPrismaPrivates,
   borrow_histories as IPrismaBorrowHistories,
 } from '@prisma/client';
 import { bookConverter } from './book-converter';
 
 export type IPrismaBook = IPrismaBooks & {
   tags: IPrismaTags[];
-  lostings: IPrismaLostings;
-  privates: IPrismaPrivates;
   borrow_histories: IPrismaBorrowHistories[];
 };
 
@@ -30,8 +26,6 @@ export class BookRepository implements IBookRepository {
       where: { id: bookId.toString() },
       include: {
         tags: true,
-        lostings: true,
-        privates: true,
         borrow_histories: true,
       },
     });
@@ -43,8 +37,6 @@ export class BookRepository implements IBookRepository {
     const allBooks: IPrismaBook[] = await this.prisma.books.findMany({
       include: {
         tags: true,
-        lostings: true,
-        privates: true,
         borrow_histories: true,
       },
     });
@@ -52,25 +44,14 @@ export class BookRepository implements IBookRepository {
     return allBooks.map((one: IPrismaBook): Book => bookConverter(one));
   }
 
-  /*
-    export type booksCreateInput = {
-    id: string
-    name: string
-    author: string
-    updated_at?: Date | string
-    created_at?: Date | string
-    tags?: tagsCreateNestedManyWithoutBooksInput
-    lostings?: lostingsCreateNestedOneWithoutBooksInput
-    privates?: privatesCreateNestedOneWithoutBooksInput
-    borrow_histories?: borrow_historiesCreateNestedManyWithoutBooksInput
-  }
-   */
   async register(entity: Book): Promise<void> {
     await this.prisma.books.create({
       data: {
         id: entity.id.toString(),
         name: entity.getName(),
         author: entity.getAuthor(),
+        is_privates:entity.getIsPrivate(),
+        is_losting:entity.getIsLost()
       },
     });
     await this.prisma.tags.createMany({
@@ -84,20 +65,6 @@ export class BookRepository implements IBookRepository {
           };
         }),
     });
-    if (entity.getIsLost()) {
-      await this.prisma.lostings.create({
-        data: {
-          book_id: entity.id.toString(),
-        },
-      });
-    }
-    if (entity.getIsPrivate()) {
-      await this.prisma.privates.create({
-        data: {
-          book_id: entity.id.toString(),
-        },
-      });
-    }
     if (entity.getLatestBorrow()) {
       await this.prisma.borrow_histories.create({
         data: {
@@ -109,4 +76,54 @@ export class BookRepository implements IBookRepository {
       });
     }
   }
+
+  async update(entity: Book): Promise<void> {
+    const id = entity.id.toString();
+    // idを消すと外部キーで繋がっているレコードがカスケードで削除されてしまうのでそれはしない。
+    // しかしただの値であれば削除してから新規作成する
+    await this.prisma.books.update({
+      where: { id: id },
+      data: {
+        name: entity.getName(),
+        author: entity.getAuthor(),
+        is_privates:entity.getIsPrivate(),
+        is_losting:entity.getIsLost()
+      },
+    });
+
+    await this.prisma.tags.deleteMany({ where: { book_id: id } });
+    await this.prisma.tags.createMany({
+      data: entity
+        .getTagList()
+        .getCollection()
+        .map((one) => {
+          return {
+            tag_name: one.getValue(),
+            book_id: entity.id.toString(),
+          };
+        }),
+    });
+
+    await this.prisma.borrow_histories.upsert({
+      where: {
+        book_id_user_id_start_at: {
+          book_id: id,
+          user_id: entity.getLatestBorrow().getUserId().toString(),
+          start_at: entity.getLatestBorrow().getStartAt()
+        }
+      },
+      create: {
+          user_id: entity.getLatestBorrow().getUserId().toString(),
+          book_id: entity.id.toString(),
+          start_at: entity.getLatestBorrow().getStartAt(),
+          end_at: entity.getLatestBorrow().getEndAt(),
+      },
+      update: {
+        user_id: entity.getLatestBorrow().getUserId().toString(),
+        book_id: entity.id.toString(),
+        start_at: entity.getLatestBorrow().getStartAt(),
+        end_at: entity.getLatestBorrow().getEndAt(),
+      }
+    })
+    }
 }

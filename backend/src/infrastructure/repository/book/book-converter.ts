@@ -21,8 +21,8 @@ export const bookConverter = (prismaBook: IPrismaBook): Book => {
     name: prismaBook.name,
     author: prismaBook.author,
     tagList: tagList,
-    isLost: !!prismaBook.lostings,
-    isPrivate: !!prismaBook.privates,
+    isLost: !!prismaBook.is_losting,
+    isPrivate: !!prismaBook.is_privates,
     latestBorrow: latestBorrow,
   };
 

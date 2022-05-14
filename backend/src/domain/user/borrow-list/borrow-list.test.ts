@@ -55,11 +55,12 @@ describe('BorrowList', () => {
       expect(borrowList).toEqual(expect.any(BorrowingList));
     });
     it('6冊のレンタルはできない', () => {
-      expect(
+      const actual = () => {
         new BorrowingList({
           borrowList: [borrow1, borrow2, borrow3, borrow4, borrow5, borrow6],
-        }),
-      ).toThrowError('貸出は一人5冊までです');
+        });
+      };
+      expect(actual).toThrowError('貸出は一人5冊までです');
     });
   });
 

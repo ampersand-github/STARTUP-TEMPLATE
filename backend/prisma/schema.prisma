@@ -26,24 +26,15 @@ model books {
     id          String  @id
     name        String
     author      String
+    is_losting  Boolean   @default(false)
+    is_privates Boolean   @default(false)
     updated_at  DateTime   @updatedAt
     created_at  DateTime   @default(now())
     //
     tags        tags[]
-    lostings    lostings?
-    privates    privates?
     borrow_histories borrow_histories[]
 }
 
-model lostings {
-    book_id  String @id
-    books   books @relation(fields: [book_id], references: [id])
-}
-
-model privates {
-    book_id  String @id
-    books   books @relation(fields: [book_id], references: [id])
-}
 
 // One-to-many relations
 // https://www.prisma.io/docs/concepts/components/prisma-schema/relations/one-to-many-relations
