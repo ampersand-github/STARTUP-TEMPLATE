@@ -9,7 +9,7 @@ export interface IBook {
   tagList: TagList;
   isLost: boolean;
   isPrivate: boolean;
-  latestBorrow: Borrow;
+  latestBorrow: Borrow | undefined;
 }
 
 export class Book extends AggregateRoot<IBook, BookId> {
@@ -18,7 +18,26 @@ export class Book extends AggregateRoot<IBook, BookId> {
   private readonly tagList: TagList;
   private readonly isLost: boolean;
   private readonly isPrivate: boolean;
-  private readonly latestBorrow: Borrow;
+  private readonly latestBorrow: Borrow | undefined;
+
+  public getName() {
+    return this.name;
+  }
+  public getAuthor() {
+    return this.author;
+  }
+  public getTagList() {
+    return this.tagList;
+  }
+  public getIsLost() {
+    return this.isLost;
+  }
+  public getIsPrivate() {
+    return this.isPrivate;
+  }
+  public getLatestBorrow() {
+    return this.latestBorrow;
+  }
 
   private constructor(props: IBook, id: BookId) {
     super(props, id);
