@@ -8,7 +8,7 @@ describe('BorrowList', () => {
     bookId: BookId.create(),
     userId: UserId.create(),
     startAt: new Date(),
-    endAt:undefined
+    endAt: undefined,
   });
   const borrow2 = new Borrow({
     bookId: BookId.create(),
@@ -20,25 +20,25 @@ describe('BorrowList', () => {
     bookId: BookId.create(),
     userId: UserId.create(),
     startAt: new Date(),
-    endAt:undefined
+    endAt: undefined,
   });
   const borrow4 = new Borrow({
     bookId: BookId.create(),
     userId: UserId.create(),
     startAt: new Date(),
-    endAt:undefined
+    endAt: undefined,
   });
   const borrow5 = new Borrow({
     bookId: BookId.create(),
     userId: UserId.create(),
     startAt: new Date(),
-    endAt:undefined
+    endAt: undefined,
   });
   const borrow6 = new Borrow({
     bookId: BookId.create(),
     userId: UserId.create(),
     startAt: new Date(),
-    endAt:undefined
+    endAt: undefined,
   });
 
   describe('constructor()', () => {
@@ -55,12 +55,11 @@ describe('BorrowList', () => {
       expect(borrowList).toEqual(expect.any(BorrowingList));
     });
     it('6冊のレンタルはできない', () => {
-      const actual = () => {
-        const result = new BorrowingList({
+      expect(
+        new BorrowingList({
           borrowList: [borrow1, borrow2, borrow3, borrow4, borrow5, borrow6],
-        });
-      };
-      expect(actual).toThrowError('貸出は一人5冊までです');
+        }),
+      ).toThrowError('貸出は一人5冊までです');
     });
   });
 

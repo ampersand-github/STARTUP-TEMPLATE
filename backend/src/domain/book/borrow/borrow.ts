@@ -18,12 +18,15 @@ export class Borrow extends ValueObject<IBorrow> {
   public getBookId() {
     return this.bookId;
   }
+
   public getUserId() {
     return this.userId;
   }
+
   public getStartAt() {
     return this.startAt;
   }
+
   public getEndAt() {
     return this.endAt;
   }

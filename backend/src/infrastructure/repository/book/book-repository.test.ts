@@ -70,7 +70,6 @@ describe('bookRepository', () => {
         },
       });
       await bookRepository.register(book1);
-      //const actual = await bookRepository.findOne(book1.id);
       const actual = await prismaService.books.findUnique({
         where: { id: book1.id.toString() },
         include: {
@@ -139,7 +138,7 @@ const props1: IBook = {
     bookId: bookId1,
     userId: userId1,
     startAt: new Date('2022-05-14T12:31:02.522Z'),
-    endAt:undefined
+    endAt: undefined,
   }),
 };
 const book1 = Book.reBuild(props1, bookId1);
@@ -152,7 +151,7 @@ const props2: IBook = {
   author: 'author2',
   isLost: false,
   isPrivate: false,
-  latestBorrow:undefined
+  latestBorrow: undefined,
 };
 const book2 = Book.reBuild(props2, bookId2);
 //
@@ -164,7 +163,7 @@ const props3: IBook = {
   author: 'author3',
   isLost: false,
   isPrivate: false,
-  latestBorrow:undefined
+  latestBorrow: undefined,
 };
 const book3 = Book.reBuild(props3, bookId3);
 
@@ -177,6 +176,6 @@ const props4: IBook = {
   author: 'author4',
   isLost: false,
   isPrivate: true,
-  latestBorrow:undefined
+  latestBorrow: undefined,
 };
 const book4 = Book.reBuild(props4, bookId4);

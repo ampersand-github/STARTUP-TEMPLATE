@@ -1,10 +1,13 @@
 import { UserId } from 'src/domain/user/user-id/user-id';
 import { IUser, User } from 'src/domain/user/user';
-import {BorrowingList} from "./borrow-list/borrow-list";
+import { BorrowingList } from './borrow-list/borrow-list';
 
 describe('User', () => {
   const name = '田中太郎';
-  const props: IUser = { name: name ,borrowingList:new BorrowingList({borrowList:[]})};
+  const props: IUser = {
+    name: name,
+    borrowingList: new BorrowingList({ borrowList: [] }),
+  };
 
   describe('constructor', () => {
     it('createできる', () => {

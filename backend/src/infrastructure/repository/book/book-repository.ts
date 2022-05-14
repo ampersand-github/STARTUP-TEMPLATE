@@ -37,6 +37,7 @@ export class BookRepository implements IBookRepository {
     });
     return book ? bookConverter(book) : null;
   }
+
   async findAll(): Promise<Book[]> {
     // データの取得
     const allBooks: IPrismaBook[] = await this.prisma.books.findMany({

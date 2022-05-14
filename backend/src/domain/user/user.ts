@@ -14,6 +14,7 @@ export class User extends AggregateRoot<IUser, UserId> {
   public getName() {
     return this.name;
   }
+
   public getBorrowingList() {
     return this.borrowingList;
   }

@@ -10,8 +10,6 @@ import {
 import { Borrow } from '../../../domain/book/borrow/borrow';
 import { UserId } from '../../../domain/user/user-id/user-id';
 
-
-
 export const bookConverter = (prismaBook: IPrismaBook): Book => {
   const tags = prismaBook.tags.map(
     (one: IPrismaTags) => new Tag({ name: one.tag_name }),
@@ -25,7 +23,7 @@ export const bookConverter = (prismaBook: IPrismaBook): Book => {
     tagList: tagList,
     isLost: !!prismaBook.lostings,
     isPrivate: !!prismaBook.privates,
-    latestBorrow:latestBorrow
+    latestBorrow: latestBorrow,
   };
 
   const bookId = BookId.reBuild(prismaBook.id);
@@ -33,11 +31,11 @@ export const bookConverter = (prismaBook: IPrismaBook): Book => {
 };
 
 const selectLatestBorrow = (
-    borrowHistories: IPrismaBorrowHistories[],
+  borrowHistories: IPrismaBorrowHistories[],
 ): Borrow | null => {
   if (borrowHistories.length === 0) return undefined;
   const latest: IPrismaBorrowHistories = borrowHistories.reduce((a, b) =>
-      a.start_at.getTime() > b.start_at.getTime() ? a : b,
+    a.start_at.getTime() > b.start_at.getTime() ? a : b,
   );
   return new Borrow({
     bookId: BookId.reBuild(latest.book_id),

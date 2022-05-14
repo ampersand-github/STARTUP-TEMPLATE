@@ -23,18 +23,23 @@ export class Book extends AggregateRoot<IBook, BookId> {
   public getName() {
     return this.name;
   }
+
   public getAuthor() {
     return this.author;
   }
+
   public getTagList() {
     return this.tagList;
   }
+
   public getIsLost() {
     return this.isLost;
   }
+
   public getIsPrivate() {
     return this.isPrivate;
   }
+
   public getLatestBorrow() {
     return this.latestBorrow;
   }

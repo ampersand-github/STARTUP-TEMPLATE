@@ -1,4 +1,3 @@
-import { Book, IBook } from 'src/domain/book/book';
 import { Tag } from 'src/domain/book/tag/tag';
 import { IPrismaBook } from './book-repository';
 import { tags as IPrismaTags } from '@prisma/client';
