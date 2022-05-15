@@ -11,19 +11,38 @@ const prismaBook1: IPrismaBook = {
   id: bookId,
   name: 'セキュア・バイ・デザイン',
   author: 'author1',
+  is_losting: true,
+  is_privates: false,
   updated_at: new Date('2022-05-14T05:49:26.505Z'),
   created_at: new Date('2022-05-14T05:49:26.505Z'),
   tags: [
     { tag_name: '運用', book_id: bookId },
     { tag_name: 'Go', book_id: bookId },
   ],
-  lostings: { book_id: bookId },
-  privates: null,
   borrow_histories: [
     {
       book_id: bookId,
-      user_id: 'aaa',
+      user_id: '6b6d4447-cf09-5415-e52e-261a456a204a',
+      start_at: new Date('2022-03-01T12:11:14.418Z'),
+      end_at: new Date('2022-03-11T12:11:14.418Z'),
+    },
+    {
+      book_id: bookId,
+      user_id: '92b0294e-e254-a40d-ac06-8378c188dac6',
+      start_at: new Date('2022-04-14T12:11:14.418Z'),
+      end_at: new Date('2022-04-19T12:11:14.418Z'),
+    },
+    {
+      book_id: bookId,
+      user_id: '9b0abf1a-87b7-ed4c-ed3a-a0d6642f058b',
       start_at: new Date('2022-05-14T12:11:14.418Z'),
+      end_at: new Date('2022-05-15T12:11:14.418Z'),
+    },
+    {
+      // ↓ 最新の貸出 ↓
+      book_id: bookId,
+      user_id: '3e2cfb03-e17b-660f-80b8-a3e6426cea66',
+      start_at: new Date('2022-06-14T12:11:14.418Z'),
       end_at: null,
     },
   ],
@@ -40,15 +59,21 @@ describe('bookConverter', () => {
     );
     const tagCollection = actual.getTagList().getCollection();
     expect(tagCollection).toEqual(expect.arrayContaining(tags));
-    expect(actual.getIsLost()).toStrictEqual(!!prismaBook1.lostings);
-    expect(actual.getIsPrivate()).toStrictEqual(!!prismaBook1.privates);
+    expect(actual.getIsLost()).toStrictEqual(!!prismaBook1.is_losting);
+    expect(actual.getIsPrivate()).toStrictEqual(!!prismaBook1.is_privates);
     expect(actual.getLatestBorrow()).toStrictEqual(
+      // 最新の貸出なら正しい
       new Borrow({
         bookId: BookId.reBuild(bookId),
-        userId: UserId.reBuild('aaa'),
-        startAt: new Date('2022-05-14T12:11:14.418Z'),
+        userId: UserId.reBuild('3e2cfb03-e17b-660f-80b8-a3e6426cea66'),
+        startAt: new Date('2022-06-14T12:11:14.418Z'),
         endAt: undefined,
       }),
     );
+  });
+  it('borrow_historiesが空', () => {
+    const blankBorrowHistories = { ...prismaBook1, borrow_histories: [] };
+    const actual = bookConverter(blankBorrowHistories);
+    expect(actual.getLatestBorrow()).toStrictEqual(undefined);
   });
 });
