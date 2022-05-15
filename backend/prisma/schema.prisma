@@ -20,6 +20,16 @@ model users {
     borrow_histories borrow_histories[]
 }
 
+model borrow_histories {
+    id          String  @id
+    book_id     String
+    user_id     String
+    start_at    DateTime @default(now())
+    end_at      DateTime?
+    //
+    users   users @relation(fields: [user_id], references: [id])
+    books   books @relation(fields: [book_id], references: [id])
+}
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // 書籍集約
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -47,13 +57,3 @@ model tags {
     @@id([tag_name, book_id])
 }
 
-model borrow_histories {
-    book_id     String
-    user_id     String
-    start_at    DateTime @default(now())
-    end_at      DateTime?
-    //
-    users   users @relation(fields: [user_id], references: [id])
-    books   books @relation(fields: [book_id], references: [id])
-    @@id([book_id,user_id,start_at])
-}

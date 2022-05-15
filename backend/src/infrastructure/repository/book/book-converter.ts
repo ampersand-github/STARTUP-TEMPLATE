@@ -9,6 +9,7 @@ import {
 } from '@prisma/client';
 import { Borrow } from '../../../domain/book/borrow/borrow';
 import { UserId } from '../../../domain/user/user-id/user-id';
+import {BorrowId} from "../../../domain/book/borrow/borrow-id";
 
 export const bookConverter = (prismaBook: IPrismaBook): Book => {
   const tags = prismaBook.tags.map(
@@ -37,10 +38,10 @@ const selectLatestBorrow = (
   const latest: IPrismaBorrowHistories = borrowHistories.reduce((a, b) =>
     a.start_at.getTime() > b.start_at.getTime() ? a : b,
   );
-  return new Borrow({
+  return Borrow.reBuild({
     bookId: BookId.reBuild(latest.book_id),
     userId: UserId.reBuild(latest.user_id),
     startAt: latest.start_at,
     endAt: latest.end_at ? latest.end_at : undefined,
-  });
+  },BorrowId.reBuild(latest.id));
 };

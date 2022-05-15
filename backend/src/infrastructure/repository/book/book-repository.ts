@@ -68,17 +68,6 @@ export class BookRepository implements IBookRepository {
             };
           }),
       });
-      // - - - - - borrow_histories - - - - -
-      if (entity.getLatestBorrow()) {
-        await prisma.borrow_histories.create({
-          data: {
-            user_id: entity.getLatestBorrow().getUserId().toString(),
-            book_id: entity.id.toString(),
-            start_at: entity.getLatestBorrow().getStartAt(),
-            end_at: entity.getLatestBorrow().getEndAt(),
-          },
-        });
-      }
     });
   }
 
@@ -111,30 +100,6 @@ export class BookRepository implements IBookRepository {
             };
           }),
       });
-      // - - - - - borrow_histories - - - - -
-      if (entity.getLatestBorrow()) {
-        await prisma.borrow_histories.upsert({
-          where: {
-            book_id_user_id_start_at: {
-              book_id: id,
-              user_id: entity.getLatestBorrow().getUserId().toString(),
-              start_at: entity.getLatestBorrow().getStartAt(),
-            },
-          },
-          create: {
-            user_id: entity.getLatestBorrow().getUserId().toString(),
-            book_id: entity.id.toString(),
-            start_at: entity.getLatestBorrow().getStartAt(),
-            end_at: entity.getLatestBorrow().getEndAt(),
-          },
-          update: {
-            user_id: entity.getLatestBorrow().getUserId().toString(),
-            book_id: entity.id.toString(),
-            start_at: entity.getLatestBorrow().getStartAt(),
-            end_at: entity.getLatestBorrow().getEndAt(),
-          },
-        });
-      }
     });
   }
 }

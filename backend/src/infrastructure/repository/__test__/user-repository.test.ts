@@ -1,6 +1,6 @@
 import { truncateAllTable } from 'src/infrastructure/__shared__/truncate-all-table';
 import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
-import { UserRepository } from 'src/infrastructure/repository/user-repository';
+import { UserRepository } from 'src/infrastructure/repository/user/user-repository';
 import { IUser, User } from 'src/domain/user/user';
 import { UserId } from 'src/domain/user/user-id/user-id';
 import { BorrowingList } from '../../../domain/user/borrow-list/borrow-list';

@@ -6,6 +6,7 @@ const main = async () => {
   let prisma: PrismaClient;
   try {
     prisma = new PrismaClient();
+/*
     console.log('= = = = = seeding start= = = = = ');
     console.log('createBooks');
     await createBooks(prisma);
@@ -13,6 +14,7 @@ const main = async () => {
     await createTags(prisma);
 
     console.log('= = = = =  seeding ends = = = = = ');
+ */
   } catch (e) {
     console.error(e);
     process.exit(1);

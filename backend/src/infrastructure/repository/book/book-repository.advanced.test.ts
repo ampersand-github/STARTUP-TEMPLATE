@@ -37,7 +37,7 @@ describe('bookRepository(advanced)', () => {
         author: 'author1',
         isLost: false,
         isPrivate: false,
-        latestBorrow: new Borrow({
+        latestBorrow: Borrow.create({
           bookId: baseBookId,
           userId: baseUserId,
           startAt: new Date('2022-05-14T12:31:02.522Z'),
@@ -90,7 +90,7 @@ describe('bookRepository(advanced)', () => {
           {
             book_id: book1.id.toString(),
             user_id: baseUserId.toString(),
-            start_at: book1.getLatestBorrow().getStartAt(),
+            start_at: new Date('2022-05-14T12:31:02.522Z'),
             end_at: null,
           },
         ],

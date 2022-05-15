@@ -5,6 +5,7 @@ import { bookConverter } from './book-converter';
 import { Borrow } from '../../../domain/book/borrow/borrow';
 import { UserId } from '../../../domain/user/user-id/user-id';
 import { BookId } from '../../../domain/book/book-id/book-id';
+import { BorrowId } from 'src/domain/book/borrow/borrow-id';
 
 const bookId = '2422c514-4b06-aced-5ef3-3f869d299bd8';
 const prismaBook1: IPrismaBook = {
@@ -21,18 +22,21 @@ const prismaBook1: IPrismaBook = {
   ],
   borrow_histories: [
     {
+      id: "1606547a-549e-bf09-b566-382a6fabd1a2",
       book_id: bookId,
       user_id: '6b6d4447-cf09-5415-e52e-261a456a204a',
       start_at: new Date('2022-03-01T12:11:14.418Z'),
       end_at: new Date('2022-03-11T12:11:14.418Z'),
     },
     {
+      id: "2e068bc9-eed9-a693-d285-69f6cfd469cd",
       book_id: bookId,
       user_id: '92b0294e-e254-a40d-ac06-8378c188dac6',
       start_at: new Date('2022-04-14T12:11:14.418Z'),
       end_at: new Date('2022-04-19T12:11:14.418Z'),
     },
     {
+      id: "9a28bee7-ac75-514f-7e7c-942dc8488456",
       book_id: bookId,
       user_id: '9b0abf1a-87b7-ed4c-ed3a-a0d6642f058b',
       start_at: new Date('2022-05-14T12:11:14.418Z'),
@@ -40,6 +44,7 @@ const prismaBook1: IPrismaBook = {
     },
     {
       // ↓ 最新の貸出 ↓
+      id: "b6ac88d6-9c5e-6739-787d-3fc248ae4212",
       book_id: bookId,
       user_id: '3e2cfb03-e17b-660f-80b8-a3e6426cea66',
       start_at: new Date('2022-06-14T12:11:14.418Z'),
@@ -63,12 +68,12 @@ describe('bookConverter', () => {
     expect(actual.getIsPrivate()).toStrictEqual(!!prismaBook1.is_privates);
     expect(actual.getLatestBorrow()).toStrictEqual(
       // 最新の貸出なら正しい
-      new Borrow({
+      Borrow.reBuild({
         bookId: BookId.reBuild(bookId),
         userId: UserId.reBuild('3e2cfb03-e17b-660f-80b8-a3e6426cea66'),
         startAt: new Date('2022-06-14T12:11:14.418Z'),
         endAt: undefined,
-      }),
+      },BorrowId.reBuild("b6ac88d6-9c5e-6739-787d-3fc248ae4212")),
     );
   });
   it('borrow_historiesが空', () => {
