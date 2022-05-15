@@ -4,37 +4,37 @@ import { BookId } from '../../book/book-id/book-id';
 import { UserId } from '../user-id/user-id';
 
 describe('BorrowList', () => {
-  const borrow1 = new Borrow({
+  const borrow1 = Borrow.create({
     bookId: BookId.create(),
     userId: UserId.create(),
     startAt: new Date(),
     endAt: undefined,
   });
-  const borrow2 = new Borrow({
+  const borrow2 = Borrow.create({
     bookId: BookId.create(),
     userId: UserId.create(),
     startAt: new Date(),
     endAt: new Date(),
   });
-  const borrow3 = new Borrow({
+  const borrow3 = Borrow.create({
     bookId: BookId.create(),
     userId: UserId.create(),
     startAt: new Date(),
     endAt: undefined,
   });
-  const borrow4 = new Borrow({
+  const borrow4 = Borrow.create({
     bookId: BookId.create(),
     userId: UserId.create(),
     startAt: new Date(),
     endAt: undefined,
   });
-  const borrow5 = new Borrow({
+  const borrow5 = Borrow.create({
     bookId: BookId.create(),
     userId: UserId.create(),
     startAt: new Date(),
     endAt: undefined,
   });
-  const borrow6 = new Borrow({
+  const borrow6 = Borrow.create({
     bookId: BookId.create(),
     userId: UserId.create(),
     startAt: new Date(),

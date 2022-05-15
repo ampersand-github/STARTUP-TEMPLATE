@@ -16,7 +16,7 @@ describe('Book', () => {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   // borrow
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  const borrow = new Borrow({
+  const borrow = Borrow.create({
     bookId: BookId.create(),
     userId: UserId.create(),
     startAt: new Date(),

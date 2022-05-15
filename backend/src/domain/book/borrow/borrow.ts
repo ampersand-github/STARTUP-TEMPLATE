@@ -1,6 +1,8 @@
-import { ValueObject } from '../../__shared__/value-object';
 import { UserId } from '../../user/user-id/user-id';
 import { BookId } from '../book-id/book-id';
+import { Entity } from '../../__shared__/entity';
+import { BorrowId } from './borrow-id';
+import { IBook } from '../book';
 
 export interface IBorrow {
   bookId: BookId;
@@ -9,49 +11,35 @@ export interface IBorrow {
   endAt: Date | undefined;
 }
 
-export class Borrow extends ValueObject<IBorrow> {
+export class Borrow extends Entity<IBorrow, BorrowId> {
   private readonly bookId: BookId;
   private readonly userId: UserId;
   private readonly startAt: Date;
   private readonly endAt: Date | undefined;
 
-  public getBookId() {
-    return this.bookId;
-  }
+  // - - - - - - - - - - - - - - - - - - - - - - - - -
+  // このドメインオブジェクトは利用者集約に属するテーブルから習得している。
+  // そのため書籍集約から更新がかけられないようにgetterは公開しない
+  // - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public getUserId() {
-    return this.userId;
-  }
-
-  public getStartAt() {
-    return this.startAt;
-  }
-
-  public getEndAt() {
-    return this.endAt;
-  }
-
-  public constructor(props: IBorrow) {
-    super(props);
+  public constructor(props: IBorrow, id: BorrowId) {
+    super(props, id);
     this.bookId = props.bookId;
     this.userId = props.userId;
     this.startAt = props.startAt;
     this.endAt = props.endAt;
   }
 
+  public static create(props: IBorrow): Borrow {
+    return new Borrow(props, BorrowId.create());
+  }
+
+  public static reBuild(props: IBorrow, id: BorrowId): Borrow {
+    return new Borrow(props, id);
+  }
+
   public canBorrow(): boolean {
     // this.endAt ? false:true と同じ
     return !this.endAt;
-  }
-
-  public returnBook() {
-    if (this.endAt) throw new Error('返却済みです。');
-    const props: IBorrow = {
-      bookId: this.bookId,
-      userId: this.userId,
-      startAt: this.startAt,
-      endAt: new Date(),
-    };
-    return new Borrow(props);
   }
 }
