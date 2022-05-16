@@ -1,21 +1,15 @@
-import { Borrow, IBorrow } from './borrow';
-import { BookId } from '../book-id/book-id';
-import { UserId } from '../../user/user-id/user-id';
+import { ILatestBorrow, LatestBorrow } from './latest-borrow';
 
 describe('Book', () => {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   // props
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  const returnedBookProps: IBorrow = {
-    bookId: BookId.create(),
-    userId: UserId.create(),
+  const returnedBookProps: ILatestBorrow = {
     startAt: new Date(),
     endAt: new Date(),
   };
 
-  const notReturnedBookProps: IBorrow = {
-    bookId: BookId.create(),
-    userId: UserId.create(),
+  const notReturnedBookProps: ILatestBorrow = {
     startAt: new Date(),
     endAt: null,
   };
@@ -25,19 +19,19 @@ describe('Book', () => {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   describe('constructor', () => {
     it('createできる', () => {
-      const borrow1 = Borrow.create(notReturnedBookProps);
-      expect(borrow1).toEqual(expect.any(Borrow));
+      const borrow1 = new LatestBorrow(notReturnedBookProps);
+      expect(borrow1).toEqual(expect.any(LatestBorrow));
     });
 
     // describe
     describe('canBorrow()', () => {
       it('借りることができる', () => {
-        const notReturnedBook = Borrow.create(notReturnedBookProps);
+        const notReturnedBook = new LatestBorrow(notReturnedBookProps);
         const actual = notReturnedBook.canBorrow();
         expect(actual).toStrictEqual(true);
       });
       it('すでに誰かに借りられているのでレンタルできない', () => {
-        const returnedBook = Borrow.create(returnedBookProps);
+        const returnedBook = new LatestBorrow(returnedBookProps);
         const actual = returnedBook.canBorrow();
         expect(actual).toStrictEqual(false);
       });

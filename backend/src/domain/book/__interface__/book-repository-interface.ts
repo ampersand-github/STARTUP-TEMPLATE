@@ -4,6 +4,5 @@ import { BookId } from 'src/domain/book/book-id/book-id';
 export interface IBookRepository {
   findOne(id: BookId): Promise<Book | null>;
   findAll(): Promise<Book[]>;
-  register(entity: Book): Promise<void>;
-  update(entity: Book): Promise<void>;
+  save(entity: Book): Promise<void>;
 }

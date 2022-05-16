@@ -1,7 +1,7 @@
 import { AggregateRoot } from 'src/domain/__shared__/aggregate-root';
 import { TagList } from './tag/tag-list';
 import { BookId } from './book-id/book-id';
-import { Borrow } from './borrow/borrow';
+import { LatestBorrow } from './latest-borrow/latest-borrow';
 
 export interface IBook {
   name: string;
@@ -9,7 +9,7 @@ export interface IBook {
   tagList: TagList;
   isLost: boolean;
   isPrivate: boolean;
-  latestBorrow: Borrow | undefined;
+  latestBorrow: LatestBorrow;
 }
 
 export class Book extends AggregateRoot<IBook, BookId> {
@@ -18,7 +18,7 @@ export class Book extends AggregateRoot<IBook, BookId> {
   private readonly tagList: TagList;
   private readonly isLost: boolean;
   private readonly isPrivate: boolean;
-  private readonly latestBorrow: Borrow | undefined;
+  private readonly latestBorrow: LatestBorrow;
 
   public getName() {
     return this.name;
@@ -40,9 +40,9 @@ export class Book extends AggregateRoot<IBook, BookId> {
     return this.isPrivate;
   }
 
-  public getLatestBorrow() {
-    return this.latestBorrow;
-  }
+  // latestBorrow
+  // user集約から習得しているので、book集約では更新したくない
+  // 更新させないためにgetterを記述しないこと！
 
   private constructor(props: IBook, id: BookId) {
     super(props, id);

@@ -5,7 +5,7 @@ import { Book, IBook } from 'src/domain/book/book';
 import { TAG, Tag } from 'src/domain/book/tag/tag';
 import { TagList } from 'src/domain/book/tag/tag-list';
 import { BookRepository } from 'src/infrastructure/repository/book/book-repository';
-import { Borrow } from 'src/domain/book/borrow/borrow';
+import { Borrow } from 'src/domain/user/borrow/borrow';
 import { UserId } from 'src/domain/user/user-id/user-id';
 
 // より詳細にテストや動作確認するために作成した

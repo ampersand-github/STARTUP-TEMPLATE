@@ -7,6 +7,7 @@ import { User } from 'src/domain/user/user';
 import { UserId } from 'src/domain/user/user-id/user-id';
 import { IUserRepository } from 'src/domain/user/__interface__/user-repository-interface';
 import { userConverter } from './user-converter';
+import { Borrow } from '../../../domain/user/borrow/borrow';
 
 export type IPrismaUser = IPrismaUsers & {
   borrow_histories: IPrismaBorrowHistories[];
@@ -39,9 +40,22 @@ export class UserRepository implements IUserRepository {
     return user ? userConverter(user) : null;
   }
 
-  async register(entity: User): Promise<void> {
-    await this.prisma.users.create({
-      data: { id: entity.id.toString(), name: entity.getName() },
+  async save(entity: User): Promise<void> {
+    await this.prisma.users.upsert({
+      where: { id: entity.id.toString() },
+      include: { borrow_histories: true },
+      create: {
+        id: entity.id.toString(),
+        name: entity.getName(),
+        borrow_histories: {
+          createMany: {
+            data: entity
+              .getBorrowingList()
+              .getCollection()
+              .map((one: Borrow) => {}),
+          },
+        },
+      },
     });
   }
 }

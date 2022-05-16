@@ -1,8 +1,8 @@
-import { UserId } from '../../user/user-id/user-id';
-import { BookId } from '../book-id/book-id';
+import { UserId } from '../user-id/user-id';
+import { BookId } from '../../book/book-id/book-id';
 import { Entity } from '../../__shared__/entity';
 import { BorrowId } from './borrow-id';
-import { IBook } from '../book';
+import { IBook } from '../../book/book';
 
 export interface IBorrow {
   bookId: BookId;

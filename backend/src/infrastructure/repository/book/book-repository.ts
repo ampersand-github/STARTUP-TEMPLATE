@@ -11,7 +11,10 @@ import { bookConverter } from './book-converter';
 
 export type IPrismaBook = IPrismaBooks & {
   tags: IPrismaTags[];
-  borrow_histories: IPrismaBorrowHistories[];
+  borrow_histories: {
+    start_at: Date;
+    end_at: Date | null;
+  }[];
 };
 
 export class BookRepository implements IBookRepository {
@@ -22,11 +25,19 @@ export class BookRepository implements IBookRepository {
   }
 
   async findOne(bookId: BookId): Promise<Book | null> {
-    const book = await this.prisma.books.findUnique({
+    const book: IPrismaBook = await this.prisma.books.findUnique({
       where: { id: bookId.toString() },
       include: {
         tags: true,
-        borrow_histories: true,
+        borrow_histories: {
+          select: {
+            start_at: true,
+            end_at: true,
+          },
+          take: 1,
+          orderBy: { start_at: 'desc' },
+          where: { end_at: null },
+        },
       },
     });
     return book ? bookConverter(book) : null;
@@ -37,68 +48,66 @@ export class BookRepository implements IBookRepository {
     const allBooks: IPrismaBook[] = await this.prisma.books.findMany({
       include: {
         tags: true,
-        borrow_histories: true,
+        // 最新1件を習得、習得できなければnull
+        borrow_histories: {
+          select: {
+            start_at: true,
+            end_at: true,
+          },
+          take: 1,
+          orderBy: { start_at: 'desc' },
+          where: { end_at: null },
+        },
       },
     });
     // データの加工
+    console.log('--------');
+    console.log(allBooks);
     return allBooks.map((one: IPrismaBook): Book => bookConverter(one));
   }
 
-  async register(entity: Book): Promise<void> {
+  async save(entity: Book): Promise<void> {
+    const createPrismaTagList = entity
+      .getTagList()
+      .getCollection()
+      .map((one) => {
+        return {
+          tag_name: one.getValue(),
+        };
+      });
+
     await this.prisma.$transaction(async (prisma) => {
-      // - - - - - books - - - - -
-      await prisma.books.create({
-        data: {
+      // tagを一旦消してから再度insertする。(delete -> insert)
+      await prisma.tags.deleteMany({
+        where: { book_id: entity.id.toString() },
+      });
+
+      await prisma.books.upsert({
+        where: { id: entity.id.toString() },
+        include: { tags: true },
+        create: {
           id: entity.id.toString(),
           name: entity.getName(),
           author: entity.getAuthor(),
           is_privates: entity.getIsPrivate(),
           is_losting: entity.getIsLost(),
+          tags: {
+            createMany: {
+              data: createPrismaTagList,
+            },
+          },
         },
-      });
-      // - - - - - tags - - - - -
-      await prisma.tags.createMany({
-        data: entity
-          .getTagList()
-          .getCollection()
-          .map((one) => {
-            return {
-              tag_name: one.getValue(),
-              book_id: entity.id.toString(),
-            };
-          }),
-      });
-    });
-  }
-
-  async update(entity: Book): Promise<void> {
-    const id = entity.id.toString();
-    // idを消すと外部キーで繋がっているレコードがカスケードで削除されてしまうのでそれはしない。
-    // しかしただの値であれば削除してから新規作成する
-
-    await this.prisma.$transaction(async (prisma) => {
-      // - - - - - books - - - - -
-      await prisma.books.update({
-        where: { id: id },
-        data: {
+        update: {
           name: entity.getName(),
           author: entity.getAuthor(),
           is_privates: entity.getIsPrivate(),
           is_losting: entity.getIsLost(),
+          tags: {
+            createMany: {
+              data: createPrismaTagList,
+            },
+          },
         },
-      });
-      // - - - - - tags - - - - -
-      await prisma.tags.deleteMany({ where: { book_id: id } });
-      await prisma.tags.createMany({
-        data: entity
-          .getTagList()
-          .getCollection()
-          .map((one) => {
-            return {
-              tag_name: one.getValue(),
-              book_id: entity.id.toString(),
-            };
-          }),
       });
     });
   }

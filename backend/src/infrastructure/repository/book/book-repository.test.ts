@@ -6,8 +6,9 @@ import { TAG, Tag } from 'src/domain/book/tag/tag';
 import { TagList } from 'src/domain/book/tag/tag-list';
 import { BookRepository } from 'src/infrastructure/repository/book/book-repository';
 import { UserId } from 'src/domain/user/user-id/user-id';
-import {Borrow, IBorrow} from "../../../domain/book/borrow/borrow";
-import {BorrowId} from "../../../domain/book/borrow/borrow-id";
+import { Borrow, IBorrow } from '../../../domain/user/borrow/borrow';
+import { BorrowId } from '../../../domain/user/borrow/borrow-id';
+import {firstBook, firstBookUpdate} from "./book-repository.data";
 
 describe('bookRepository', () => {
   const prismaService = new PrismaService();
@@ -15,16 +16,86 @@ describe('bookRepository', () => {
 
   beforeEach(async () => {
     await truncateAllTable(prismaService);
-    await prismaService.users.create({
-      data: {
-        id: userId1.toString(),
-        name: '',
-      },
-    });
   });
 
   afterAll(async () => {
     await prismaService.$disconnect();
+  });
+
+  describe('findOne()/save()', () => {
+    test('新しい書籍を登録できる', async () => {
+      await bookRepository.save(firstBook)
+      const actual = await bookRepository.findOne(firstBook.id)
+      expect(actual).toStrictEqual(firstBook);
+    });
+    test('書籍の情報を更新できる', async () => {
+      await bookRepository.save(firstBookUpdate)
+      const actual = await bookRepository.findOne(firstBookUpdate.id)
+      expect(actual).toStrictEqual(firstBookUpdate);
+      expect(actual).not.toEqual(firstBook)
+    });
+    test('タグ情報が0件でも登録できる', async () => {});
+    test('タグ情報を更新できる(delete/insert)', async () => {
+      // 別の書籍のタグ情報を消してないことを確認
+    });
+    test('一度も貸し出したことのない書籍を習得できる', async () => {
+      // undefinedになる
+    });
+    test('貸出履歴が存在し、その最新の貸出履歴のendAtに値が入っている', async () => {});
+    test('貸出履歴が存在し、その最新の貸出履歴のendAtがnullである', async () => {});
+    test('貸出履歴を更新することはできない(userリポジトリの情報なので)', async () => {});
+  });
+
+  describe('findAll()', () => {
+    test('１件もない場合は空配列を取得する', async () => {
+      const result = await bookRepository.findAll();
+      expect(result).toEqual([]);
+    });
+    test('全件を習得できる', async () => {});
+  });
+});
+
+/*
+    describe('練習', () => {
+    test('練習', async () => {
+      // テストの意図を書く
+      // null値あり、最新引っ張るみたいなかんじで。
+      // テストデータを別ファイルへ寄せても良いかも
+      const bookId = BookId.reBuild('2422c514-4b06-aced-5ef3-3f869d299bd8');
+      const book = Book.reBuild(baseBookProps, bookId);
+      await bookRepository.register(book);
+      //
+      await prismaService.borrow_histories.create({
+        data: {
+          id: '0a520a59-b8ae-ec69-32b1-7c46efbe44e5',
+          book_id: bookId.toString(),
+          user_id: userId1.toString(),
+          start_at: new Date('2022-05-10T15:19:44.125Z'),
+          end_at: new Date('2022-05-11T15:19:44.125Z'),
+        },
+      });
+      await prismaService.borrow_histories.create({
+        data: {
+          id: '0a520a59-b8ae-ec69-32b1-7c46efbe44e6',
+          book_id: bookId.toString(),
+          user_id: userId1.toString(),
+          start_at: new Date('2022-05-12T15:19:44.125Z'),
+          end_at: new Date('2022-05-13T15:19:44.125Z'),
+        },
+      });
+      await prismaService.borrow_histories.create({
+        data: {
+          id: '0a520a59-b8ae-ec69-32b1-7c46efbe44e7',
+          book_id: bookId.toString(),
+          user_id: userId1.toString(),
+          start_at: new Date('2022-05-14T15:19:44.125Z'),
+          end_at: null,
+        },
+      });
+      //
+      await bookRepository['getLatestBorrow'](bookId.toString());
+      console.log(await bookRepository.findAll());
+    });
   });
 
   describe('register/findOne', () => {
@@ -84,33 +155,36 @@ describe('bookRepository', () => {
       // データを登録
       // - - - - - - - - - - - - - - - - - - - - - - - -
       const bookId = BookId.reBuild('2422c514-4b06-aced-5ef3-3f869d299bd8');
-      const borrowId = BorrowId.reBuild("a48dcd33-1638-48bd-f6fe-07a4ab50f45d")
-      const latestBorrowProps:IBorrow ={
-        userId:userId1,
-            bookId:bookId,
-            startAt:new Date("2022-05-15T13:55:03.232Z"),
-            endAt:new Date("2022-05-16T13:55:03.232Z")
-      }
-      const borrow = Borrow.reBuild(latestBorrowProps,borrowId)
+      const borrowId = BorrowId.reBuild('a48dcd33-1638-48bd-f6fe-07a4ab50f45d');
+      const latestBorrowProps: IBorrow = {
+        userId: userId1,
+        bookId: bookId,
+        startAt: new Date('2022-05-15T13:55:03.232Z'),
+        endAt: new Date('2022-05-16T13:55:03.232Z'),
+      };
+      const borrow = LatestBorrow.reBuild(latestBorrowProps, borrowId);
 
-      const withLatestBorrowProps:IBook = {...baseBookProps,latestBorrow:borrow}
+      const withLatestBorrowProps: IBook = {
+        ...baseBookProps,
+        isBorrowing: false,
+      };
       const book = Book.reBuild(withLatestBorrowProps, bookId);
       await bookRepository.register(book);
       await prismaService.borrow_histories.create({
-        data:{
+        data: {
           id: borrowId.toString(),
-          book_id:latestBorrowProps.bookId.toString(),
-          user_id:latestBorrowProps.userId.toString(),
-          start_at:latestBorrowProps.startAt,
-          end_at:latestBorrowProps.endAt
-        }})
+          book_id: latestBorrowProps.bookId.toString(),
+          user_id: latestBorrowProps.userId.toString(),
+          start_at: latestBorrowProps.startAt,
+          end_at: latestBorrowProps.endAt,
+        },
+      });
       // - - - - - - - - - - - - - - - - - - - - - - - -
       // テスト
       // - - - - - - - - - - - - - - - - - - - - - - - -
       const actual = await bookRepository.findOne(bookId);
       expect(actual).toStrictEqual(book);
     });
-
   });
   describe('findAll', () => {
     test('データが１件もない', async () => {
@@ -212,5 +286,7 @@ const baseBookProps: IBook = {
   author: 'author1',
   isLost: false,
   isPrivate: false,
-  latestBorrow: undefined,
+  isBorrowing: false,
 };
+
+   */

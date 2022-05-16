@@ -2,7 +2,7 @@ import { TAG, Tag } from './tag/tag';
 import { BookId } from './book-id/book-id';
 import { Book, IBook } from './book';
 import { TagList } from './tag/tag-list';
-import { Borrow } from './borrow/borrow';
+import { Borrow } from '../user/borrow/borrow';
 import { UserId } from '../user/user-id/user-id';
 
 describe('Book', () => {
@@ -14,15 +14,6 @@ describe('Book', () => {
   const tag3 = new Tag({ name: TAG.ops });
   const tagList = new TagList({ tagsList: [tag1, tag2, tag3] });
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  // borrow
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  const borrow = Borrow.create({
-    bookId: BookId.create(),
-    userId: UserId.create(),
-    startAt: new Date(),
-    endAt: new Date(),
-  });
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   // props
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   const props: IBook = {
@@ -31,7 +22,7 @@ describe('Book', () => {
     tagList: tagList,
     isLost: false,
     isPrivate: false,
-    latestBorrow: borrow,
+    isBorrowing: true,
   };
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

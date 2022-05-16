@@ -2,7 +2,7 @@ import { IPrismaUser } from './user-repository';
 import { IUser, User } from 'src/domain/user/user';
 import { UserId } from 'src/domain/user/user-id/user-id';
 import { BorrowingList } from 'src/domain/user/borrow-list/borrow-list';
-import { Borrow } from 'src/domain/book/borrow/borrow';
+import { Borrow } from 'src/domain/user/borrow/borrow';
 import { BookId } from 'src/domain/book/book-id/book-id';
 
 export const userConverter = (prismaUser: IPrismaUser): User => {

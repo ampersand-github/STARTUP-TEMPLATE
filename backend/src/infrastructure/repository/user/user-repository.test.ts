@@ -71,7 +71,7 @@ describe('userRepository', () => {
     await prismaService.$disconnect();
   });
 
-  describe('register/findOne', () => {
+  describe('save', () => {
     test('最小限の書籍データを登録できる', async () => {
       const userId = UserId.reBuild('2422c514-4b06-aced-5ef3-3f869d299bd8');
       await prismaService.users.create({
@@ -85,18 +85,23 @@ describe('userRepository', () => {
           end_at: null,
         },
       });
-
-      describe('register', () => {
-        test('登録できる', async () => {
-          const userId = UserId.reBuild('2422c514-4b06-aced-5ef3-3f869d299bd8');
-          const props: IUser = {
-            name: 'name1',
-            borrowingList: new BorrowingList({ borrowList: [] }),
-          };
-          const user = User.reBuild(props, userId);
-          userRepository.resister();
-
-          /*
+    });
+  });
+  /*
+    describe('register', () => {
+      test('登録できる', async () => {
+        const userId = UserId.reBuild('2422c514-4b06-aced-5ef3-3f869d299bd8');
+        const props: IUser = {
+          name: 'name1',
+          borrowingList: new BorrowingList({ borrowList: [] }),
+        };
+        const user = User.reBuild(props, userId);
+        userRepository.resister();
+      });
+    });
+ */
+});
+/*
       // - - - - - - - - - - - - - - - - - - - - - - - -
       // データを登録
       // - - - - - - - - - - - - - - - - - - - - - - - -
@@ -109,11 +114,7 @@ describe('userRepository', () => {
       const actual = await userRepository.findOne(userId);
       expect(actual).toStrictEqual(user);
      */
-        });
-      });
-    });
-  });
-});
+
 /*
     describe('findAll', () => {
       test('データが１件もない', async () => {
@@ -219,7 +220,7 @@ describe('userRepository', () => {
       // - - - - - - - - - - - - - - - - - - - - - - - -
       const firstBorrowProps = {
         ...baseuserProps,
-        latestBorrow: new Borrow({
+        latestBorrow: new LatestBorrow({
           userId: userId,
           userId: userId1,
           startAt: new Date('2022-05-14T12:31:02.522Z'),
@@ -247,7 +248,7 @@ describe('userRepository', () => {
       const userId = userId.reBuild('2422c514-4b06-aced-5ef3-3f869d299bd8');
       const borrowingProps = {
         ...baseuserProps,
-        latestBorrow: new Borrow({
+        latestBorrow: new LatestBorrow({
           userId: userId,
           userId: userId1,
           startAt: new Date('2022-05-14T12:31:02.522Z'),
@@ -261,7 +262,7 @@ describe('userRepository', () => {
       // - - - - - - - - - - - - - - - - - - - - - - - -
       const returnProps = {
         ...baseuserProps,
-        latestBorrow: new Borrow({
+        latestBorrow: new LatestBorrow({
           userId: borrowingProps.latestBorrow.getuserId(),
           userId: borrowingProps.latestBorrow.getUserId(),
           startAt: borrowingProps.latestBorrow.getStartAt(),

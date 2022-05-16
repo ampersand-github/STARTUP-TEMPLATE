@@ -1,5 +1,5 @@
 import { BorrowingList } from './borrow-list';
-import { Borrow } from '../../book/borrow/borrow';
+import { Borrow } from '../borrow/borrow';
 import { BookId } from '../../book/book-id/book-id';
 import { UserId } from '../user-id/user-id';
 

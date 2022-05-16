@@ -1,4 +1,4 @@
-import { Borrow } from '../../book/borrow/borrow';
+import { Borrow } from '../borrow/borrow';
 import { ValueObject } from '../../__shared__/value-object';
 
 export interface IBorrowingList {
