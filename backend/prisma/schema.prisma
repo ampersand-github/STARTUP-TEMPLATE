@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["interactiveTransactions"]
 }
 
 datasource db {
@@ -13,47 +14,46 @@ datasource db {
 model users {
     id          String  @id
     name        String
-    email       String
     updated_at  DateTime    @updatedAt
     created_at  DateTime    @default(now())
     //
-    lendingHistories lendingHistories[]
+    borrow_histories borrow_histories[]
 }
 
+model borrow_histories {
+    id          String  @id
+    book_id     String
+    user_id     String
+    start_at    DateTime @default(now())
+    end_at      DateTime?
+    //
+    users   users @relation(fields: [user_id], references: [id])
+    books   books @relation(fields: [book_id], references: [id])
+}
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // 書籍集約
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 model books {
     id          String  @id
     name        String
+    author      String
+    is_losting  Boolean   @default(false)
+    is_privates Boolean   @default(false)
     updated_at  DateTime   @updatedAt
     created_at  DateTime   @default(now())
     //
     tags        tags[]
-    lendingHistories lendingHistories[]
+    borrow_histories borrow_histories[]
 }
+
 
 // One-to-many relations
 // https://www.prisma.io/docs/concepts/components/prisma-schema/relations/one-to-many-relations
 model tags {
-    id          String  @id
-    name        String
+    tag_name    String
     book_id     String
-    updated_at  DateTime   @updatedAt
-    created_at  DateTime   @default(now())
     //
     books   books @relation(fields: [book_id], references: [id])
+    @@id([tag_name, book_id])
 }
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// 履歴集約
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-model lendingHistories {
-    id          String  @id // 必要ないけどprismaの制約上必須
-    user_id     String
-    book_id     String
-    checkoutAt  DateTime
-    returnAt    DateTime
-    //
-    users   users @relation(fields: [user_id], references: [id])
-    books   books @relation(fields: [book_id], references: [id])
-}
+
