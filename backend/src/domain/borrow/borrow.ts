@@ -48,6 +48,10 @@ export class Borrow extends AggregateRoot<IBorrow, BorrowId> {
     return new Borrow(props, id);
   }
 
+  public isBorrowing() {
+    return !this.endAt
+  }
+
   public returnBook(): Borrow {
     if (this.endAt) throw new Error('この書籍は返却済みです');
 
