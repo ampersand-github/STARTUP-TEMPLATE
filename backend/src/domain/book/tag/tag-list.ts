@@ -17,7 +17,6 @@ export class TagList extends ValueObject<ITagList> {
     this.collection = props.tagsList;
   }
 
-  /*
   public add(tag: Tag): TagList {
     const tagList = [...this.collection].concat(tag);
     return new TagList({ tagsList: tagList });
@@ -27,5 +26,4 @@ export class TagList extends ValueObject<ITagList> {
     const tagList = this.collection.filter((one: Tag) => one !== tag);
     return new TagList({ tagsList: tagList });
   }
- */
 }
