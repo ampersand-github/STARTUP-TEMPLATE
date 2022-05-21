@@ -2,11 +2,7 @@ import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
 import { Book } from 'src/domain/book/book';
 import { IBookRepository } from 'src/domain/book/__interface__/book-repository-interface';
 import { BookId } from 'src/domain/book/book-id/book-id';
-import {
-  books as IPrismaBooks,
-  tags as IPrismaTags,
-  borrow_histories as IPrismaBorrowHistories,
-} from '@prisma/client';
+import { books as IPrismaBooks, tags as IPrismaTags } from '@prisma/client';
 import { bookConverter } from './book-converter';
 
 export type IPrismaBook = IPrismaBooks & {
@@ -36,7 +32,6 @@ export class BookRepository implements IBookRepository {
           },
           take: 1,
           orderBy: { start_at: 'desc' },
-          where: { end_at: null },
         },
       },
     });
@@ -56,13 +51,10 @@ export class BookRepository implements IBookRepository {
           },
           take: 1,
           orderBy: { start_at: 'desc' },
-          where: { end_at: null },
         },
       },
     });
     // データの加工
-    console.log('--------');
-    console.log(allBooks);
     return allBooks.map((one: IPrismaBook): Book => bookConverter(one));
   }
 
