@@ -49,7 +49,7 @@ export class Borrow extends AggregateRoot<IBorrow, BorrowId> {
   }
 
   public isBorrowing() {
-    return !this.endAt
+    return !this.endAt;
   }
 
   public returnBook(): Borrow {

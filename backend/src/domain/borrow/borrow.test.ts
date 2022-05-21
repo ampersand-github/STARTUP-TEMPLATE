@@ -1,13 +1,13 @@
 import { Borrow, IBorrow } from './borrow';
 import { UserId } from '../user/user-id/user-id';
 import { BorrowId } from './borrow-id/borrow-id';
-import { User } from '../user/user';
+import { BookId } from '../book/book-id/book-id';
 
 describe('Borrow', () => {
   describe('constructor', () => {
     const props: IBorrow = {
       userId: UserId.reBuild('8e37f697-581a-3486-bb79-80348c153828'),
-      bookId: UserId.reBuild('64cd7892-966b-0238-72a9-e2b87b29c580'),
+      bookId: BookId.reBuild('64cd7892-966b-0238-72a9-e2b87b29c580'),
       startAt: new Date(),
       endAt: null,
     };
@@ -26,7 +26,7 @@ describe('Borrow', () => {
   describe('get()', () => {
     const props: IBorrow = {
       userId: UserId.reBuild('8e37f697-581a-3486-bb79-80348c153828'),
-      bookId: UserId.reBuild('64cd7892-966b-0238-72a9-e2b87b29c580'),
+      bookId: BookId.reBuild('64cd7892-966b-0238-72a9-e2b87b29c580'),
       startAt: new Date(),
       endAt: null,
     };
@@ -42,7 +42,7 @@ describe('Borrow', () => {
   describe('isBorrowing()', () => {
     const props: IBorrow = {
       userId: UserId.reBuild('8e37f697-581a-3486-bb79-80348c153828'),
-      bookId: UserId.reBuild('64cd7892-966b-0238-72a9-e2b87b29c580'),
+      bookId: BookId.reBuild('64cd7892-966b-0238-72a9-e2b87b29c580'),
       startAt: new Date(),
       endAt: null,
     };
@@ -51,7 +51,7 @@ describe('Borrow', () => {
       expect(expected.isBorrowing()).toStrictEqual(true);
     });
     it('貸出が終了している', () => {
-      const props2:IBorrow = {...props,endAt:new Date()}
+      const props2: IBorrow = { ...props, endAt: new Date() };
       const expected = Borrow.create(props2);
       expect(expected.isBorrowing()).toStrictEqual(false);
     });
@@ -61,7 +61,7 @@ describe('Borrow', () => {
     it('返却できる', () => {
       const expected = Borrow.create({
         userId: UserId.reBuild('8e37f697-581a-3486-bb79-80348c153828'),
-        bookId: UserId.reBuild('64cd7892-966b-0238-72a9-e2b87b29c580'),
+        bookId: BookId.reBuild('64cd7892-966b-0238-72a9-e2b87b29c580'),
         startAt: new Date(),
         endAt: undefined,
       });
@@ -72,7 +72,7 @@ describe('Borrow', () => {
     it('返却済み書籍は返却できない', () => {
       const expected = Borrow.create({
         userId: UserId.reBuild('8e37f697-581a-3486-bb79-80348c153828'),
-        bookId: UserId.reBuild('64cd7892-966b-0238-72a9-e2b87b29c580'),
+        bookId: BookId.reBuild('64cd7892-966b-0238-72a9-e2b87b29c580'),
         startAt: new Date(),
         endAt: new Date(),
       });
