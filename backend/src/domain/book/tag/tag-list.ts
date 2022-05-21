@@ -12,6 +12,10 @@ export class TagList extends ValueObject<ITagList> {
     return this.collection;
   }
 
+  public toString(): string[] {
+    return this.collection.map((one: Tag) => one.getValue());
+  }
+
   public constructor(props: ITagList) {
     super(props);
     this.collection = props.tagsList;

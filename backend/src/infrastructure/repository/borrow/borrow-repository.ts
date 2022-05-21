@@ -23,15 +23,15 @@ export class BorrowRepository implements IBorrowRepository {
     return Promise.resolve([]);
   }
 
+  findAllByBookId(bookId: BookId): Promise<Borrow[]> {
+    return Promise.resolve([]);
+  }
+
   findOne(id: BorrowId): Promise<Borrow | null> {
     return Promise.resolve(undefined);
   }
 
   save(entity: Borrow): Promise<void> {
     return Promise.resolve(undefined);
-  }
-
-  findAllByBookId(bookId: BookId): Promise<Borrow[]> {
-    return Promise.resolve([]);
   }
 }

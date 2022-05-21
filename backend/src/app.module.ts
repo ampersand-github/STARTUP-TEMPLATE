@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { BookController } from './presentation/controller/book.controller';
+import { BookController } from './presentation/controller/book/book.controller';
 import { PrismaService } from './infrastructure/prisma/prisma.service';
 
 const ENV = process.env.NODE_ENV;

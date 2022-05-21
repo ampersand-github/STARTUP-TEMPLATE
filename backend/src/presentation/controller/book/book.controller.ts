@@ -1,9 +1,9 @@
 import { Controller, Get } from '@nestjs/common';
-import { findAllBooks } from 'src/usecase/find-all-books';
 import { BookRepository } from 'src/infrastructure/repository/book/book-repository';
 import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
-import { findAllBooksDto } from './__dto__/find-all-books-dto';
-import { CustomLoggerService } from '../../__shared__/logger/custom-logger.service';
+import { findAllBooksDto } from '../../../usecase/book/__dto__/find-all-books-dto';
+import { CustomLoggerService } from '../../../__shared__/logger/custom-logger.service';
+import { findAllBook } from '../../../usecase/book/find-all-book.test';
 
 @Controller('book')
 export class BookController {
@@ -22,7 +22,7 @@ export class BookController {
   @Get()
   //  curl http://localhost:3001/book
   public async getHello() {
-    const allBooks = await findAllBooks(this.bookRepository);
+    const allBooks = await findAllBook(this.bookRepository);
     return findAllBooksDto(allBooks);
   }
 }
