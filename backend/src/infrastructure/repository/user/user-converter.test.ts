@@ -3,7 +3,6 @@ import { userConverter } from './user-converter';
 import { User } from '../../../domain/user/user';
 import { UserId } from '../../../domain/user/user-id/user-id';
 
-// todo テストケースを書き直す
 describe('userConverter', () => {
   it('コンバートできる', () => {
     const userId1 = UserId.reBuild('33f14742-b9cf-e964-ba02-be9bc5baad88');

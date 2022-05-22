@@ -16,38 +16,22 @@ describe('userRepository', () => {
     await prismaService.$disconnect();
   });
 
-  describe('findOne()', () => {
-    test('値を習得できる', async () => {});
-    // テストデータとして、貸出履歴が複数あるデータを使うこと。
-    // 複数冊を現在借りていて、かつ、複数冊を返却している人
-  });
-
-  describe('findAll()', () => {
-    test('', async () => {});
-  });
-
-  describe('save()', () => {
-    test('新規登録できる(borrow_histories以外)', async () => {
-      const userId = UserId.reBuild('803298db-f5c4-2f7c-39a7-026da6c9ea03');
-      const user1 = User.reBuild(
+  describe('save()/findOne()', () => {
+    const userId = UserId.reBuild('803298db-f5c4-2f7c-39a7-026da6c9ea03');
+    const user1 = User.reBuild(
         {
           name: 'user1',
         },
         userId,
-      );
+    );
+
+    test('新規登録できる', async () => {
       await userRepository.save(user1);
       const actual = await userRepository.findOne(userId);
       expect(actual).toStrictEqual(user1);
     });
-    test('更新できる(borrow_histories以外)', async () => {
-      const userId = UserId.reBuild('803298db-f5c4-2f7c-39a7-026da6c9ea03');
-      const user1 = User.reBuild(
-        {
-          name: 'user1',
-        },
-        userId,
-      );
-      const user1Update = User.reBuild(
+    test('更新できる', async () => {
+        const user1Update = User.reBuild(
         {
           name: 'user1update',
         },
@@ -60,9 +44,5 @@ describe('userRepository', () => {
       expect(actual).not.toStrictEqual(user1);
       expect(await prismaService.users.count()).toStrictEqual(1);
     });
-    test('borrow_historiesを含めて新規登録できる', async () => {});
-    // 既存の貸出履歴を削除していないこと
-    test('borrow_historiesを含めて更新できる', async () => {});
-    // 既存の貸出履歴を削除していないこと
   });
 });
