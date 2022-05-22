@@ -4,7 +4,7 @@ import {
 } from './__interface__/book-with-borrow-qs-interface';
 import { BookWithBorrowListOutputDto } from './__dto__/book-with-borrow-list-output-dto';
 
-export const findAllBookWithBorrow = async (
+export const findAllBookWithBorrowUC = async (
   qs: IBookWithBorrowQS,
 ): Promise<BookWithBorrowListOutputDto[]> => {
   const findAll = await qs.findAll();

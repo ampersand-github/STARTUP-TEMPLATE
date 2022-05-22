@@ -1,12 +1,9 @@
-import {
-  IBookWithBorrow,
-  IBookWithBorrowQS,
-} from './__interface__/book-with-borrow-qs-interface';
+import { IBookWithBorrowQS } from './__interface__/book-with-borrow-qs-interface';
 import { BookId } from '../../domain/book/book-id/book-id';
 import { BookWithBorrowDetailOutputDto } from './__dto__/book-with-borrow-detail-output-dto';
 import { BookWithBorrowListOutputDto } from './__dto__/book-with-borrow-list-output-dto';
 
-export const findOneBookWithBorrow = async (
+export const findOneBookWithBorrowUC = async (
   bookId: BookId,
   qs: IBookWithBorrowQS,
 ): Promise<BookWithBorrowListOutputDto> => {

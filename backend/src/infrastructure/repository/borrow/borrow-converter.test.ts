@@ -1,7 +1,7 @@
 import { IPrismaBorrow } from './borrow-repository';
 import { borrowConverter } from './borrow-converter';
 import { BookId } from '../../../domain/book/book-id/book-id';
-import {UserId} from "../../../domain/user/user-id/user-id";
+import { UserId } from '../../../domain/user/user-id/user-id';
 
 describe('borrowConverter', () => {
   const borrowId = '2422c514-4b06-aced-5ef3-3f869d299bd8';
@@ -31,11 +31,11 @@ describe('borrowConverter', () => {
       end_at: null,
     };
 
-      const actual = borrowConverter(props2);
-      expect(actual.id.toString()).toStrictEqual(borrowId);
-      expect(actual.getBookId()).toStrictEqual(BookId.reBuild(props2.book_id));
-      expect(actual.getUserId()).toStrictEqual(UserId.reBuild(props2.user_id));
-      expect(actual.getStartAt()).toStrictEqual(props2.start_at);
-      expect(actual.getEndAt()).toStrictEqual(undefined); // nullじゃないよ
+    const actual = borrowConverter(props2);
+    expect(actual.id.toString()).toStrictEqual(borrowId);
+    expect(actual.getBookId()).toStrictEqual(BookId.reBuild(props2.book_id));
+    expect(actual.getUserId()).toStrictEqual(UserId.reBuild(props2.user_id));
+    expect(actual.getStartAt()).toStrictEqual(props2.start_at);
+    expect(actual.getEndAt()).toStrictEqual(undefined); // nullじゃないよ
   });
 });

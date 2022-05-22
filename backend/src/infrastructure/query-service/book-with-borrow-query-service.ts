@@ -24,7 +24,7 @@ export class BookWithBorrowQS implements IBookWithBorrowQS {
 
   async findAll(): Promise<IBookWithBorrow[]> {
     const a = await this.prisma.books.findMany({
-      include: { borrow_histories: {skip:1,orderBy:{start_at:"desc"}} },
+      include: { borrow_histories: { skip: 1, orderBy: { start_at: 'desc' } } },
     });
     return Promise.resolve(undefined);
   }

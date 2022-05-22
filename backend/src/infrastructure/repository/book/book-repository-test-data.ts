@@ -3,7 +3,6 @@ import { Book } from '../../../domain/book/book';
 import { TagList } from '../../../domain/book/tag/tag-list';
 import { BookId } from '../../../domain/book/book-id/book-id';
 
-
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // 共通
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
