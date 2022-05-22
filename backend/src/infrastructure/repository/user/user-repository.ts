@@ -14,18 +14,6 @@ export class UserRepository implements IUserRepository {
     this.prisma = _prisma;
   }
 
-  /*
-  async findAll(): Promise<User[]> {
-    // データの取得
-    const allUsers: IPrismaUsers[] = await this.prisma.users.findMany();
-
-    // データの加工
-    return allUsers.map((one: IPrismaUser): User => {
-      return userConverter(one);
-    });
-  }
-   */
-
   async findOne(UserId: UserId): Promise<User | null> {
     const user: IPrismaUser = await this.prisma.users.findUnique({
       where: { id: UserId.toString() },

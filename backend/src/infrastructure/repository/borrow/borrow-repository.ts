@@ -1,5 +1,4 @@
 import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
-// import { borrows as IPrismaBorroews} from '@prisma/client';
 import { IBorrowRepository } from 'src/domain/borrow/__interface__/borrow-repository-interface';
 import { UserId } from 'src/domain/user/user-id/user-id';
 import { Borrow } from 'src/domain/borrow/borrow';
@@ -27,7 +26,7 @@ export class BorrowRepository implements IBorrowRepository {
     return Promise.resolve([]);
   }
 
-  findOne(id: BorrowId): Promise<Borrow | null> {
+  async findOne(id: BorrowId): Promise<Borrow | null> {
     return Promise.resolve(undefined);
   }
 
@@ -35,3 +34,8 @@ export class BorrowRepository implements IBorrowRepository {
     return Promise.resolve(undefined);
   }
 }
+
+/*
+       take: 1,
+          orderBy: { start_at: 'desc' },
+ */
