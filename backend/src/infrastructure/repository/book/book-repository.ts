@@ -7,10 +7,6 @@ import { bookConverter } from './book-converter';
 
 export type IPrismaBook = IPrismaBooks & {
   tags: IPrismaTags[];
-  borrow_histories: {
-    start_at: Date;
-    end_at: Date | null;
-  }[];
 };
 
 export class BookRepository implements IBookRepository {
@@ -25,37 +21,9 @@ export class BookRepository implements IBookRepository {
       where: { id: bookId.toString() },
       include: {
         tags: true,
-        borrow_histories: {
-          select: {
-            start_at: true,
-            end_at: true,
-          },
-          take: 1,
-          orderBy: { start_at: 'desc' },
-        },
       },
     });
     return book ? bookConverter(book) : null;
-  }
-
-  async findAll(): Promise<Book[]> {
-    // データの取得
-    const allBooks: IPrismaBook[] = await this.prisma.books.findMany({
-      include: {
-        tags: true,
-        // 最新1件を習得、習得できなければnull
-        borrow_histories: {
-          select: {
-            start_at: true,
-            end_at: true,
-          },
-          take: 1,
-          orderBy: { start_at: 'desc' },
-        },
-      },
-    });
-    // データの加工
-    return allBooks.map((one: IPrismaBook): Book => bookConverter(one));
   }
 
   async save(entity: Book): Promise<void> {

@@ -18,12 +18,6 @@ const prismaBook1: IPrismaBook = {
     { tag_name: '運用', book_id: bookId },
     { tag_name: 'Go', book_id: bookId },
   ],
-  borrow_histories: [
-    {
-      start_at: new Date('2022-06-14T12:11:14.418Z'),
-      end_at: null,
-    },
-  ],
 };
 
 describe('bookConverter', () => {
@@ -43,51 +37,5 @@ describe('bookConverter', () => {
         BookId.reBuild(bookId),
       ),
     );
-  });
-
-  it('end_atに日付のあるデータをコンバートできる', () => {
-    const withEndAt = {
-      ...prismaBook1,
-      borrow_histories: [
-        {
-          start_at: new Date('2022-06-14T12:11:14.418Z'),
-          end_at: new Date('2022-07-14T12:11:14.418Z'),
-        },
-      ],
-    };
-    const actual = bookConverter(withEndAt);
-    expect(actual).toStrictEqual(
-      Book.reBuild(
-        {
-          name: prismaBook1.name,
-          author: prismaBook1.author,
-          tagList: new TagList({
-            tagsList: [new Tag({ name: '運用' }), new Tag({ name: 'Go' })],
-          }),
-          isLost: prismaBook1.is_losting,
-          isPrivate: prismaBook1.is_privates,
-        },
-        BookId.reBuild(bookId),
-      ),
-    );
-  });
-
-  it('borrow_historiesが空', () => {
-    const blankBorrowHistories = { ...prismaBook1, borrow_histories: [] };
-    const actual = bookConverter(blankBorrowHistories);
-    const book = Book.reBuild(
-      {
-        name: prismaBook1.name,
-        author: prismaBook1.author,
-        tagList: new TagList({
-          tagsList: [new Tag({ name: '運用' }), new Tag({ name: 'Go' })],
-        }),
-        isLost: prismaBook1.is_losting,
-        isPrivate: prismaBook1.is_privates,
-      },
-      BookId.reBuild(bookId),
-    );
-
-    expect(actual).toStrictEqual(book);
   });
 });

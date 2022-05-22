@@ -57,12 +57,4 @@ describe('bookRepository', () => {
       expect(await bookRepository.findOne(baseBook.id)).toStrictEqual(baseBook);
     });
   });
-
-  describe('findAll()', () => {
-    test('１件もない場合は空配列を取得する', async () => {
-      const result = await bookRepository.findAll();
-      expect(result).toEqual([]);
-    });
-    test('全件を習得できる', async () => {});
-  });
 });
