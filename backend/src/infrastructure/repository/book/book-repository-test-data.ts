@@ -67,7 +67,7 @@ export const WithTagBook = Book.reBuild(
 export const WithTagBookUpdate = Book.reBuild(
   {
     name: 'セキュア・バイ・デザイン',
-    tagList: new TagList({ tagsList: [ops, ui] }),
+    tagList: new TagList({ tagsList: [ui,ops] }),
     author: 'author1',
     isLost: false,
     isPrivate: false,
