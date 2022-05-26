@@ -1,9 +1,9 @@
 import { UserId } from '../../user/user-id/user-id';
-import { BookId } from '../../book/book-id/book-id';
 import { Borrow } from '../borrow';
 import { BorrowRepository } from '../../../infrastructure/repository/borrow/borrow-repository';
 import { PrismaService } from '../../../infrastructure/prisma/prisma.service';
-import { canUserAdditionalBorrowDomainService } from './can-user-additional-borrow-domain-service';
+import { OpenBookId } from '../../open-book/open-book-id/open-book-id';
+import { canAdditionalBorrowDS } from './can-additional-borrow-domain-service';
 
 describe('maxBorrowLimitDomainService', () => {
   const borrowRepository = new BorrowRepository(new PrismaService());
@@ -11,49 +11,49 @@ describe('maxBorrowLimitDomainService', () => {
 
   const borrowing1 = Borrow.create({
     userId: userId,
-    bookId: BookId.create(),
+    openBookId: OpenBookId.create(),
     startAt: new Date(),
     endAt: undefined,
   });
 
   const borrowing2 = Borrow.create({
     userId: userId,
-    bookId: BookId.create(),
+    openBookId: OpenBookId.create(),
     startAt: new Date(),
     endAt: undefined,
   });
 
   const borrowing3 = Borrow.create({
     userId: userId,
-    bookId: BookId.create(),
+    openBookId: OpenBookId.create(),
     startAt: new Date(),
     endAt: undefined,
   });
 
   const borrowing4 = Borrow.create({
     userId: userId,
-    bookId: BookId.create(),
+    openBookId: OpenBookId.create(),
     startAt: new Date(),
     endAt: undefined,
   });
 
   const borrowing5 = Borrow.create({
     userId: userId,
-    bookId: BookId.create(),
+    openBookId: OpenBookId.create(),
     startAt: new Date(),
     endAt: undefined,
   });
 
   const borrowFinish1 = Borrow.create({
     userId: userId,
-    bookId: BookId.create(),
+    openBookId: OpenBookId.create(),
     startAt: new Date(),
     endAt: new Date(),
   });
 
   const borrowFinish2 = Borrow.create({
     userId: userId,
-    bookId: BookId.create(),
+    openBookId: OpenBookId.create(),
     startAt: new Date(),
     endAt: new Date(),
   });
@@ -63,13 +63,13 @@ describe('maxBorrowLimitDomainService', () => {
     //  jest
     // - - - - - - - - - - - - - - - - - - - - - - - - - - -
     jest
-      .spyOn(BorrowRepository.prototype, 'findAllByUserId')
+      .spyOn(BorrowRepository.prototype, 'findManyByUserId')
       .mockResolvedValue([]);
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - -
     //  ロジック
     // - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    const expected = await canUserAdditionalBorrowDomainService({
+    const expected = await canAdditionalBorrowDS({
       userId: userId,
       borrowR: borrowRepository,
     });
@@ -85,13 +85,13 @@ describe('maxBorrowLimitDomainService', () => {
     //  jest
     // - - - - - - - - - - - - - - - - - - - - - - - - - - -
     jest
-      .spyOn(BorrowRepository.prototype, 'findAllByUserId')
+      .spyOn(BorrowRepository.prototype, 'findManyByUserId')
       .mockResolvedValue([borrowing1, borrowing2, borrowing3, borrowing4]);
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - -
     //  ロジック
     // - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    const expected = await canUserAdditionalBorrowDomainService({
+    const expected = await canAdditionalBorrowDS({
       userId: userId,
       borrowR: borrowRepository,
     });
@@ -107,7 +107,7 @@ describe('maxBorrowLimitDomainService', () => {
     //  jest
     // - - - - - - - - - - - - - - - - - - - - - - - - - - -
     jest
-      .spyOn(BorrowRepository.prototype, 'findAllByUserId')
+      .spyOn(BorrowRepository.prototype, 'findManyByUserId')
       .mockResolvedValue([
         borrowing1,
         borrowing2,
@@ -119,7 +119,7 @@ describe('maxBorrowLimitDomainService', () => {
     // - - - - - - - - - - - - - - - - - - - - - - - - - - -
     //  ロジック
     // - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    const expected = await canUserAdditionalBorrowDomainService({
+    const expected = await canAdditionalBorrowDS({
       userId: userId,
       borrowR: borrowRepository,
     });
@@ -135,7 +135,7 @@ describe('maxBorrowLimitDomainService', () => {
     //  jest
     // - - - - - - - - - - - - - - - - - - - - - - - - - - -
     jest
-      .spyOn(BorrowRepository.prototype, 'findAllByUserId')
+      .spyOn(BorrowRepository.prototype, 'findManyByUserId')
       .mockResolvedValue([
         borrowing1,
         borrowing2,
@@ -148,7 +148,7 @@ describe('maxBorrowLimitDomainService', () => {
     // - - - - - - - - - - - - - - - - - - - - - - - - - - -
     //  ロジック
     // - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    const expected = await canUserAdditionalBorrowDomainService({
+    const expected = await canAdditionalBorrowDS({
       userId: userId,
       borrowR: borrowRepository,
     });

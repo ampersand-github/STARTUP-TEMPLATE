@@ -1,45 +1,42 @@
-import { Book } from '../../book/book';
 import { UserId } from '../../user/user-id/user-id';
 import { IBorrowRepository } from '../__interface__/borrow-repository-interface';
-import { canUserAdditionalBorrowDomainService } from './can-user-additional-borrow-domain-service';
-import { isBorrowingDomainService } from './is-borrowing-domain-service';
+import { canAdditionalBorrowDS } from './can-additional-borrow-domain-service';
 import { Borrow } from '../borrow';
+import { OpenBook } from 'src/domain/open-book/open-book';
+import { IOpenBookRepository } from '../../open-book/__interface__/open-book-repository-interface';
 
 export interface IBorrowDomainService {
   userId: UserId;
-  book: Book;
+  openBook: OpenBook;
   borrowR: IBorrowRepository;
+  openBookR: IOpenBookRepository;
 }
 
 export const borrowDomainService = async (props: IBorrowDomainService) => {
-  if (props.book.getIsPrivate())
-    throw new Error('この書籍は閉架にあり、貸し出すことができません。');
-
-  if (props.book.getIsLost())
-    throw new Error(
-      'この書籍は紛失中の書籍です。カウンターで紛失解除の手続きしてください。',
-    );
-
-  const canUserAdditionalBorrow: boolean =
-    await canUserAdditionalBorrowDomainService({
-      userId: props.userId,
-      borrowR: props.borrowR,
-    });
-  if (!canUserAdditionalBorrow)
-    throw new Error('同時に借りることのできる書籍は5冊までです。');
-
-  const isBorrowing: boolean = await isBorrowingDomainService({
-    book: props.book,
+  const canBorrow: boolean = await canAdditionalBorrowDS({
+    userId: props.userId,
     borrowR: props.borrowR,
   });
-  if (isBorrowing) throw new Error('この書籍は貸出中です。');
+  if (!canBorrow)
+    throw new Error('同時に借りることのできる書籍は5冊までです。');
+
+  if (props.openBook.idBorrowing()) throw new Error('この書籍は貸出中です。');
 
   const borrow = Borrow.create({
     userId: props.userId,
-    bookId: props.book.id,
+    openBookId: props.openBook.id,
     startAt: new Date(),
     endAt: undefined,
   });
 
+  const openBook = OpenBook.reBuild(
+    {
+      bookId: props.openBook.getBookId(),
+      borrowingId: borrow.id,
+    },
+    props.openBook.id,
+  );
+
   await props.borrowR.save(borrow);
+  await props.openBookR.save(openBook);
 };

@@ -4,7 +4,7 @@ import { UserId } from '../../user/user-id/user-id';
 
 export interface IBorrowRepository {
   findOne(id: BookId): Promise<Borrow | null>;
-  findAllByUserId(userId: UserId): Promise<Borrow[]>;
-  findAllByBookId(bookId: BookId): Promise<Borrow[]>;
+  findManyByUserId(userId: UserId): Promise<Borrow[]>;
+  //findAllByBookId(bookId: BookId): Promise<Borrow[]>;
   save(entity: Borrow): Promise<void>;
 }
