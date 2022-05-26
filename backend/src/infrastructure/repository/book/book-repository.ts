@@ -49,8 +49,6 @@ export class BookRepository implements IBookRepository {
           id: entity.id.toString(),
           name: entity.getName(),
           author: entity.getAuthor(),
-          is_privates: entity.getIsPrivate(),
-          is_losting: entity.getIsLost(),
           tags: {
             createMany: {
               data: createPrismaTagList,
@@ -60,8 +58,6 @@ export class BookRepository implements IBookRepository {
         update: {
           name: entity.getName(),
           author: entity.getAuthor(),
-          is_privates: entity.getIsPrivate(),
-          is_losting: entity.getIsLost(),
           tags: {
             createMany: {
               data: createPrismaTagList,

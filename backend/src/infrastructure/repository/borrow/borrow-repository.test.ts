@@ -6,6 +6,7 @@ import { UserId } from '../../../domain/user/user-id/user-id';
 import { BookId } from '../../../domain/book/book-id/book-id';
 import { BorrowId } from '../../../domain/borrow/borrow-id/borrow-id';
 import { User } from '../../../domain/user/user';
+import { OpenBookId } from '../../../domain/open-book/open-book-id/open-book-id';
 
 describe('BorrowRepository', () => {
   const prismaService = new PrismaService();
@@ -35,12 +36,12 @@ describe('BorrowRepository', () => {
     test('習得できる', async () => {
       const borrowId = BorrowId.reBuild('2422c514-4b06-aced-5ef3-3f869d299bd8');
       const userId = UserId.reBuild('8e37f697-581a-3486-bb79-80348c153828');
-      const bookId = BookId.reBuild('64cd7892-966b-0238-72a9-e2b87b29c580');
+      const bookId = OpenBookId.reBuild('64cd7892-966b-0238-72a9-e2b87b29c580');
 
       const borrow: Borrow = Borrow.reBuild(
         {
           userId: userId,
-          bookId: bookId,
+          openBookId: bookId,
           startAt: new Date(),
           endAt: undefined,
         },
@@ -55,8 +56,6 @@ describe('BorrowRepository', () => {
           id: bookId.toString(),
           name: 'name1',
           author: 'author1',
-          is_losting: false,
-          is_privates: false,
         },
       });
       await borrowRepository.save(borrow);

@@ -22,14 +22,14 @@ model users {
 
 model borrow_histories {
     id          String  @id
-    book_id     String
+    open_book_id String
     user_id     String
     start_at    DateTime @default(now())
     end_at      DateTime?
     //
     users   users @relation(fields: [user_id], references: [id])
-    books   books @relation(fields: [book_id], references: [id])
-}
+   open_books open_books[]
+   }
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // 書籍集約
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -37,13 +37,11 @@ model books {
     id          String  @id
     name        String
     author      String
-    is_losting  Boolean   @default(false)
-    is_privates Boolean   @default(false)
     updated_at  DateTime   @updatedAt
     created_at  DateTime   @default(now())
     //
     tags        tags[]
-    borrow_histories borrow_histories[]
+    open_books open_books[]
 }
 
 
@@ -56,4 +54,16 @@ model tags {
     books   books @relation(fields: [book_id], references: [id])
     @@id([tag_name, book_id])
 }
-
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+model open_books {
+    id          String  @id
+    book_id     String
+    borrow_histories_id String?
+    updated_at  DateTime   @updatedAt
+    created_at  DateTime   @default(now())
+    //
+   books  books @relation(fields: [book_id], references: [id])
+   borrow_histories  borrow_histories? @relation(fields: [borrow_histories_id], references: [id])
+}

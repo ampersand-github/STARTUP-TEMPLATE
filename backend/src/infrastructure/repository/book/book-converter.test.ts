@@ -10,8 +10,6 @@ const prismaBook1: IPrismaBook = {
   id: bookId,
   name: 'セキュア・バイ・デザイン',
   author: 'author1',
-  is_losting: true,
-  is_privates: false,
   updated_at: new Date('2022-05-14T05:49:26.505Z'),
   created_at: new Date('2022-05-14T05:49:26.505Z'),
   tags: [
@@ -31,8 +29,6 @@ describe('bookConverter', () => {
           tagList: new TagList({
             tagsList: [new Tag({ name: '運用' }), new Tag({ name: 'Go' })],
           }),
-          isLost: prismaBook1.is_losting,
-          isPrivate: prismaBook1.is_privates,
         },
         BookId.reBuild(bookId),
       ),
