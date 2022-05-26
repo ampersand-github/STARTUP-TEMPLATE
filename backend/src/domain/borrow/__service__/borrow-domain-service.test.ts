@@ -2,17 +2,17 @@ import { BorrowRepository } from '../../../infrastructure/repository/borrow/borr
 import { borrowDomainService } from './borrow-domain-service';
 import { UserId } from '../../user/user-id/user-id';
 import { PrismaService } from '../../../infrastructure/prisma/prisma.service';
-import { BookId } from '../../book/book-id/book-id';
 import * as canAdditionalBorrowDS from './can-additional-borrow-domain-service';
-import { OpenBook } from '../../open-book/open-book';
-import { BorrowId } from '../borrow-id/borrow-id';
 import { OpenBookRepository } from '../../../infrastructure/repository/open-book/open-book-repository';
+import { OpenBookId } from '../../open-book/open-book-id/open-book-id';
+import { OpenBook } from '../../open-book/open-book';
+import { BookId } from '../../book/book-id/book-id';
+import { BorrowId } from '../borrow-id/borrow-id';
 
 describe('borrowDomainService', () => {
   const prisma = new PrismaService();
   const borrowRepository = new BorrowRepository(prisma);
   const openBookRepository = new OpenBookRepository(prisma);
-
   it('追加で書籍を借りることができない', async () => {
     // - - - - - - - - - - - - - - - - - - - - - - - - - - -
     //  jest
@@ -27,10 +27,7 @@ describe('borrowDomainService', () => {
     const actual = async () =>
       await borrowDomainService({
         userId: UserId.create(),
-        openBook: OpenBook.create({
-          bookId: BookId.create(),
-          borrowingId: undefined,
-        }),
+        openBookId: OpenBookId.create(),
         borrowR: borrowRepository,
         openBookR: openBookRepository,
       });
@@ -50,17 +47,19 @@ describe('borrowDomainService', () => {
     jest
       .spyOn(canAdditionalBorrowDS, 'canAdditionalBorrowDS')
       .mockResolvedValue(true);
-
+    jest.spyOn(openBookRepository, 'findOne').mockResolvedValue(
+      OpenBook.create({
+        bookId: BookId.create(),
+        borrowingId: BorrowId.create(),
+      }),
+    );
     // - - - - - - - - - - - - - - - - - - - - - - - - - - -
     //  ロジック
     // - - - - - - - - - - - - - - - - - - - - - - - - - - -
     const actual = async () =>
       await borrowDomainService({
         userId: UserId.create(),
-        openBook: OpenBook.create({
-          bookId: BookId.create(),
-          borrowingId: BorrowId.create(),
-        }),
+        openBookId: OpenBookId.create(),
         borrowR: borrowRepository,
         openBookR: openBookRepository,
       });
@@ -80,17 +79,19 @@ describe('borrowDomainService', () => {
       .mockResolvedValue(true);
     jest.spyOn(BorrowRepository.prototype, 'save').mockResolvedValue();
     jest.spyOn(OpenBookRepository.prototype, 'save').mockResolvedValue();
-
+    jest.spyOn(openBookRepository, 'findOne').mockResolvedValue(
+      OpenBook.create({
+        bookId: BookId.create(),
+        borrowingId: undefined,
+      }),
+    );
     // - - - - - - - - - - - - - - - - - - - - - - - - - - -
     //  ロジック
     // - - - - - - - - - - - - - - - - - - - - - - - - - - -
     const actual = async () =>
       await borrowDomainService({
         userId: UserId.create(),
-        openBook: OpenBook.create({
-          bookId: BookId.create(),
-          borrowingId: undefined,
-        }),
+        openBookId: OpenBookId.create(),
         borrowR: borrowRepository,
         openBookR: openBookRepository,
       });
