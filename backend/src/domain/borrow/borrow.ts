@@ -1,5 +1,4 @@
 import { AggregateRoot } from '../__shared__/aggregate-root';
-import { BookId } from '../book/book-id/book-id';
 import { UserId } from '../user/user-id/user-id';
 import { BorrowId } from './borrow-id/borrow-id';
 import { OpenBookId } from '../open-book/open-book-id/open-book-id';

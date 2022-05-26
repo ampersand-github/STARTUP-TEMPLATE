@@ -1,6 +1,5 @@
 import { IPrismaBorrow } from './borrow-repository';
 import { borrowConverter } from './borrow-converter';
-import { BookId } from '../../../domain/book/book-id/book-id';
 import { UserId } from '../../../domain/user/user-id/user-id';
 import { OpenBookId } from '../../../domain/open-book/open-book-id/open-book-id';
 

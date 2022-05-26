@@ -1,10 +1,8 @@
-import { IBookWithBorrowQS } from '../../usecase/book-with-borrow/__interface__/book-with-borrow-qs-interface';
 import { PrismaService } from '../prisma/prisma.service';
 import { IOpenBookOAQS } from '../../usecase/open-book-over-aggregation/__interface__/open-book-OAQS-interface';
 import { IOpenBookOA } from '../../usecase/open-book-over-aggregation/__interface__/open-book-OA-interface';
 import { OpenBookId } from '../../domain/open-book/open-book-id/open-book-id';
 import { open_books as IPrismaOpenBook } from '@prisma/client';
-
 import { IPrismaBorrow } from '../repository/borrow/borrow-repository';
 import { borrowConverter } from '../repository/borrow/borrow-converter';
 import { bookConverter } from '../repository/book/book-converter';

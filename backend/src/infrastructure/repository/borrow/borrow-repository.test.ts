@@ -1,11 +1,9 @@
 import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
 import { truncateAllTable } from 'src/infrastructure/__shared__/truncate-all-table';
-import { BorrowRepository, IPrismaBorrow } from './borrow-repository';
-import { Borrow, IBorrow } from '../../../domain/borrow/borrow';
+import { BorrowRepository } from './borrow-repository';
+import { Borrow } from '../../../domain/borrow/borrow';
 import { UserId } from '../../../domain/user/user-id/user-id';
-import { BookId } from '../../../domain/book/book-id/book-id';
 import { BorrowId } from '../../../domain/borrow/borrow-id/borrow-id';
-import { User } from '../../../domain/user/user';
 import { OpenBookId } from '../../../domain/open-book/open-book-id/open-book-id';
 
 describe('BorrowRepository', () => {

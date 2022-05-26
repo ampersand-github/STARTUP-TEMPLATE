@@ -1,5 +1,4 @@
 import { PrismaService } from '../prisma/prisma.service';
-import { IPrismaOpenBookOAQS } from './open-book-over-aggregation-query-service';
 import { IOpenBookOA } from '../../usecase/open-book-over-aggregation/__interface__/open-book-OA-interface';
 import { OpenBookId } from '../../domain/open-book/open-book-id/open-book-id';
 import { Book } from '../../domain/book/book';
@@ -25,12 +24,12 @@ const borrowId2 = 'aa81c1de-36d6-beda-f38f-52a3d2a006d4';
 const userId3 = 'f3accf91-e7b1-29e0-2c83-30d2aba90751';
 const openBookId3 = '9bbd10c1-7939-e2a7-1c90-666258565708';
 const bookId3 = 'z8159404-e8dc-9319-85eb-6a56fbc9223a';
-const borrowId3 = 'eac4b860-6a37-b102-170c-2e0b9841b7c2';
+// const borrowId3 = 'eac4b860-6a37-b102-170c-2e0b9841b7c2';
 
 const userId4 = 'dad92cc8-881c-5c74-1c36-d5d4f46f0168';
-const openBookId4 = 'ca23df00-dd52-ebb8-0bc9-649d8d07d027';
+// const openBookId4 = 'ca23df00-dd52-ebb8-0bc9-649d8d07d027';
 const bookId4 = 'fdfeb125-b532-4a9e-74fa-5145fb37642a';
-const borrowId4 = '8864f642-4c39-ab9a-72c6-880f72d75344';
+// const borrowId4 = '8864f642-4c39-ab9a-72c6-880f72d75344';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //

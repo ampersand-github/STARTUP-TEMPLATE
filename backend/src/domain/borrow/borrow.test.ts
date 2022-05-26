@@ -1,7 +1,6 @@
 import { Borrow, IBorrow } from './borrow';
 import { UserId } from '../user/user-id/user-id';
 import { BorrowId } from './borrow-id/borrow-id';
-import { BookId } from '../book/book-id/book-id';
 import { OpenBookId } from '../open-book/open-book-id/open-book-id';
 
 describe('Borrow', () => {

@@ -10,9 +10,6 @@ export const findAllBookWithBorrowUC = async (
   const findAll = await qs.findAll();
 
   return findAll.map((one: IBookWithBorrow) => {
-    if (one.book.getIsLost()) return;
-    if (one.book.getIsPrivate()) return;
-
     return new BookWithBorrowListOutputDto({
       name: one.book.getName(),
       author: one.book.getAuthor(),
