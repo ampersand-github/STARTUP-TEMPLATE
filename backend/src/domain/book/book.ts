@@ -6,16 +6,12 @@ export interface IBook {
   name: string;
   author: string;
   tagList: TagList;
-  isLost: boolean;
-  isPrivate: boolean;
 }
 
 export class Book extends AggregateRoot<IBook, BookId> {
   private readonly name: string;
   private readonly author: string;
   private readonly tagList: TagList;
-  private readonly isLost: boolean;
-  private readonly isPrivate: boolean;
 
   public getName() {
     return this.name;
@@ -29,21 +25,11 @@ export class Book extends AggregateRoot<IBook, BookId> {
     return this.tagList;
   }
 
-  public getIsLost() {
-    return this.isLost;
-  }
-
-  public getIsPrivate() {
-    return this.isPrivate;
-  }
-
   private constructor(props: IBook, id: BookId) {
     super(props, id);
     this.name = props.name;
     this.author = props.author;
     this.tagList = props.tagList;
-    this.isLost = props.isLost;
-    this.isPrivate = props.isPrivate;
   }
 
   public static create(props: IBook): Book {

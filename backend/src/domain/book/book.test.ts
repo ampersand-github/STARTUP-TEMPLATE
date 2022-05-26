@@ -18,8 +18,6 @@ describe('Book', () => {
     name: 'book1',
     author: 'author',
     tagList: tagList,
-    isLost: false,
-    isPrivate: false,
   };
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -33,7 +31,7 @@ describe('Book', () => {
     it('reBuildできる', () => {
       const bookId = BookId.reBuild('43145f95-2034-4fae-b88f-ca0bdf7890bd');
       const book = Book.reBuild(props, bookId);
-      expect(book).toEqual(expect.any(Book));
+      expect(book).toStrictEqual(expect.any(Book));
       expect(book.id).toStrictEqual(bookId);
     });
 
@@ -47,12 +45,6 @@ describe('Book', () => {
       });
       it('getTagList()', () => {
         expect(expected.getTagList()).toStrictEqual(props.tagList);
-      });
-      it('getIsLost()', () => {
-        expect(expected.getIsLost()).toStrictEqual(props.isLost);
-      });
-      it('getIsPrivate()', () => {
-        expect(expected.getIsPrivate()).toStrictEqual(props.isPrivate);
       });
     });
   });
