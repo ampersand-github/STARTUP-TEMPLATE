@@ -1,4 +1,4 @@
-const { firebaseAdminJson } = require('../../../firebase-admin.json');
+const firebaseAdminJson = require('../../../firebase-admin.json');
 
 export const firebaseConfig = {
   type: firebaseAdminJson.type,

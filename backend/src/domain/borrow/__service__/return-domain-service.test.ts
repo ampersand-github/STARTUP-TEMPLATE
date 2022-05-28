@@ -50,18 +50,18 @@ describe('returnDomainService', () => {
 
   it('登録できる', async () => {
     jest.spyOn(OpenBookRepository.prototype, 'findOne').mockResolvedValue(
-        OpenBook.create({
-          bookId: BookId.create(),
-          borrowingId: BorrowId.create(),
-        }),
+      OpenBook.create({
+        bookId: BookId.create(),
+        borrowingId: BorrowId.create(),
+      }),
     );
     jest.spyOn(BorrowRepository.prototype, 'findOne').mockResolvedValue(
-        Borrow.create({
-          userId: UserId.create(),
-          openBookId: OpenBookId.create(),
-          startAt: new Date(),
-          endAt: null,
-        })
+      Borrow.create({
+        userId: UserId.create(),
+        openBookId: OpenBookId.create(),
+        startAt: new Date(),
+        endAt: null,
+      }),
     );
     jest.spyOn(OpenBookRepository.prototype, 'save').mockResolvedValue();
     jest.spyOn(BorrowRepository.prototype, 'save').mockResolvedValue();
