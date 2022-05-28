@@ -42,3 +42,6 @@ lerna-debug.log*
 .docker/containers/mysql/db
 .docker/containers/mysql/log
 .docker/containers/localstack
+
+# firebase
+firebase-admin.json
