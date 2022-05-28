@@ -58,7 +58,7 @@ const SignUp: NextPage = () => {
   };
 
   return (
-    <BaseLayout>
+    <>
       <CustomSnackbar
         open={open}
         setOpen={setOpen}
@@ -96,7 +96,7 @@ const SignUp: NextPage = () => {
           </Grid>
         </Grid>
       </Stack>
-    </BaseLayout>
+    </>
   );
 };
 

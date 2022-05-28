@@ -65,53 +65,52 @@ const SignIn: NextPage = () => {
   // 画面
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   return (
-    <BaseLayout>
-      <CustomSnackbar
-        open={open}
-        setOpen={setOpen}
-        message={message}
-        alertType={'error'}
-      />
-      <Stack
-        component="form"
-        noValidate
-        onSubmit={handleSubmit(onSubmit)}
-        spacing={2}
-        sx={{ marginTop: 8 }}
-      >
-        <Grid container direction="column" alignItems="center">
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            ログイン
-          </Typography>
-        </Grid>
-        <EmailTextField control={control} errors={errors} />
-        <PasswordTextField control={control} errors={errors} />
-        <Button variant="contained" type="submit">
-          <Typography>ログインする</Typography>
-        </Button>
-        <Grid container>
-          <Grid item xs>
-            <Link href="#">
-              <a>
-                <Typography variant="caption">
-                  パスワードを忘れた場合
-                </Typography>
-              </a>
-            </Link>
-          </Grid>
-          <Grid item>
-            <LinkText
-              text={'新規登録する'}
-              path={'/auth/sign-up'}
-              variant={'caption'}
-            />
-          </Grid>
-        </Grid>
-      </Stack>
-    </BaseLayout>
+<>
+  <CustomSnackbar
+      open={open}
+      setOpen={setOpen}
+      message={message}
+      alertType={'error'}
+  />
+  <Stack
+      component="form"
+      noValidate
+      onSubmit={handleSubmit(onSubmit)}
+      spacing={2}
+      sx={{ marginTop: 8 }}
+  >
+    <Grid container direction="column" alignItems="center">
+      <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+        <LockOutlinedIcon />
+      </Avatar>
+      <Typography component="h1" variant="h5">
+        ログイン
+      </Typography>
+    </Grid>
+    <EmailTextField control={control} errors={errors} />
+    <PasswordTextField control={control} errors={errors} />
+    <Button variant="contained" type="submit">
+      <Typography>ログインする</Typography>
+    </Button>
+    <Grid container>
+      <Grid item xs>
+        <Link href="#">
+          <a>
+            <Typography variant="caption">
+              パスワードを忘れた場合
+            </Typography>
+          </a>
+        </Link>
+      </Grid>
+      <Grid item>
+        <LinkText
+            text={'新規登録する'}
+            path={'/auth/sign-up'}
+            variant={'caption'}
+        />
+      </Grid>
+    </Grid>
+  </Stack></>
   );
 };
 export default SignIn;

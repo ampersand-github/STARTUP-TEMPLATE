@@ -30,7 +30,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     <AuthProvider firebaseAuth={auth}>
       <CssBaseline />
       <BaseLayout>
-        {' '}
         <Component {...pageProps} />
       </BaseLayout>
     </AuthProvider>

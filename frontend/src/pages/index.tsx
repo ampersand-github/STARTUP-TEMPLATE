@@ -32,11 +32,11 @@ const Home: NextPage = () => {
   if (currentUser === undefined) return <CenterLoading />;
 
   return (
-    <BaseLayout>
-      <WaitingEmailVerifiedCustomSnackbar />
-      <Box>{currentUser ? 'ログイン済み' : 'ログインしていない'}</Box>
-      <p>{currentUser?.type === 'verified' ? currentUser.user.email : '-'}</p>
-    </BaseLayout>
+      <>
+        <WaitingEmailVerifiedCustomSnackbar />
+        <Box>{currentUser ? 'ログイン済み' : 'ログインしていない'}</Box>
+        <p>{currentUser?.type === 'verified' ? currentUser.user.email : '-'}</p>
+      </>
   );
 };
 

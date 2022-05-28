@@ -10,7 +10,7 @@ export class PassController {
     ) {}
 
     @Get('1')
-    //  curl http://localhost:3001/book
+    //  curl http://localhost:3001/pass/1
     public async pass() {
         return 'passed!';
     }
