@@ -12,4 +12,4 @@ const TemplateStory: ComponentStory<typeof CustomButton> = (args) => (
 );
 
 export const Default = TemplateStory.bind({});
-Default.args = { text: 'text', onClick: new Promise<void>(() => {}) };
+Default.args = { text: 'text', onClick: () => new Promise<void>(() => {}) };

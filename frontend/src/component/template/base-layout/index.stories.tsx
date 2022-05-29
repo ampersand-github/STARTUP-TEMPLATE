@@ -17,6 +17,6 @@ const header: IHeader = {
   isAuth: false,
   signInUrl: 'string',
   signUpUrl: 'string',
-  onSignOut: new Promise(() => {}),
+  onSignOut: () => new Promise(() => {}),
 };
 Default.args = { children: <div>aaa</div>, header: header };

@@ -1,7 +1,6 @@
 import { FieldErrors } from 'react-hook-form/dist/types/errors';
 import { TextField } from '@mui/material';
 import React from 'react';
-import { ISignUp } from 'pages/auth/sign-up';
 import { Controller } from 'react-hook-form';
 import { Control } from 'react-hook-form/dist/types/form';
 

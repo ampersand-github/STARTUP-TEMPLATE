@@ -11,7 +11,7 @@ import { CustomSnackbar } from 'component/atom/custom-snack-bar';
 import { ISignUpResult, signUp } from 'util/auth/sign-up';
 import { useAuthContext } from 'util/auth/auth-context';
 import { CenterLoading } from 'component/atom/center-loading';
-import {CustomLinkButton} from "../../component/atom/custom-link-button";
+import { CustomLinkButton } from '../../component/atom/custom-link-button';
 
 export interface ISignUp {
   email: string;
@@ -76,7 +76,9 @@ const SignUp: NextPage = () => {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5" >新規登録</Typography>
+          <Typography component="h1" variant="h5">
+            新規登録
+          </Typography>
         </Grid>
         <EmailTextField control={control} errors={errors} />
         <PasswordTextField control={control} errors={errors} />
@@ -85,7 +87,11 @@ const SignUp: NextPage = () => {
         </Button>
         <Grid container>
           <Grid item xs>
-            <CustomLinkButton text={"ログインする"} link={'/auth/sign-in'}  variant={'caption'}/>
+            <CustomLinkButton
+              text={'ログインする'}
+              link={'/auth/sign-in'}
+              variant={'caption'}
+            />
           </Grid>
         </Grid>
       </Stack>

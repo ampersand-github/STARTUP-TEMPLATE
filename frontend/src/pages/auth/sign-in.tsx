@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import React from 'react'
+import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Avatar, Grid, Stack, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -12,7 +12,7 @@ import { ISignInResult, signIn } from 'util/auth/sign-in';
 import { auth } from '../_app';
 import { CustomSnackbar } from 'component/atom/custom-snack-bar';
 import { CenterLoading } from 'component/atom/center-loading';
-import {CustomLinkButton} from "../../component/atom/custom-link-button";
+import { CustomLinkButton } from '../../component/atom/custom-link-button';
 
 export interface ISignIn {
   email: string;
@@ -81,7 +81,7 @@ const SignIn: NextPage = () => {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5" >
+          <Typography component="h1" variant="h5">
             ログイン
           </Typography>
         </Grid>
@@ -92,10 +92,18 @@ const SignIn: NextPage = () => {
         </Button>
         <Grid container>
           <Grid item xs>
-            <CustomLinkButton text={"パスワードを忘れた場合"} link={'#'}  variant={'caption'}/>
+            <CustomLinkButton
+              text={'パスワードを忘れた場合'}
+              link={'#'}
+              variant={'caption'}
+            />
           </Grid>
           <Grid item>
-            <CustomLinkButton text={"新規登録する"} link={'/auth/sign-up'}  variant={'caption'}/>
+            <CustomLinkButton
+              text={'新規登録する'}
+              link={'/auth/sign-up'}
+              variant={'caption'}
+            />
           </Grid>
         </Grid>
       </Stack>
