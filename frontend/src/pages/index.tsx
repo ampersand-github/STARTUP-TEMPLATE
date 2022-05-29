@@ -29,7 +29,7 @@ const WaitingEmailVerifiedCustomSnackbar = (): JSX.Element => {
 const Home: NextPage = () => {
   const { currentUser } = useAuthContext();
   if (currentUser === undefined) return <CenterLoading />;
-
+console.log(currentUser)
   return (
     <>
       <WaitingEmailVerifiedCustomSnackbar />

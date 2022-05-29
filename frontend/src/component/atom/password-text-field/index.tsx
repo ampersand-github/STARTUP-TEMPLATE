@@ -7,7 +7,7 @@ import { Control } from 'react-hook-form/dist/types/form';
 
 interface IPasswordTextField {
   errors: FieldErrors;
-  control: Control<ISignUp>;
+  control: Control;
 }
 
 export const PasswordTextField = (props: IPasswordTextField) => {
