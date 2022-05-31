@@ -1,6 +1,5 @@
 import { NextPage } from 'next';
 import React from 'react';
-import { BaseLayout } from 'component/template/base-layout';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Avatar, Grid, Stack, Typography, Button } from '@mui/material';
 import { EmailTextField } from 'component/atom/email-text-field';
@@ -9,10 +8,10 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useRouter } from 'next/router';
 import { auth } from '../_app';
 import { CustomSnackbar } from 'component/atom/custom-snack-bar';
-import { LinkText } from 'component/atom/link-text';
 import { ISignUpResult, signUp } from 'util/auth/sign-up';
 import { useAuthContext } from 'util/auth/auth-context';
 import { CenterLoading } from 'component/atom/center-loading';
+import { CustomLinkButton } from '../../component/atom/custom-link-button';
 
 export interface ISignUp {
   email: string;
@@ -27,7 +26,7 @@ const SignUp: NextPage = () => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<ISignUp>();
+  } = useForm();
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   // 既にログインしていたらこのページを表示しない
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -41,7 +40,7 @@ const SignUp: NextPage = () => {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   // ボタン押下時処理
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  const onSubmit: SubmitHandler<ISignUp> = async (data: ISignUp) => {
+  const onSubmit: SubmitHandler<any> = async (data) => {
     const signUpResult: ISignUpResult = await signUp({
       auth,
       email: data.email,
@@ -58,7 +57,7 @@ const SignUp: NextPage = () => {
   };
 
   return (
-    <BaseLayout>
+    <>
       <CustomSnackbar
         open={open}
         setOpen={setOpen}
@@ -88,15 +87,15 @@ const SignUp: NextPage = () => {
         </Button>
         <Grid container>
           <Grid item xs>
-            <LinkText
+            <CustomLinkButton
               text={'ログインする'}
-              path={'/auth/sign-in'}
+              link={'/auth/sign-in'}
               variant={'caption'}
             />
           </Grid>
         </Grid>
       </Stack>
-    </BaseLayout>
+    </>
   );
 };
 

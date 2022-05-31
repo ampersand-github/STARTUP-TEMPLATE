@@ -26,7 +26,6 @@ export const LinkText = (props: ILinkText): JSX.Element => {
   return (
     <Link href={props.path}>
       <a>
-        {' '}
         <Typography variant={props.variant}>{props.text}</Typography>
       </a>
     </Link>

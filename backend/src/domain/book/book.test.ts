@@ -2,8 +2,6 @@ import { TAG, Tag } from './tag/tag';
 import { BookId } from './book-id/book-id';
 import { Book, IBook } from './book';
 import { TagList } from './tag/tag-list';
-import { Borrow } from '../user/borrow/borrow';
-import { UserId } from '../user/user-id/user-id';
 
 describe('Book', () => {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -20,9 +18,6 @@ describe('Book', () => {
     name: 'book1',
     author: 'author',
     tagList: tagList,
-    isLost: false,
-    isPrivate: false,
-    isBorrowing: true,
   };
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -36,8 +31,21 @@ describe('Book', () => {
     it('reBuildできる', () => {
       const bookId = BookId.reBuild('43145f95-2034-4fae-b88f-ca0bdf7890bd');
       const book = Book.reBuild(props, bookId);
-      expect(book).toEqual(expect.any(Book));
+      expect(book).toStrictEqual(expect.any(Book));
       expect(book.id).toStrictEqual(bookId);
+    });
+
+    describe('get()', () => {
+      const expected = Book.create(props);
+      it('getName()', () => {
+        expect(expected.getName()).toStrictEqual(props.name);
+      });
+      it('getAuthor()', () => {
+        expect(expected.getAuthor()).toStrictEqual(props.author);
+      });
+      it('getTagList()', () => {
+        expect(expected.getTagList()).toStrictEqual(props.tagList);
+      });
     });
   });
 });

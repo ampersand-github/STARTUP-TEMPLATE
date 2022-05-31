@@ -1,12 +1,10 @@
 import { UserId } from 'src/domain/user/user-id/user-id';
 import { IUser, User } from 'src/domain/user/user';
-import { BorrowingList } from './borrow-list/borrow-list';
 
 describe('User', () => {
   const name = '田中太郎';
   const props: IUser = {
     name: name,
-    borrowingList: new BorrowingList({ borrowList: [] }),
   };
 
   describe('constructor', () => {
@@ -24,7 +22,7 @@ describe('User', () => {
 
   describe('get', () => {
     const user = User.create(props);
-    it('nameが正しく取得できる', () => {
+    it('getName()', () => {
       expect(user.getName()).toEqual(props.name);
     });
   });

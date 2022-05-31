@@ -14,3 +14,4 @@ plugins:
 rules:
   react/react-in-jsx-scope: off
   no-useless-constructor: off
+  camelcase: off

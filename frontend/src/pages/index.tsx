@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import type { NextPage } from 'next';
-import { BaseLayout } from 'component/template/base-layout';
 import { Box } from '@mui/material';
 import { useAuthContext } from 'util/auth/auth-context';
 import { CustomSnackbar } from 'component/atom/custom-snack-bar';
@@ -30,13 +29,13 @@ const WaitingEmailVerifiedCustomSnackbar = (): JSX.Element => {
 const Home: NextPage = () => {
   const { currentUser } = useAuthContext();
   if (currentUser === undefined) return <CenterLoading />;
-
+  console.log(currentUser);
   return (
-    <BaseLayout>
+    <>
       <WaitingEmailVerifiedCustomSnackbar />
       <Box>{currentUser ? 'ログイン済み' : 'ログインしていない'}</Box>
       <p>{currentUser?.type === 'verified' ? currentUser.user.email : '-'}</p>
-    </BaseLayout>
+    </>
   );
 };
 

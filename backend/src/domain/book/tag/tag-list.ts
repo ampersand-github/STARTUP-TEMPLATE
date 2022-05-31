@@ -12,12 +12,15 @@ export class TagList extends ValueObject<ITagList> {
     return this.collection;
   }
 
+  public toString(): string[] {
+    return this.collection.map((one: Tag) => one.getValue());
+  }
+
   public constructor(props: ITagList) {
     super(props);
     this.collection = props.tagsList;
   }
 
-  /*
   public add(tag: Tag): TagList {
     const tagList = [...this.collection].concat(tag);
     return new TagList({ tagsList: tagList });
@@ -27,5 +30,4 @@ export class TagList extends ValueObject<ITagList> {
     const tagList = this.collection.filter((one: Tag) => one !== tag);
     return new TagList({ tagsList: tagList });
   }
- */
 }

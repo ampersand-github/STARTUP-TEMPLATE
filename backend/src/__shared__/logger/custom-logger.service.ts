@@ -35,7 +35,7 @@ export class CustomLoggerService implements LoggerService {
     this.logger = createLogger({
       level: 'info',
       format: format.combine(format.timestamp(), format.json()),
-      defaultMeta: { service: 'ARTRIRE' },
+      defaultMeta: { service: 'STARTUP-TEMPLATE' },
       transports: [applicationLogTransport, errorLogTransport],
     });
   }

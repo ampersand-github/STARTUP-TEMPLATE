@@ -5,6 +5,9 @@ import { Auth, getAuth } from '@firebase/auth';
 import CssBaseline from '@mui/material/CssBaseline';
 import { AuthProvider } from '../util/auth/auth-context';
 import { BaseLayout } from '../component/template/base-layout';
+import { signOut } from '../util/auth/sign-out';
+import { IHeader } from '../component/organism/header';
+import router from 'next/router';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Firebase設定
@@ -23,14 +26,24 @@ const getFirebaseApp = () => getApps()[0] || initializeApp(config);
 export const app = getFirebaseApp();
 export const auth: Auth = getAuth(app);
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// 全体設定
+//
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function MyApp({ Component, pageProps }: AppProps) {
+  const headerProps: IHeader = {
+    isAuth: !!auth.currentUser,
+    signInUrl: '/auth/sign-in',
+    signUpUrl: '/auth/sign-up',
+    onSignOut: () => {
+      return signOut(auth).then(() => {
+        console.log('onSignOut-ok');
+        router.push('');
+      });
+    },
+  };
   return (
     <AuthProvider firebaseAuth={auth}>
       <CssBaseline />
-      <BaseLayout>
-        {' '}
+      <BaseLayout header={headerProps}>
         <Component {...pageProps} />
       </BaseLayout>
     </AuthProvider>
