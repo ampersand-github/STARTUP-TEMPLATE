@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import type { AppProps } from 'next/app';
 import { getApps, initializeApp } from 'firebase/app';
 import { Auth, getAuth } from '@firebase/auth';
@@ -8,6 +8,9 @@ import { BaseLayout } from '../component/template/base-layout';
 import { signOut } from '../util/auth/sign-out';
 import { IHeader } from '../component/organism/header';
 import router from 'next/router';
+import { Container, createTheme, ThemeProvider } from '@mui/material';
+import { purple } from '@mui/material/colors';
+import { NotificationProvider } from '../util/snackbar/notification-provider';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Firebase設定
@@ -28,24 +31,40 @@ export const auth: Auth = getAuth(app);
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-function MyApp({ Component, pageProps }: AppProps) {
-  const headerProps: IHeader = {
-    isAuth: !!auth.currentUser,
-    signInUrl: '/auth/sign-in',
-    signUpUrl: '/auth/sign-up',
-    onSignOut: () => {
-      return signOut(auth).then(() => {
-        console.log('onSignOut-ok');
-        router.push('');
-      });
+export const theme = createTheme({
+  palette: {
+    primary: {
+      // Purple and green play nicely together.
+      main: purple[500],
     },
-  };
+    secondary: {
+      // This is green.A700 as hex.
+      main: '#11cb5f',
+    },
+    error: {
+      main: '#FF7D7D',
+    },
+    warning: {
+      main: purple[500],
+    },
+  },
+});
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider firebaseAuth={auth}>
-      <CssBaseline />
-      <BaseLayout header={headerProps}>
-        <Component {...pageProps} />
-      </BaseLayout>
+      <ThemeProvider theme={theme}>
+        <NotificationProvider>
+          <CssBaseline />
+          <BaseLayout>
+            <Component {...pageProps} />
+          </BaseLayout>
+        </NotificationProvider>
+      </ThemeProvider>
     </AuthProvider>
   );
 }
