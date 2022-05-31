@@ -10,7 +10,7 @@ import { IHeader } from '../component/organism/header';
 import router from 'next/router';
 import { Container, createTheme, ThemeProvider } from '@mui/material';
 import { purple } from '@mui/material/colors';
-import { NotificationProvider } from '../util/snackbar/notification-provider';
+import { NotificationProvider } from '../util/notification/notification-provider';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Firebase設定

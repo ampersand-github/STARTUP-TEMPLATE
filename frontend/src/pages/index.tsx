@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 import { Box, Typography } from '@mui/material';
 import { useAuthContext } from 'util/auth/auth-context';
 import { CenterLoading } from 'component/atom/center-loading';
-import { useNotification } from '../util/snackbar/notification-provider';
+import { useNotification } from '../util/notification/notification-provider';
 
 // https://mui.com/material-ui/react-app-bar/
 const Home: NextPage = () => {
