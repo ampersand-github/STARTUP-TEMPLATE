@@ -17,7 +17,7 @@ const html = new Tag({ name: TAG.html });
 export const baseBook = Book.reBuild(
   {
     name: 'ベース',
-    tagList: new TagList({ tagsList: [ui, html] }),
+    tagList: new TagList({ tagsList: [html, ui] }),
     author: 'author1',
   },
   BookId.reBuild('0a4c50df-d747-d862-fee3-2698f4f2b624'),
@@ -26,7 +26,7 @@ export const baseBook = Book.reBuild(
 export const baseBookUpdate = Book.reBuild(
   {
     name: 'ベースupdate',
-    tagList: new TagList({ tagsList: [ui, go] }),
+    tagList: new TagList({ tagsList: [go, ui] }),
     author: 'author1update',
   },
   BookId.reBuild('0a4c50df-d747-d862-fee3-2698f4f2b624'),

@@ -44,4 +44,4 @@ lerna-debug.log*
 .docker/containers/localstack
 
 # firebase
-firebase-admin.json
+/firebase-admin.json

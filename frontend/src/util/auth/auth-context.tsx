@@ -11,6 +11,7 @@ interface IVerifiedUser {
   type: 'verified';
   user: User;
 }
+
 interface INotVerifiedUser {
   type: 'notVerified';
   user: User;
@@ -23,9 +24,10 @@ interface IAuthContext {
   // undefined : まだfirebaseから読み込まれていない
   currentUser: IVerifiedUser | INotVerifiedUser | null | undefined;
 }
+
 export interface IAuthProvider {
-  firebaseAuth: Auth;
   children: ReactNode;
+  firebaseAuth: Auth;
 }
 
 const defaultValue: IAuthContext = {

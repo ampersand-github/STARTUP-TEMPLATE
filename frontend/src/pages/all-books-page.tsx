@@ -1,7 +1,7 @@
 import { GetServerSideProps, NextPage } from 'next';
 import React from 'react';
 
-const AllBooks: NextPage = (props: any) => {
+const AllBooksPage: NextPage = (props: any) => {
   const data = props.data;
   console.log(data[0].name);
   return (
@@ -20,7 +20,7 @@ const AllBooks: NextPage = (props: any) => {
   );
 };
 
-export default AllBooks;
+export default AllBooksPage;
 
 // サーバサイドで実行する処理(getServerSideProps)を定義する
 export const getServerSideProps: GetServerSideProps = async (context) => {
