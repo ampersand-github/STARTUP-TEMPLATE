@@ -20,6 +20,9 @@ model users {
     borrow_histories borrow_histories[]
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 model borrow_histories {
     id          String  @id
     open_book_id String
@@ -42,6 +45,8 @@ model books {
     //
     tags        tags[]
     open_books open_books[]
+    private_books private_books[]
+    lost_books lost_books[]
 }
 
 
@@ -66,4 +71,26 @@ model open_books {
     //
    books  books @relation(fields: [book_id], references: [id])
    borrow_histories  borrow_histories? @relation(fields: [borrow_histories_id], references: [id])
+}
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+model private_books {
+    id          String  @id
+    book_id     String
+    updated_at  DateTime   @updatedAt
+    created_at  DateTime   @default(now())
+    //
+   books  books @relation(fields: [book_id], references: [id])
+}
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+model lost_books {
+    id          String  @id
+    book_id     String
+    updated_at  DateTime   @updatedAt
+    created_at  DateTime   @default(now())
+    //
+   books  books @relation(fields: [book_id], references: [id])
 }

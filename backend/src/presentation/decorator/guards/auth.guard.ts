@@ -1,6 +1,7 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Request } from 'express';
 import { RequestValidator } from './request-validator';
+import { Authenticator } from '../../../infrastructure/firebase/authenticator';
 
 /*
 コントローラー層での使い方
@@ -15,14 +16,14 @@ type CustomRequest = Request & { uid: string };
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  // private authenticator: Authenticator;
+  private authenticator: Authenticator;
   private readonly requestValidator: RequestValidator;
 
   constructor(
-    //  authenticator: Authenticator,
+    authenticator: Authenticator,
     requestValidator: RequestValidator,
   ) {
-    //   this.authenticator = authenticator;
+    this.authenticator = authenticator;
     this.requestValidator = requestValidator;
   }
 
@@ -30,8 +31,8 @@ export class AuthGuard implements CanActivate {
     const request = context.switchToHttp().getRequest<CustomRequest>();
     this.requestValidator.validateRequest(request);
     this.requestValidator.validateBearer(request.headers.authorization);
-    //  const token = AuthGuard.pullOutToken(request);
-    // request.uid = await this.authenticator.execute(token);
+    const token = AuthGuard.pullOutToken(request);
+    request.uid = await this.authenticator.execute(token);
     return true;
   }
 
