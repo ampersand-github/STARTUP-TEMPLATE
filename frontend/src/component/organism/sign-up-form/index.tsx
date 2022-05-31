@@ -2,23 +2,24 @@ import React from 'react';
 import {
   useForm,
   SubmitHandler,
-  Control,
   UnpackNestedValue,
 } from 'react-hook-form';
 import { Stack, Typography, Button } from '@mui/material';
-import { ISignInFormContext } from '../sign-in-form';
 import { TextForm } from '../../atom/form/text-form';
 import { emailRule } from '../../../util/validation-rule/email-rule';
 import { passwordRule } from '../../../util/validation-rule/password-rule';
 import { PasswordForm } from '../../atom/form/password-form';
 
-interface ISignUpForm {
-  onSubmit: SubmitHandler<ISignUpFormContext>;
-}
 export interface ISignUpFormContext {
   email: string;
   password: string;
 }
+
+interface ISignUpForm {
+  onSubmit: SubmitHandler<ISignUpFormContext>;
+}
+
+
 export const SignUpForm = (props: ISignUpForm): JSX.Element => {
   const {
     control,

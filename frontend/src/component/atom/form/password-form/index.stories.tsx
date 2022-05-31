@@ -2,7 +2,6 @@ import React from 'react';
 import { ComponentMeta } from '@storybook/react';
 import { PasswordForm } from './index';
 import { useForm } from 'react-hook-form';
-import { emailRule } from '../../../../util/validation-rule/email-rule';
 import { passwordRule } from '../../../../util/validation-rule/password-rule';
 
 export default {

@@ -14,4 +14,4 @@ const TemplateStory: ComponentStory<typeof SignUpForm> = (args) => (
 
 const onSubmit = (data: ISignInFormContext) => console.log(data);
 export const Default = TemplateStory.bind({});
-Default.args = { onSubmit: onSubmit };
+Default.args = {onSubmit};

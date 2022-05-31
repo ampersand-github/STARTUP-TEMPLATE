@@ -26,7 +26,7 @@ export const TextForm = (props: ITextForm): JSX.Element => {
 
   return (
     <TextField
-      id={field.name} //id="password"
+      id={field.name} // id="password"
       name={field.name}
       label={props.label}
       type={props.inputType}

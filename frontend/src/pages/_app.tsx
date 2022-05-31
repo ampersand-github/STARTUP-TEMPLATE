@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import type { AppProps } from 'next/app';
 import { getApps, initializeApp } from 'firebase/app';
 import { Auth, getAuth } from '@firebase/auth';
 import CssBaseline from '@mui/material/CssBaseline';
 import { AuthProvider } from '../util/auth/auth-context';
 import { BaseLayout } from '../component/template/base-layout';
-import { signOut } from '../util/auth/sign-out';
-import { IHeader } from '../component/organism/header';
-import router from 'next/router';
-import { Container, createTheme, ThemeProvider } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material';
 import { purple } from '@mui/material/colors';
 import { NotificationProvider } from '../util/notification/notification-provider';
 

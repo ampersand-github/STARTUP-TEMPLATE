@@ -2,7 +2,6 @@ import {
   Box,
   Checkbox,
   FormControlLabel,
-  FormGroup,
   TextField,
   Typography,
 } from '@mui/material';

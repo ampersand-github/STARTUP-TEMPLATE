@@ -1,6 +1,6 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import { Container, Stack } from '@mui/material';
-import { Header, IHeader } from '../../organism/header';
+import { Header } from '../../organism/header';
 import { Footer } from '../../organism/footer';
 import { useAuthContext } from '../../../util/auth/auth-context';
 import { signOut } from '@firebase/auth';

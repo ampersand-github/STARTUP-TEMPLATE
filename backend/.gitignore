@@ -45,4 +45,3 @@ lerna-debug.log*
 
 # firebase
 /firebase-admin.json
-firebase-admin.json
