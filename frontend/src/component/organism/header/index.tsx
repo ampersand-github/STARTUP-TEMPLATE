@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import AppBar from '@mui/material/AppBar';
 import { CustomLinkButton } from '../../atom/custom-link-button';
 import { CustomButton } from '../../atom/custom-button';
+import { signOut } from '../../../util/auth/sign-out';
+import router from 'next/router';
+import { auth } from '../../../pages/_app';
+import { useAuthContext } from '../../../util/auth/auth-context';
 
 export interface IHeader {
   isAuth: boolean; // 認証済みか
