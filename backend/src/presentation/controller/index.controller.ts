@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
-import { CustomLoggerService } from '../../../__shared__/logger/custom-logger.service';
-import { PrismaService } from '../../../infrastructure/prisma/prisma.service';
+import { CustomLoggerService } from '../../module/logger/custom-logger.service';
+import { PrismaService } from '../../infrastructure/prisma/prisma.service';
 
 @Controller('pass')
 export class PassController {
