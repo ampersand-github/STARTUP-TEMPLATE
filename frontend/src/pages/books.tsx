@@ -1,5 +1,7 @@
 import { GetServerSideProps, NextPage } from 'next';
 import React from 'react';
+import axios from 'axios';
+import { axiosConfig } from '../util/axios/axios-config';
 
 const Books: NextPage = (props: any) => {
   const data = props.data;
@@ -24,7 +26,6 @@ export default Books;
 
 // サーバサイドで実行する処理(getServerSideProps)を定義する
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const res: Response = await fetch('http://localhost:3001/book');
-  const data = await res.json();
+  const { data } = await axios.get(`book`, await axiosConfig());
   return { props: { data } };
 };

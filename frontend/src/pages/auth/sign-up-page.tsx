@@ -4,16 +4,15 @@ import { SubmitHandler } from 'react-hook-form';
 import { Grid, Stack } from '@mui/material';
 import { useRouter } from 'next/router';
 import { auth } from '../_app';
-import { CustomSnackbar } from 'component/atom/custom-snack-bar';
-import { ISignUpResult, signUp } from 'util/auth/sign-up';
-import { useAuthContext } from 'util/auth/auth-context';
-import { CenterLoading } from 'component/atom/center-loading';
 import { CustomLinkButton } from '../../component/atom/custom-link-button';
 import {
   ISignUpFormContext,
   SignUpForm,
 } from '../../component/organism/sign-up-form';
 import { SignUpIcon } from '../../component/atom/sign-up-icon';
+import { useAuthContext } from 'src/util/auth/auth-context';
+import { CenterLoading } from '../../component/atom/center-loading';
+import { ISignUpResult, signUp } from '../../util/auth/sign-up';
 
 const SignUpPage: NextPage = () => {
   const [open, setOpen] = React.useState<boolean>(false);
@@ -52,12 +51,6 @@ const SignUpPage: NextPage = () => {
 
   return (
     <Stack spacing={2}>
-      <CustomSnackbar
-        open={open}
-        setOpen={setOpen}
-        message={message}
-        alertType={'error'}
-      />
       <SignUpIcon />
       <SignUpForm onSubmit={onSubmit} />
       <Grid marginTop={2} container>

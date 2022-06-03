@@ -28,6 +28,9 @@ export const auth: Auth = getAuth(app);
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 export const theme = createTheme({
   palette: {
     primary: {
