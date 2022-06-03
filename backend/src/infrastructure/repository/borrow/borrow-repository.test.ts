@@ -7,6 +7,8 @@ import { BorrowId } from '../../../domain/borrow/borrow-id/borrow-id';
 import { OpenBookId } from '../../../domain/open-book/open-book-id/open-book-id';
 
 describe('BorrowRepository', () => {
+  process.env.DATABASE_URL =
+    'postgresql://sample_root:sample_password@localhost:5432/dev_db';
   const prismaService = new PrismaService();
   const borrowRepository = new BorrowRepository(prismaService);
 

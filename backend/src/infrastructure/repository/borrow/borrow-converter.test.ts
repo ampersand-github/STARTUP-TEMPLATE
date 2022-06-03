@@ -4,6 +4,8 @@ import { UserId } from '../../../domain/user/user-id/user-id';
 import { OpenBookId } from '../../../domain/open-book/open-book-id/open-book-id';
 
 describe('borrowConverter', () => {
+  process.env.DATABASE_URL =
+    'postgresql://sample_root:sample_password@localhost:5432/dev_db';
   const borrowId = '2422c514-4b06-aced-5ef3-3f869d299bd8';
 
   it('コンバートできる(end_atに値がある)', () => {

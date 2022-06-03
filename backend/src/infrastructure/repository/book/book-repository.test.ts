@@ -10,6 +10,8 @@ import {
 } from './book-repository-test-data';
 
 describe('bookRepository', () => {
+  process.env.DATABASE_URL =
+    'postgresql://sample_root:sample_password@localhost:5432/dev_db';
   const prismaService = new PrismaService();
   const bookRepository = new BookRepository(prismaService);
 
