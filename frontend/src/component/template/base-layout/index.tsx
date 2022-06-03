@@ -30,8 +30,8 @@ export const BaseLayout = (props: IBaseLayout): JSX.Element => {
       <Header
         isAuth={isAuthState}
         onSignOut={onSignOut}
-        signInUrl="/auth/sign-in"
-        signUpUrl="/auth/sign-up"
+        signInUrl="/auth/sign-in-page"
+        signUpUrl="/auth/sign-up-page"
       />
       <Container
         component="main"
