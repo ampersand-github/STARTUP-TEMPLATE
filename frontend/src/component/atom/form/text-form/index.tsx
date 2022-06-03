@@ -12,7 +12,6 @@ interface ITextForm {
   rules: any;
   isError: boolean;
   errorText: string | undefined;
-  defaultValue?: string;
   placeholder?: string;
   inputType: InputType;
 }
@@ -33,8 +32,7 @@ export const TextForm = (props: ITextForm): JSX.Element => {
       onChange={field.onChange}
       error={props.isError}
       helperText={props.errorText}
-      value={field.value}
-      defaultValue={props.defaultValue}
+      value={field.value || ''}
       placeholder={props.placeholder}
     />
   );

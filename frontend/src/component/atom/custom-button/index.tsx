@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 
 interface ICustomButton {
   text: string;
-  onClick: () => Promise<void>;
+  onClick: () => void;
 }
 export const CustomButton = (props: ICustomButton): JSX.Element => {
   return (
