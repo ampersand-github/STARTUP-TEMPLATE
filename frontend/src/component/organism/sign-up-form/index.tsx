@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  useForm,
-  SubmitHandler,
-  UnpackNestedValue,
-} from 'react-hook-form';
+import { useForm, SubmitHandler, UnpackNestedValue } from 'react-hook-form';
 import { Stack, Typography, Button } from '@mui/material';
 import { TextForm } from '../../atom/form/text-form';
 import { emailRule } from '../../../util/validation-rule/email-rule';
@@ -18,7 +14,6 @@ export interface ISignUpFormContext {
 interface ISignUpForm {
   onSubmit: SubmitHandler<ISignUpFormContext>;
 }
-
 
 export const SignUpForm = (props: ISignUpForm): JSX.Element => {
   const {
