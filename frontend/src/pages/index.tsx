@@ -4,7 +4,7 @@ import { Box, Typography } from '@mui/material';
 import { CenterLoading } from '../component/atom/center-loading';
 import { useAuthContext } from '../util/auth/auth-context';
 import { useNotification } from '../util/notification/notification-provider';
-import { CustomLinkButton } from '../component/atom/custom-link-button';
+import { CustomLinkButton } from 'src/component/atom/custom-link-button';
 
 // https://mui.com/material-ui/react-app-bar/
 const Home: NextPage = () => {

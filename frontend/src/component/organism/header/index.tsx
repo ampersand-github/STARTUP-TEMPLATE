@@ -2,8 +2,8 @@ import React from 'react';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import AppBar from '@mui/material/AppBar';
-import { CustomLinkButton } from '../../atom/custom-link-button';
-import { CustomButton } from '../../atom/custom-button';
+import { CustomLinkButton } from 'src/component/atom/custom-link-button';
+import { CustomButton } from 'src/component/atom/custom-button';
 
 export interface IHeader {
   isAuth: boolean; // 認証済みか

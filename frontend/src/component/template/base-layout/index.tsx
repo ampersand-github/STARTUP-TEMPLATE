@@ -1,10 +1,10 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import { Container, Stack } from '@mui/material';
-import { Header } from '../../organism/header';
-import { Footer } from '../../organism/footer';
-import { useAuthContext } from '../../../util/auth/auth-context';
+import { Header } from 'src/component/organism/header';
+import { Footer } from 'src/component/organism/footer';
+import { useAuthContext } from 'src/util/auth/auth-context';
 import { signOut } from '@firebase/auth';
-import { auth } from '../../../pages/_app';
+import { auth } from 'src/pages/_app';
 import router from 'next/router';
 
 export interface IBaseLayout {

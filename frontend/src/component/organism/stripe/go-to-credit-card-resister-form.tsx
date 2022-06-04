@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { axiosConfig } from '../../../util/axios/axios-config';
+import { axiosConfig } from 'src/util/axios-config';
 import { useRouter } from 'next/router';
 import { Button, Typography } from '@mui/material';
 

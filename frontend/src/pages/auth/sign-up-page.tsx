@@ -4,15 +4,15 @@ import { SubmitHandler } from 'react-hook-form';
 import { Grid, Stack } from '@mui/material';
 import { useRouter } from 'next/router';
 import { auth } from '../_app';
-import { CustomLinkButton } from '../../component/atom/custom-link-button';
+import { CustomLinkButton } from 'src/component/atom/custom-link-button';
 import {
   ISignUpFormContext,
   SignUpForm,
-} from '../../component/organism/sign-up-form';
-import { SignUpIcon } from '../../component/atom/sign-up-icon';
+} from 'src/component/organism/sign-up-form';
+import { SignUpIcon } from 'src/component/atom/sign-up-icon';
 import { useAuthContext } from 'src/util/auth/auth-context';
-import { CenterLoading } from '../../component/atom/center-loading';
-import { ISignUpResult, signUp } from '../../util/auth/sign-up';
+import { CenterLoading } from 'src/component/atom/center-loading';
+import { ISignUpResult, signUp } from 'src/util/auth/sign-up';
 
 const SignUpPage: NextPage = () => {
   const [open, setOpen] = React.useState<boolean>(false);

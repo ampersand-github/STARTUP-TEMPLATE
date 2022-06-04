@@ -1,7 +1,7 @@
 import { GetServerSideProps, NextPage } from 'next';
 import React from 'react';
 import axios from 'axios';
-import { axiosConfig } from '../util/axios/axios-config';
+import { axiosConfig } from 'src/util/axios-config';
 
 const Books: NextPage = (props: any) => {
   const data = props.data;

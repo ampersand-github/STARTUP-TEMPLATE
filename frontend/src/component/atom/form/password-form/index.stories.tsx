@@ -2,7 +2,7 @@ import React from 'react';
 import { ComponentMeta } from '@storybook/react';
 import { PasswordForm } from './index';
 import { useForm } from 'react-hook-form';
-import { passwordRule } from '../../../../util/validation-rule/password-rule';
+import { passwordRule } from 'src/util/validation-rule/password-rule';
 
 export default {
   title: 'Atom/Form/PasswordForm',

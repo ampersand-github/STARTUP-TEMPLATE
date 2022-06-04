@@ -10,11 +10,10 @@ import {
 import { SubmitHandler } from 'react-hook-form';
 import { SignInIcon } from 'src/component/atom/sign-in-icon';
 import { CustomSnackbar } from 'src/component/atom/custom-snack-bar';
-import { signIn } from 'src/util/auth/sign-in';
-import { ISignInResult } from 'src/util/auth/sign-in';
 import { useAuthContext } from 'src/util/auth/auth-context';
 import { CenterLoading } from 'src/component/atom/center-loading';
 import { CustomLinkButton } from 'src/component/atom/custom-link-button';
+import {ISignInResult, signIn} from "src/util/auth/sign-in";
 
 const SignInPage: NextPage = () => {
   const [open, setOpen] = React.useState<boolean>(false);

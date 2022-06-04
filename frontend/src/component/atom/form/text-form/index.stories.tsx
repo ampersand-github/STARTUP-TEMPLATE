@@ -2,7 +2,7 @@ import React from 'react';
 import { ComponentMeta } from '@storybook/react';
 import { TextForm } from './index';
 import { useForm } from 'react-hook-form';
-import { emailRule } from '../../../../util/validation-rule/email-rule';
+import { emailRule } from 'src/util/validation-rule/email-rule';
 
 export default {
   title: 'Atom/Form/TextForm',
