@@ -1,7 +1,7 @@
 import { IPrismaUser } from './user-repository';
 import { userConverter } from './user-converter';
-import { User } from '../../../domain/user/user';
-import { UserId } from '../../../domain/user/user-id/user-id';
+import { User } from 'src/domain/user/user';
+import { UserId } from 'src/domain/user/user-id/user-id';
 
 describe('userConverter', () => {
   it('コンバートできる', () => {

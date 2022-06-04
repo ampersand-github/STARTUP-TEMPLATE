@@ -1,5 +1,5 @@
 import { TAG, Tag } from 'src/domain/book/tag/tag';
-import { ITagList, TagList } from './tag-list';
+import { ITagList, TagList } from 'src/domain/book/tag/tag-list';
 
 describe('TagList', () => {
   const tag1 = new Tag({ name: TAG.ui });

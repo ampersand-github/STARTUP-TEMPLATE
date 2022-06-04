@@ -7,7 +7,7 @@ import {
   openBookOAQSEFindOneExpected,
   openBookOAQSFindAllExpected,
 } from './open-book-over-aggregation-query-service-test-data';
-import { OpenBookId } from '../../domain/open-book/open-book-id/open-book-id';
+import { OpenBookId } from 'src/domain/open-book/open-book-id/open-book-id';
 
 describe('OpenBookOAQS', () => {
   const prismaService = new PrismaService();

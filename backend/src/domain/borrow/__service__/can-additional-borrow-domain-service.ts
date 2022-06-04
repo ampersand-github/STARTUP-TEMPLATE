@@ -1,6 +1,6 @@
-import { Borrow } from '../borrow';
-import { UserId } from '../../user/user-id/user-id';
-import { IBorrowRepository } from '../__interface__/borrow-repository-interface';
+import { Borrow } from 'src/domain/borrow/borrow';
+import { UserId } from 'src/domain/user/user-id/user-id';
+import { IBorrowRepository } from 'src/domain/borrow/__interface__/borrow-repository-interface';
 
 export interface ICanAdditionalBorrow {
   userId: UserId;

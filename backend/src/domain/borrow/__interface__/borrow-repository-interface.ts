@@ -1,6 +1,6 @@
-import { Borrow } from '../borrow';
-import { UserId } from '../../user/user-id/user-id';
-import { OpenBookId } from '../../open-book/open-book-id/open-book-id';
+import { Borrow } from 'src/domain/borrow/borrow';
+import { UserId } from 'src/domain/user/user-id/user-id';
+import { OpenBookId } from 'src/domain/open-book/open-book-id/open-book-id';
 
 export interface IBorrowRepository {
   findOne(id: OpenBookId): Promise<Borrow | null>;

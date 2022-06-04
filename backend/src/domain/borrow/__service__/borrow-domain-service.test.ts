@@ -1,13 +1,13 @@
-import { BorrowRepository } from '../../../infrastructure/repository/borrow/borrow-repository';
+import { BorrowRepository } from 'src/infrastructure/repository/borrow/borrow-repository';
 import { borrowDomainService } from './borrow-domain-service';
-import { UserId } from '../../user/user-id/user-id';
-import { PrismaService } from '../../../infrastructure/prisma/prisma.service';
+import { UserId } from 'src/domain/user/user-id/user-id';
+import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
 import * as canAdditionalBorrowDS from './can-additional-borrow-domain-service';
-import { OpenBookRepository } from '../../../infrastructure/repository/open-book/open-book-repository';
-import { OpenBookId } from '../../open-book/open-book-id/open-book-id';
-import { OpenBook } from '../../open-book/open-book';
-import { BookId } from '../../book/book-id/book-id';
-import { BorrowId } from '../borrow-id/borrow-id';
+import { OpenBookRepository } from 'src/infrastructure/repository/open-book/open-book-repository';
+import { OpenBookId } from 'src/domain/open-book/open-book-id/open-book-id';
+import { OpenBook } from 'src/domain/open-book/open-book';
+import { BookId } from 'src/domain/book/book-id/book-id';
+import { BorrowId } from 'src/domain/borrow/borrow-id/borrow-id';
 
 describe('borrowDomainService', () => {
   const prisma = new PrismaService();

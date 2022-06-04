@@ -1,5 +1,5 @@
 import { IOpenBookOAQS } from './__interface__/open-book-OAQS-interface';
-import { OpenBookId } from '../../domain/open-book/open-book-id/open-book-id';
+import { OpenBookId } from 'src/domain/open-book/open-book-id/open-book-id';
 import { OneBookOutputDTO } from './__dto__/one-book-output-DTO';
 
 export interface IBookDetailPageUC {

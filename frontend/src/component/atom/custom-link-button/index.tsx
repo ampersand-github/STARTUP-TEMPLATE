@@ -27,7 +27,9 @@ export const CustomLinkButton = (props: ICustomLinkButton): JSX.Element => {
   return (
     <Button color="inherit">
       <Link href={props.link}>
-        <Typography variant={props.variant}>{props.text}</Typography>
+        <a style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Typography variant={props.variant}>{props.text}</Typography>
+        </a>
       </Link>
     </Button>
   );

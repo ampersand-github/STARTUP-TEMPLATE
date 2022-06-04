@@ -1,9 +1,9 @@
 import { Tag } from 'src/domain/book/tag/tag';
 import { IPrismaBook } from './book-repository';
 import { bookConverter } from './book-converter';
-import { Book } from '../../../domain/book/book';
-import { TagList } from '../../../domain/book/tag/tag-list';
-import { BookId } from '../../../domain/book/book-id/book-id';
+import { Book } from 'src/domain/book/book';
+import { TagList } from 'src/domain/book/tag/tag-list';
+import { BookId } from 'src/domain/book/book-id/book-id';
 
 const bookId = '2422c514-4b06-aced-5ef3-3f869d299bd8';
 const prismaBook1: IPrismaBook = {

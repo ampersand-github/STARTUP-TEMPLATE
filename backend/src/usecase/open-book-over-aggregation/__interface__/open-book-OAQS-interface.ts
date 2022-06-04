@@ -1,4 +1,4 @@
-import { OpenBookId } from '../../../domain/open-book/open-book-id/open-book-id';
+import { OpenBookId } from 'src/domain/open-book/open-book-id/open-book-id';
 import { IOpenBookOA } from './open-book-OA-interface';
 
 export interface IOpenBookOAQS {

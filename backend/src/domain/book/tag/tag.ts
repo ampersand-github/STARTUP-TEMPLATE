@@ -1,4 +1,4 @@
-import { ValueObject } from '../../__shared__/value-object';
+import { ValueObject } from 'src/domain/__shared__/value-object';
 
 export const TAG = {
   design: '設計',

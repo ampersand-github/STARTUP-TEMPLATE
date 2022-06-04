@@ -1,4 +1,4 @@
-import { BorrowId } from './borrow-id';
+import { BorrowId } from 'src/domain/borrow/borrow-id/borrow-id';
 
 describe('BorrowId', () => {
   describe('create()', () => {

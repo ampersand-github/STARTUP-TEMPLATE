@@ -1,7 +1,7 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Request } from 'express';
 import { RequestValidator } from './request-validator';
-import { Authenticator } from '../../../infrastructure/firebase/authenticator';
+import { Authenticator } from 'src/infrastructure/firebase/authenticator';
 
 /*
 コントローラー層での使い方

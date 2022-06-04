@@ -6,9 +6,9 @@ import {
   Logger,
 } from '@nestjs/common';
 import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
-import { CustomLoggerService } from '../../module/logger/custom-logger.service';
-import { OpenBookOAQS } from '../../infrastructure/query-service/open-book-over-aggregation-query-service';
-import { findAllBookUC } from '../../usecase/open-book-over-aggregation/find-all-book-usecase';
+import { CustomLoggerService } from 'src/module/logger/custom-logger.service';
+import { OpenBookOAQS } from 'src/infrastructure/query-service/open-book-over-aggregation-query-service';
+import { findAllBookUC } from 'src/usecase/open-book-over-aggregation/find-all-book-usecase';
 
 @Controller('book')
 export class BookController {

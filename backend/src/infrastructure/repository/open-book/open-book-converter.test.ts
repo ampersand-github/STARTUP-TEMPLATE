@@ -1,9 +1,9 @@
-import { BorrowId } from '../../../domain/borrow/borrow-id/borrow-id';
+import { BorrowId } from 'src/domain/borrow/borrow-id/borrow-id';
 import { IPrismaOpenBook } from './open-book-repository';
 import { openBookConverter } from './open-book-converter';
-import { OpenBook } from '../../../domain/open-book/open-book';
-import { OpenBookId } from '../../../domain/open-book/open-book-id/open-book-id';
-import { BookId } from '../../../domain/book/book-id/book-id';
+import { OpenBook } from 'src/domain/open-book/open-book';
+import { OpenBookId } from 'src/domain/open-book/open-book-id/open-book-id';
+import { BookId } from 'src/domain/book/book-id/book-id';
 
 describe('openBookConverter', () => {
   it('貸し出していない公開書籍を変換できる', () => {

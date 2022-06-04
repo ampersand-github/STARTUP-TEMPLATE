@@ -1,12 +1,12 @@
-import { BorrowRepository } from '../../../infrastructure/repository/borrow/borrow-repository';
-import { PrismaService } from '../../../infrastructure/prisma/prisma.service';
-import { OpenBookRepository } from '../../../infrastructure/repository/open-book/open-book-repository';
-import { OpenBook } from '../../open-book/open-book';
-import { BookId } from '../../book/book-id/book-id';
-import { BorrowId } from '../borrow-id/borrow-id';
-import { Borrow } from '../borrow';
-import { UserId } from '../../user/user-id/user-id';
-import { OpenBookId } from '../../open-book/open-book-id/open-book-id';
+import { BorrowRepository } from 'src/infrastructure/repository/borrow/borrow-repository';
+import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
+import { OpenBookRepository } from 'src/infrastructure/repository/open-book/open-book-repository';
+import { OpenBook } from 'src/domain/open-book/open-book';
+import { BookId } from 'src/domain/book/book-id/book-id';
+import { BorrowId } from 'src/domain/borrow/borrow-id/borrow-id';
+import { Borrow } from 'src/domain/borrow/borrow';
+import { UserId } from 'src/domain/user/user-id/user-id';
+import { OpenBookId } from 'src/domain/open-book/open-book-id/open-book-id';
 import {
   IReturnDomainService,
   returnDomainService,

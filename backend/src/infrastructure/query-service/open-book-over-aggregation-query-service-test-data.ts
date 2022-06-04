@@ -1,12 +1,12 @@
 import { PrismaService } from '../prisma/prisma.service';
-import { IOpenBookOA } from '../../usecase/open-book-over-aggregation/__interface__/open-book-OA-interface';
-import { OpenBookId } from '../../domain/open-book/open-book-id/open-book-id';
-import { Book } from '../../domain/book/book';
-import { Borrow } from '../../domain/borrow/borrow';
-import { TagList } from '../../domain/book/tag/tag-list';
-import { BookId } from '../../domain/book/book-id/book-id';
-import { BorrowId } from '../../domain/borrow/borrow-id/borrow-id';
-import { UserId } from '../../domain/user/user-id/user-id';
+import { IOpenBookOA } from 'src/usecase/open-book-over-aggregation/__interface__/open-book-OA-interface';
+import { OpenBookId } from 'src/domain/open-book/open-book-id/open-book-id';
+import { Book } from 'src/domain/book/book';
+import { Borrow } from 'src/domain/borrow/borrow';
+import { TagList } from 'src/domain/book/tag/tag-list';
+import { BookId } from 'src/domain/book/book-id/book-id';
+import { BorrowId } from 'src/domain/borrow/borrow-id/borrow-id';
+import { UserId } from 'src/domain/user/user-id/user-id';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //

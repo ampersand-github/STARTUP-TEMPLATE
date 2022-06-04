@@ -1,10 +1,10 @@
-import { UserId } from '../../domain/user/user-id/user-id';
-import { IBorrowRepository } from '../../domain/borrow/__interface__/borrow-repository-interface';
-import { Borrow } from '../../domain/borrow/borrow';
-import { OpenBookOAQS } from '../../infrastructure/query-service/open-book-over-aggregation-query-service';
+import { UserId } from 'src/domain/user/user-id/user-id';
+import { IBorrowRepository } from 'src/domain/borrow/__interface__/borrow-repository-interface';
+import { Borrow } from 'src/domain/borrow/borrow';
+import { OpenBookOAQS } from 'src/infrastructure/query-service/open-book-over-aggregation-query-service';
 import { IOpenBookOA } from './__interface__/open-book-OA-interface';
 import { OneBookOutputDTO } from './__dto__/one-book-output-DTO';
-import { OpenBookId } from '../../domain/open-book/open-book-id/open-book-id';
+import { OpenBookId } from 'src/domain/open-book/open-book-id/open-book-id';
 
 export interface IFindMyBorrowingListUC {
   userId: UserId;

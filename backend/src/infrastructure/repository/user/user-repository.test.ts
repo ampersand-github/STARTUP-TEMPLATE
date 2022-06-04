@@ -1,8 +1,8 @@
 import { truncateAllTable } from 'src/infrastructure/__shared__/truncate-all-table';
 import { UserRepository } from './user-repository';
-import { PrismaService } from '../../prisma/prisma.service';
-import { UserId } from '../../../domain/user/user-id/user-id';
-import { User } from '../../../domain/user/user';
+import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
+import { UserId } from 'src/domain/user/user-id/user-id';
+import { User } from 'src/domain/user/user';
 
 describe('userRepository', () => {
   const prismaService = new PrismaService();

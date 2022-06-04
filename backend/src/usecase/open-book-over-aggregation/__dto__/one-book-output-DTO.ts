@@ -1,5 +1,5 @@
 import { IOpenBookOA } from '../__interface__/open-book-OA-interface';
-import { Tag } from '../../../domain/book/tag/tag';
+import { Tag } from 'src/domain/book/tag/tag';
 
 export class OneBookOutputDTO {
   public readonly openBookId: string;

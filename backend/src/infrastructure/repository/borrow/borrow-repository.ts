@@ -2,7 +2,7 @@ import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
 import { IBorrowRepository } from 'src/domain/borrow/__interface__/borrow-repository-interface';
 import { UserId } from 'src/domain/user/user-id/user-id';
 import { Borrow } from 'src/domain/borrow/borrow';
-import { BorrowId } from '../../../domain/borrow/borrow-id/borrow-id';
+import { BorrowId } from 'src/domain/borrow/borrow-id/borrow-id';
 import { borrow_histories } from '@prisma/client';
 import { borrowConverter } from './borrow-converter';
 

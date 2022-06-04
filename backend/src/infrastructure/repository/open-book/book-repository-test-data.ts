@@ -1,8 +1,8 @@
-import { BookId } from '../../../domain/book/book-id/book-id';
-import { OpenBook } from '../../../domain/open-book/open-book';
-import { BorrowId } from '../../../domain/borrow/borrow-id/borrow-id';
-import { OpenBookId } from '../../../domain/open-book/open-book-id/open-book-id';
-import { PrismaService } from '../../prisma/prisma.service';
+import { BookId } from 'src/domain/book/book-id/book-id';
+import { OpenBook } from 'src/domain/open-book/open-book';
+import { BorrowId } from 'src/domain/borrow/borrow-id/borrow-id';
+import { OpenBookId } from 'src/domain/open-book/open-book-id/open-book-id';
+import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // findOne()/save()

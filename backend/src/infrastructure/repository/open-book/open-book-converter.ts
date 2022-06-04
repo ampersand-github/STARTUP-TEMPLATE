@@ -1,8 +1,8 @@
 import { BookId } from 'src/domain/book/book-id/book-id';
-import { IOpenBook, OpenBook } from '../../../domain/open-book/open-book';
-import { BorrowId } from '../../../domain/borrow/borrow-id/borrow-id';
+import { IOpenBook, OpenBook } from 'src/domain/open-book/open-book';
+import { BorrowId } from 'src/domain/borrow/borrow-id/borrow-id';
 import { IPrismaOpenBook } from './open-book-repository';
-import { OpenBookId } from '../../../domain/open-book/open-book-id/open-book-id';
+import { OpenBookId } from 'src/domain/open-book/open-book-id/open-book-id';
 
 export const openBookConverter = (
   prismaOpenBook: IPrismaOpenBook,

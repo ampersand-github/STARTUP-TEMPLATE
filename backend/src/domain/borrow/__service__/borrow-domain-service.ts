@@ -1,10 +1,10 @@
-import { UserId } from '../../user/user-id/user-id';
-import { IBorrowRepository } from '../__interface__/borrow-repository-interface';
+import { UserId } from 'src/domain/user/user-id/user-id';
+import { IBorrowRepository } from 'src/domain/borrow/__interface__/borrow-repository-interface';
 import { canAdditionalBorrowDS } from './can-additional-borrow-domain-service';
-import { Borrow } from '../borrow';
+import { Borrow } from 'src/domain/borrow/borrow';
 import { OpenBook } from 'src/domain/open-book/open-book';
-import { IOpenBookRepository } from '../../open-book/__interface__/open-book-repository-interface';
-import { OpenBookId } from '../../open-book/open-book-id/open-book-id';
+import { IOpenBookRepository } from 'src/domain/open-book/__interface__/open-book-repository-interface';
+import { OpenBookId } from 'src/domain/open-book/open-book-id/open-book-id';
 
 export interface IBorrowDomainService {
   userId: UserId;

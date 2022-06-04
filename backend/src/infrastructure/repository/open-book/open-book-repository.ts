@@ -1,7 +1,7 @@
 import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
-import { IOpenBookRepository } from '../../../domain/open-book/__interface__/open-book-repository-interface';
-import { OpenBookId } from '../../../domain/open-book/open-book-id/open-book-id';
-import { OpenBook } from '../../../domain/open-book/open-book';
+import { IOpenBookRepository } from 'src/domain/open-book/__interface__/open-book-repository-interface';
+import { OpenBookId } from 'src/domain/open-book/open-book-id/open-book-id';
+import { OpenBook } from 'src/domain/open-book/open-book';
 import { open_books } from '@prisma/client';
 import { openBookConverter } from './open-book-converter';
 

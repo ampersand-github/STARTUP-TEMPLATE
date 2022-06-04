@@ -1,7 +1,7 @@
-import { TAG, Tag } from '../../../domain/book/tag/tag';
-import { Book } from '../../../domain/book/book';
-import { TagList } from '../../../domain/book/tag/tag-list';
-import { BookId } from '../../../domain/book/book-id/book-id';
+import { TAG, Tag } from 'src/domain/book/tag/tag';
+import { Book } from 'src/domain/book/book';
+import { TagList } from 'src/domain/book/tag/tag-list';
+import { BookId } from 'src/domain/book/book-id/book-id';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // 共通

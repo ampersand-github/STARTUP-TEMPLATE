@@ -1,53 +1,50 @@
 import { NextPage } from 'next';
-import React, { useEffect, useState } from 'react';
-import { CustomButton } from '../../component/atom/custom-button';
-import axios, { AxiosResponse } from 'axios';
+import React, { useLayoutEffect, useState } from 'react';
+import axios from 'axios';
 import { axiosConfig } from '../../util/axios/axios-config';
-import { useForm } from 'react-hook-form';
-import { TextForm } from '../../component/atom/form/text-form';
-import { emailRule } from '../../util/validation-rule/email-rule';
-import { Button, Container, Stack, Typography } from '@mui/material';
+import { Container } from '@mui/material';
+import { GoToCreditCardResisterFormButton } from '../../component/organism/stripe/go-to-credit-card-resister-form';
+import { useAuthContext } from '../../util/auth/auth-context';
+import { CenterLoading } from '../../component/atom/center-loading';
 import { useRouter } from 'next/router';
+import { useAuthBlocker } from '../../util/auth/use-auth-block';
 
 // 以下mock
 const getAccountId = () => 'aaa';
 const getEmail = () => 'ampersand.dev@gmail.com';
 
-const Stripe: NextPage = (props: any) => {
-  const { push } = useRouter();
+const Stripe: NextPage = () => {
+  const { back } = useRouter();
+  const [notLoginEdBlocker, notVerifiedBlocker] = useAuthBlocker(back);
   const [stripeCustomerId, setStripeCustomerId] = useState('');
+  const { currentUser } = useAuthContext();
+  const [isLoading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const act = async () => {
-      const id = getAccountId();
-      const data = { email: getEmail() };
-      const result = await axios.post(
-        `/stripe/${id}`,
-        data,
-        await axiosConfig(),
-      );
-      console.log(result);
-      setStripeCustomerId(result.data);
-    };
-    act();
-  }, []);
-
-  const onSubmit = async () => {
-    console.log(stripeCustomerId);
-    axios
-      .post(`/stripe/add/${stripeCustomerId}`, {}, await axiosConfig())
-      .then((response: AxiosResponse<any>) => {
-        console.log(`status:${response.status}`);
-        console.log(`data:${JSON.stringify(response.data)}`);
-        push(response.data.checkout_url);
-      });
+  const getStripeCustomerId = async () => {
+    const id = getAccountId();
+    const data = { email: getEmail() };
+    const url = `/stripe/${id}`;
+    const result = await axios.post(url, data, await axiosConfig());
+    setStripeCustomerId(result.data);
   };
 
+  useLayoutEffect(() => {
+    const f = async () => {
+      if (currentUser === undefined) return <CenterLoading />;
+      await notLoginEdBlocker();
+      await notVerifiedBlocker();
+      if (currentUser?.type === 'verified') {
+        await getStripeCustomerId();
+        setLoading(false);
+      }
+    };
+    f();
+  }, [currentUser]);
+
+  if (isLoading) return <></>;
   return (
     <Container sx={{ paddingTop: 8 }}>
-      <Button onClick={onSubmit} variant="contained" type="submit">
-        <Typography>クレジットカードを登録する</Typography>
-      </Button>
+      <GoToCreditCardResisterFormButton stripeCustomerId={stripeCustomerId} />
       <p>{stripeCustomerId}</p>
     </Container>
   );

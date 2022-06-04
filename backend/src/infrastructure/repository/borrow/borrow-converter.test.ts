@@ -1,7 +1,7 @@
 import { IPrismaBorrow } from './borrow-repository';
 import { borrowConverter } from './borrow-converter';
-import { UserId } from '../../../domain/user/user-id/user-id';
-import { OpenBookId } from '../../../domain/open-book/open-book-id/open-book-id';
+import { UserId } from 'src/domain/user/user-id/user-id';
+import { OpenBookId } from 'src/domain/open-book/open-book-id/open-book-id';
 
 describe('borrowConverter', () => {
   process.env.DATABASE_URL =

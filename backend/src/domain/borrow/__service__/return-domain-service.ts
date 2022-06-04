@@ -1,8 +1,8 @@
-import { IBorrowRepository } from '../__interface__/borrow-repository-interface';
-import { Borrow } from '../borrow';
+import { IBorrowRepository } from 'src/domain/borrow/__interface__/borrow-repository-interface';
+import { Borrow } from 'src/domain/borrow/borrow';
 import { OpenBook } from 'src/domain/open-book/open-book';
-import { IOpenBookRepository } from '../../open-book/__interface__/open-book-repository-interface';
-import { OpenBookId } from '../../open-book/open-book-id/open-book-id';
+import { IOpenBookRepository } from 'src/domain/open-book/__interface__/open-book-repository-interface';
+import { OpenBookId } from 'src/domain/open-book/open-book-id/open-book-id';
 
 export interface IReturnDomainService {
   openBookId: OpenBookId;
