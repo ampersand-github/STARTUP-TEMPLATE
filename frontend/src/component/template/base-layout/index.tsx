@@ -2,7 +2,7 @@ import React, { ReactNode, useEffect, useState } from 'react';
 import { Container, Stack } from '@mui/material';
 import { Header } from 'src/component/organism/header';
 import { Footer } from 'src/component/organism/footer';
-import { useAuthContext } from 'src/util/auth/auth-context';
+import { useAuthContext } from 'src/service/auth/auth-context';
 import { signOut } from '@firebase/auth';
 import { auth } from 'src/pages/_app';
 import router from 'next/router';

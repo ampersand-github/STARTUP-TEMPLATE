@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import type { NextPage } from 'next';
 import { Box, Typography } from '@mui/material';
 import { CenterLoading } from '../component/atom/center-loading';
-import { useAuthContext } from '../util/auth/auth-context';
-import { useNotification } from '../util/notification/notification-provider';
+import { useAuthContext } from '../service/auth/auth-context';
+import { useNotification } from '../service/notification/notification-provider';
 import { CustomLinkButton } from 'src/component/atom/custom-link-button';
 
 // https://mui.com/material-ui/react-app-bar/

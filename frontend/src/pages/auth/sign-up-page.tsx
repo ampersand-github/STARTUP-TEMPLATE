@@ -10,9 +10,9 @@ import {
   SignUpForm,
 } from 'src/component/organism/sign-up-form';
 import { SignUpIcon } from 'src/component/atom/sign-up-icon';
-import { useAuthContext } from 'src/util/auth/auth-context';
+import { useAuthContext } from 'src/service/auth/auth-context';
 import { CenterLoading } from 'src/component/atom/center-loading';
-import { ISignUpResult, signUp } from 'src/util/auth/sign-up';
+import { ISignUpResult, signUp } from 'src/service/auth/sign-up';
 
 const SignUpPage: NextPage = () => {
   const [open, setOpen] = React.useState<boolean>(false);

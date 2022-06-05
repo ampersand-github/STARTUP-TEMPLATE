@@ -3,11 +3,11 @@ import type { AppProps } from 'next/app';
 import { getApps, initializeApp } from 'firebase/app';
 import { Auth, getAuth } from '@firebase/auth';
 import CssBaseline from '@mui/material/CssBaseline';
-import { AuthProvider } from '../util/auth/auth-context';
+import { AuthProvider } from '../service/auth/auth-context';
 import { BaseLayout } from '../component/template/base-layout';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { purple } from '@mui/material/colors';
-import { NotificationProvider } from '../util/notification/notification-provider';
+import { NotificationProvider } from '../service/notification/notification-provider';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Firebase設定

@@ -1,13 +1,13 @@
 import { NextPage } from 'next';
 import React, { useLayoutEffect, useState } from 'react';
 import axios from 'axios';
-import { axiosConfig } from 'src/util/axios-config';
+import { axiosConfig } from 'src/service/axios-config';
 import { Container } from '@mui/material';
 import { GoToCreditCardResisterFormButton } from 'src/component/organism/stripe/go-to-credit-card-resister-form';
-import { useAuthContext } from 'src/util/auth/auth-context';
+import { useAuthContext } from 'src/service/auth/auth-context';
 import { CenterLoading } from 'src/component/atom/center-loading';
 import { useRouter } from 'next/router';
-import { useAuthBlocker } from 'src/util/auth/use-auth-block';
+import { useAuthBlocker } from 'src/service/auth/use-auth-block';
 
 // 以下mock
 const getAccountId = () => 'aaa';
