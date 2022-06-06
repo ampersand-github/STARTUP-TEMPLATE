@@ -18,6 +18,10 @@ module.exports = {
   "framework": "@storybook/react",
   // https://github.com/chakra-ui/chakra-ui/issues/5450
   webpackFinal: async (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "src": path.resolve(__dirname, "../src"),
+    };
   config.module.rules.push({
       test: /\.mjs$/,
       include: /node_modules/,
