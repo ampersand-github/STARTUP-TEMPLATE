@@ -3,7 +3,6 @@ import React from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { Grid, Stack } from '@mui/material';
 import { useRouter } from 'next/router';
-import { auth } from '../_app';
 import { CustomLinkButton } from 'src/component/atom/custom-link-button';
 import {
   ISignUpFormContext,
@@ -13,10 +12,9 @@ import { SignUpIcon } from 'src/component/atom/sign-up-icon';
 import { useAuthContext } from 'src/service/auth/auth-context';
 import { CenterLoading } from 'src/component/atom/center-loading';
 import { ISignUpResult, signUp } from 'src/service/auth/sign-up';
+import { firebaseAuth } from 'src/service/firebase-config';
 
 const SignUpPage: NextPage = () => {
-  const [open, setOpen] = React.useState<boolean>(false);
-  const [message, setMessage] = React.useState<string>('');
   const router = useRouter();
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   // 既にログインしていたらこのページを表示しない
@@ -35,7 +33,7 @@ const SignUpPage: NextPage = () => {
     data: ISignUpFormContext,
   ) => {
     const signUpResult: ISignUpResult = await signUp({
-      auth,
+      auth: firebaseAuth,
       email: data.email,
       password: data.password,
     });
@@ -43,9 +41,6 @@ const SignUpPage: NextPage = () => {
       await router.push({
         pathname: '/',
       });
-    } else {
-      setMessage(signUpResult.message);
-      setOpen(true);
     }
   };
 

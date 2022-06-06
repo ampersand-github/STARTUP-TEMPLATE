@@ -2,7 +2,6 @@ import { NextPage } from 'next';
 import React from 'react';
 import { Grid, Stack } from '@mui/material';
 import { useRouter } from 'next/router';
-import { auth } from '../_app';
 import {
   ISignInFormContext,
   SignInForm,
@@ -13,7 +12,8 @@ import { CustomSnackbar } from 'src/component/atom/custom-snack-bar';
 import { useAuthContext } from 'src/service/auth/auth-context';
 import { CenterLoading } from 'src/component/atom/center-loading';
 import { CustomLinkButton } from 'src/component/atom/custom-link-button';
-import {ISignInResult, signIn} from "src/service/auth/sign-in";
+import { ISignInResult, signIn } from 'src/service/auth/sign-in';
+import { firebaseAuth } from 'src/service/firebase-config';
 
 const SignInPage: NextPage = () => {
   const [open, setOpen] = React.useState<boolean>(false);
@@ -38,7 +38,7 @@ const SignInPage: NextPage = () => {
     data: ISignInFormContext,
   ) => {
     const signInResult: ISignInResult = await signIn({
-      auth,
+      auth: firebaseAuth,
       email: data.email,
       password: data.password,
     });

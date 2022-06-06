@@ -16,7 +16,7 @@ SignInEd.args = {
   isAuth: true,
   signInUrl: 'string',
   signUpUrl: 'string',
-  onSignOut:() => new Promise<void>(() => {})
+  onSignOut: () => new Promise<void>(() => {}),
 };
 
 export const NotSignIn = TemplateStory.bind({});
@@ -24,5 +24,5 @@ NotSignIn.args = {
   isAuth: false,
   signInUrl: 'string',
   signUpUrl: 'string',
-  onSignOut:() => new Promise<void>(() => {})
+  onSignOut: () => new Promise<void>(() => {}),
 };
