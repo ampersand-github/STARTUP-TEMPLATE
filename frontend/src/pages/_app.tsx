@@ -4,20 +4,31 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { AuthProvider } from '../service/auth/auth-context';
 import { BaseLayout } from '../component/template/base-layout';
 import { ThemeProvider } from '@mui/material';
-import { NotificationProvider } from '../service/notification/notification-provider';
 import { theme } from 'src/service/theme';
 import { firebaseAuth } from 'src/service/firebase-config';
+import { SnackbarProvider } from 'notistack';
+import WarningIcon from '@mui/icons-material/Warning';
+import ErrorIcon from '@mui/icons-material/Error';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider firebaseAuth={firebaseAuth}>
       <ThemeProvider theme={theme}>
-        <NotificationProvider>
+        <SnackbarProvider
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          iconVariant={{
+            error: <ErrorIcon />,
+            success: <CheckCircleIcon />,
+            warning: <WarningIcon />,
+            info: <CheckCircleIcon />,
+          }}
+        >
           <CssBaseline />
           <BaseLayout>
             <Component {...pageProps} />
           </BaseLayout>
-        </NotificationProvider>
+        </SnackbarProvider>
       </ThemeProvider>
     </AuthProvider>
   );

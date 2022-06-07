@@ -3,7 +3,14 @@ import React from 'react';
 import axios from 'axios';
 import { axiosConfig } from 'src/service/axios-config';
 
+// サーバサイドで実行する処理(getServerSideProps)を定義する
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { data } = await axios.get(`book`, await axiosConfig());
+  return { props: { data } };
+};
+
 const Books: NextPage = (props: any) => {
+  // useSWR使ってみたい
   const data = props.data;
   console.log(data[0].name);
   return (
@@ -23,9 +30,3 @@ const Books: NextPage = (props: any) => {
 };
 
 export default Books;
-
-// サーバサイドで実行する処理(getServerSideProps)を定義する
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { data } = await axios.get(`book`, await axiosConfig());
-  return { props: { data } };
-};

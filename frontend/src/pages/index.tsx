@@ -1,27 +1,21 @@
 import React, { useEffect } from 'react';
 import type { NextPage } from 'next';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { CenterLoading } from '../component/atom/center-loading';
 import { useAuthContext } from '../service/auth/auth-context';
-import { useNotification } from '../service/notification/notification-provider';
 import { CustomLinkButton } from 'src/component/atom/custom-link-button';
+import { PAYMENT_URL } from 'src/service/url';
+import { useCustomSnackbar } from 'src/service/notification/use-custom-snackbar';
 
 // https://mui.com/material-ui/react-app-bar/
 const Home: NextPage = () => {
   const { currentUser } = useAuthContext();
-  const showNotification = useNotification();
+  const createEnqueueSnackbar = useCustomSnackbar();
 
-  const message = (
-    <Typography>
-      登録したメールアドレスに確認メールを送信しました。
-      <br />
-      メールのリンクから登録を完了してください。
-    </Typography>
-  );
-
+  const message = '登録したメールアドレスに確認メールを送信しました。';
   useEffect(() => {
     if (currentUser?.type === 'notVerified') {
-      showNotification({ text: message, type: 'error' });
+      createEnqueueSnackbar({ message: message, variant: 'warning' });
     }
   }, [currentUser]);
   if (currentUser === undefined) return <CenterLoading />;
@@ -30,7 +24,7 @@ const Home: NextPage = () => {
     <>
       <Box>{currentUser ? 'ログイン済み' : 'ログインしていない'}</Box>
       <p>{currentUser?.type === 'verified' ? currentUser.user.email : '-'}</p>
-      <CustomLinkButton link={'./stripe'} text={'stripe'} />
+      <CustomLinkButton link={PAYMENT_URL} text={'payment'} />
     </>
   );
 };
