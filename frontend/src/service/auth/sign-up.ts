@@ -16,6 +16,7 @@ export interface ISignUpResult {
   result: 'ok' | 'ng';
   message: string;
 }
+
 export const signUp = async (props: ISignUp): Promise<ISignUpResult> => {
   try {
     const userCredential: UserCredential = await createUserWithEmailAndPassword(
