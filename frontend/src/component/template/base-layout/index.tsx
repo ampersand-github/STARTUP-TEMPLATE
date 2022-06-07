@@ -4,8 +4,9 @@ import { Header } from 'src/component/organism/header';
 import { Footer } from 'src/component/organism/footer';
 import { useAuthContext } from 'src/service/auth/auth-context';
 import { signOut } from '@firebase/auth';
-import { auth } from 'src/pages/_app';
 import router from 'next/router';
+import { firebaseAuth } from 'src/service/firebase-config';
+import { SIGN_IN_URL, SIGN_UP_URL } from 'src/service/url';
 
 export interface IBaseLayout {
   children: ReactNode;
@@ -19,7 +20,7 @@ export const BaseLayout = (props: IBaseLayout): JSX.Element => {
   }, [currentUser]);
 
   const onSignOut = (): Promise<void> => {
-    return signOut(auth).then(() => {
+    return signOut(firebaseAuth).then(() => {
       console.log('onSignOut-ok');
       router.push('');
     });
@@ -30,8 +31,8 @@ export const BaseLayout = (props: IBaseLayout): JSX.Element => {
       <Header
         isAuth={isAuthState}
         onSignOut={onSignOut}
-        signInUrl="/auth/sign-in-page"
-        signUpUrl="/auth/sign-up-page"
+        signInUrl={SIGN_IN_URL}
+        signUpUrl={SIGN_UP_URL}
       />
       <Container
         component="main"
