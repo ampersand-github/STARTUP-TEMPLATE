@@ -15,7 +15,7 @@ const Home: NextPage = () => {
   const message = '登録したメールアドレスに確認メールを送信しました。';
   useEffect(() => {
     if (currentUser?.type === 'notVerified') {
-      createEnqueueSnackbar({ message: message, variant: 'warning' });
+      createEnqueueSnackbar({ message, variant: 'warning' });
     }
   }, [currentUser]);
   if (currentUser === undefined) return <CenterLoading />;

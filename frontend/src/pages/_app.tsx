@@ -10,6 +10,11 @@ import { SnackbarProvider } from 'notistack';
 import WarningIcon from '@mui/icons-material/Warning';
 import ErrorIcon from '@mui/icons-material/Error';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripeApiKey = process.env.NEXT_PUBLIC_STRIPE_API_KEY;
+if (!stripeApiKey) throw new Error('stripeApiKeyが存在しません');
+export const stripePromise = loadStripe(stripeApiKey);
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

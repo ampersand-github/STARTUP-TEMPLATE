@@ -76,6 +76,51 @@ export class StripeController {
   }
 
   @Post('payment')
+  public async payment(@Body('productId') productId: string) {
+    /*
+      productIdを使って、productが購入可能か判定する
+     */
+    // throw new HttpException('購入不可', HttpStatus.FORBIDDEN);
+
+    /*
+      productIdを使って、必要なデータを取得する
+    */
+    const image =
+      'https://m.media-amazon.com/images/P/B09Y1MWK9N.01._SCLZZZZZZZ_SX500_.jpg';
+    const name = '良いコード/悪いコード';
+    const price = 3378;
+
+    /*
+    ストライプカスタマーを取得もしくは作成する
+  */
+    const customerId = 'cus_Lde2sYXXDC4b5x';
+
+    /*
+    paymentIntentsを作成する
+  */
+    const paymentIntent: Stripe.PaymentIntent =
+      await this.stripe.paymentIntents.create({
+        amount: price,
+        customer: customerId,
+        currency: 'jpy',
+        payment_method_types: ['card'],
+        metadata: {}, // 顧客のuuidとか
+      });
+    const clientSecret = paymentIntent.client_secret;
+
+    /*
+      値を返す
+    */
+    return {
+      clientSecret: clientSecret,
+      image: image,
+      name: name,
+      price: price,
+    };
+  }
+}
+/*
+  @Post('payment')
   public async payment(@Param('accountId') id: string) {
     const paymentIntent: Stripe.PaymentIntent =
       await this.stripe.paymentIntents.create({
@@ -88,6 +133,9 @@ export class StripeController {
     console.log(paymentIntent);
     return paymentIntent.client_secret;
   }
+ */
+
+/*
 
   @Post('payment2')
   public async payment2() {
@@ -129,4 +177,4 @@ export class StripeController {
       console.log(e);
     }
   }
-}
+   */
