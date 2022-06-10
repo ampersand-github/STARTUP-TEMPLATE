@@ -87,7 +87,7 @@ const PaymentFormChild = (props: IPaymentFormChild): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
   const [cardInputComplete, setCardInputComplete] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:any) => {
     console.log('ssss');
     e.preventDefault();
     if (!stripe || !elements) return;
