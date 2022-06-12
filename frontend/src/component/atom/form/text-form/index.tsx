@@ -3,7 +3,7 @@ import React from 'react';
 import { useController, Control } from 'react-hook-form';
 
 // https://www.w3schools.com/tags/att_input_type.asp
-type InputType = 'email' | 'text' | 'password';
+type InputType = 'email' | 'text' | 'password' | 'number';
 
 interface ITextForm {
   control: Control<any>;
