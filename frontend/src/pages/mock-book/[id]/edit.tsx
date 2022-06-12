@@ -1,58 +1,74 @@
 import type { NextPage } from 'next';
-import React, { useEffect, useState } from 'react';
-import axios, { AxiosResponse } from 'axios';
-import { Button } from '@mui/material';
+import React, { useEffect } from 'react';
+import { Button, Stack } from '@mui/material';
 import { useRouter } from 'next/router';
-import { IBook } from 'src/service/mocks/db/models/book';
-import { axiosConfig } from 'src/service/axios-config';
+import { IBook, IBookWithoutId } from 'src/service/mocks/db/models/book';
+import { useCustomAxios } from 'src/service/axios-config';
+import { TextForm } from 'src/component/atom/form/text-form';
+import { useForm } from 'react-hook-form';
 
 const Edit: NextPage = () => {
-  const [book, setBook] = useState<IBook>();
-  const [id, setId] = useState<string>();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IBook>();
   const router = useRouter();
+  const getOneUrl = `/api/book/${router.query.id}`;
+  const [{ data: getBook, loading: getLoading, error: getError }, getExecute] =
+    useCustomAxios<IBook>({ url: getOneUrl, method: 'get' }, { manual: true });
+  const [{ data: putBook, loading: putLoading, error: putError }, putExecute] =
+    useCustomAxios<IBook>({ url: getOneUrl, method: 'put' }, { manual: true });
 
   useEffect(() => {
-    const cleanUp = async () => {
-      if (!router.isReady) return <>...loading</>;
-      const id = router.query.id;
-      if (typeof id !== 'string') return <>error!</>;
-      setId(id);
-    };
-    cleanUp();
+    if (router.isReady) getExecute();
   }, [router]);
 
-  useEffect(() => {
-    const cleanUp = async () => {
-      const { data }: AxiosResponse<IBook> = await axios.get(
-        `/api/book/${id}`,
-        await axiosConfig(),
-      );
-      setBook(data);
-    };
-    cleanUp();
-  }, []);
-
-  const updateBook = async () => {
-    const book: IBook = { id: 'id3', title: 'title10', price: 10000 };
-    const { data }: AxiosResponse = await axios.put(
-      `/api/book/${book.id}`,
-      book,
-      await axiosConfig(),
-    );
+  const onSubmit = async (props: IBookWithoutId) => {
+    putExecute({ data: props });
     await router.back();
   };
+
+  if (getLoading || putLoading || !router.isReady) return <p>Loading...</p>;
+  if (getError || putError) return <p>Error!</p>;
   return (
     <>
       <p>ここにform</p>
-      {book && (
-        <>
-          <p>{book.id}</p>
-          <p>{book.title}</p>
-          <p>{book.price}</p>
-        </>
+      {getBook && (
+        <Stack
+          component="form"
+          onSubmit={handleSubmit(onSubmit)}
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-start',
+          }}
+          spacing={3}
+        >
+          <p>{getBook.id}</p>
+          <TextForm
+            control={control}
+            rules={{ required: 'タイトルを入力してください' }}
+            name={'title'}
+            inputType="text"
+            label={'タイトル'}
+            isError={errors.title !== undefined}
+            errorText={errors.title?.message}
+            value={getBook.title}
+          />
+          <TextForm
+            control={control}
+            rules={{ required: '値段を入力してください' }}
+            name={'price'}
+            inputType="number"
+            label={'価格'}
+            isError={errors.price !== undefined}
+            errorText={errors.price?.message}
+            value={getBook.price}
+          />
+          <Button type={'submit'}>書籍を更新する</Button>
+        </Stack>
       )}
-
-      <Button onClick={() => updateBook()}>本の編集</Button>
     </>
   );
 };

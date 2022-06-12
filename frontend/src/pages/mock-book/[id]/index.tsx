@@ -1,53 +1,41 @@
 import type { NextPage } from 'next';
-import React, { useEffect, useState } from 'react';
-import axios, { AxiosResponse } from 'axios';
-import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
 import { Button } from '@mui/material';
-import { axiosConfig } from 'src/service/axios-config';
+import { useCustomAxios } from 'src/service/axios-config';
 import { IBook } from 'src/service/mocks/db/models/book';
 import { MOCK_BOOK_URL } from 'src/service/url';
+import { useRouter } from 'next/router';
 
 const Index: NextPage = () => {
-  const [book, setBook] = useState<IBook>();
-  const [id, setId] = useState<string>();
   const router = useRouter();
+  const getOneUrl = `/api/book/${router.query.id}`;
+  const [{ data: getData, loading: getLoading, error }, getExecute] =
+    useCustomAxios<IBook>({ url: getOneUrl, method: 'get' }, { manual: true });
 
   useEffect(() => {
-    const cleanUp = async () => {
-      if (!router.isReady) return <>...loading</>;
-      const id = router.query.id;
-      if (typeof id !== 'string') return <>error!</>;
-      setId(id);
-    };
-    cleanUp();
+    if (router.isReady) getExecute();
   }, [router]);
 
-  useEffect(() => {
-    const cleanUp = async () => {
-      const { data }: AxiosResponse<IBook> = await axios.get(
-        `/api/book/${id}`,
-        await axiosConfig(),
-      );
-      setBook(data);
-    };
-    cleanUp();
-  }, [id]);
-
+  if (getLoading || !router.isReady) return <p>Loading...</p>;
+  if (error) return <p>Error!</p>;
   return (
     <>
       <h1>mock</h1>
-      {book && (
+      {getData && (
         <>
           <h1>本の詳細ページ</h1>
-          <p>{book.id}</p>
-          <p>{book.title}</p>
-          <p>{book.price}</p>
+          <p>{getData.id}</p>
+          <p>{getData.title}</p>
+          <p>{getData.price}</p>
+          <Button
+            onClick={() => router.push(`${MOCK_BOOK_URL}/${getData.id}/edit`)}
+          >
+            編集ページへ
+          </Button>
+          <Button onClick={() => router.push(`${MOCK_BOOK_URL}/`)}>
+            一覧ページへ
+          </Button>
         </>
-      )}
-      {book && (
-        <Button onClick={() => router.push(`${MOCK_BOOK_URL}/${book.id}/edit`)}>
-          編集ページへ
-        </Button>
       )}
     </>
   );

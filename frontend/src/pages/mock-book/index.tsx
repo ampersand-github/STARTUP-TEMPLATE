@@ -49,6 +49,11 @@ const Index: NextPage = () => {
               >
                 編集ページへ
               </Button>
+              <Button
+                onClick={() => router.push(`${MOCK_BOOK_URL}/${one.id}/`)}
+              >
+                詳細ページへ
+              </Button>
               <Button onClick={() => deleteId(one)}>削除</Button>
             </CardActions>
           </Card>

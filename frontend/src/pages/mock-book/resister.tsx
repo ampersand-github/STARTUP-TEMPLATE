@@ -18,13 +18,10 @@ const Resister: NextPage = () => {
   const router = useRouter();
 
   const onSubmit = async (props: IBookWithoutId) => {
-    const res: AxiosResponse = await axios.post(
-      `/api/book`,
-      props,
-      await axiosConfig(),
-    );
-    console.log(res);
-    await router.back();
+    await axios
+      .post(`/api/book`, props, await axiosConfig())
+      .then((one: AxiosResponse) => router.back())
+      .catch((one) => console.log('エラーが発生しました'));
   };
   return (
     <>
