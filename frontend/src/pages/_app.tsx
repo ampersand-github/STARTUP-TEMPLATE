@@ -18,6 +18,7 @@ export const stripePromise = loadStripe(stripeApiKey);
 //
 if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled')
   require('../service/mocks');
+console.log('mock-api初期化');
 //
 function MyApp({ Component, pageProps }: AppProps) {
   return (
