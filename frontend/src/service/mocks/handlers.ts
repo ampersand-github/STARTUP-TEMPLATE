@@ -6,29 +6,31 @@ import { uuidv4 } from '@mswjs/interceptors/lib/utils/uuid';
 export const handlers = [
   rest.get(`/api/book`, (req, res, ctx) => {
     const all = db.book.getAll();
-    console.log(all);
-    return res(ctx.json(all));
+    return res(ctx.status(200), ctx.json(all));
   }),
 
   rest.get('/api/book/:id', (req, res, ctx) => {
     const { id } = req.params;
     if (typeof id === 'string') {
       const result = db.book.findFirst({ where: { id: { equals: id } } });
-      return res(ctx.json(result));
+      if (result) return res(ctx.status(200), ctx.json(result));
     }
+    return res(ctx.status(404));
   }),
 
-  rest.put('/api/book/:id', (req: RestRequest<IBook>, res, ctx) => {
+  rest.put('/api/book/:id', (req: RestRequest<IBookWithoutId>, res, ctx) => {
     const { id } = req.params;
+    console.log('----');
+    console.log(id);
     if (typeof id === 'string') {
-      const result = db.book.update({
+      db.book.update({
         where: { id: { equals: id } },
         data: {
           title: req.body.title,
           price: req.body.price,
         },
       });
-      return res(ctx.json(result));
+      return res(ctx.status(201));
     }
   }),
 
@@ -36,11 +38,12 @@ export const handlers = [
     console.log('---');
     console.log(req.body);
     console.log(uuidv4().toString());
-    db.book.create({
+    const a = db.book.create({
       id: uuidv4().toString(),
       title: req.body.title,
       price: req.body.price,
     });
+    console.log(a);
     return res(ctx.status(201));
   }),
 
