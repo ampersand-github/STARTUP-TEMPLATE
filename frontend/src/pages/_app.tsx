@@ -15,7 +15,10 @@ import { loadStripe } from '@stripe/stripe-js';
 const stripeApiKey = process.env.NEXT_PUBLIC_STRIPE_API_KEY;
 if (!stripeApiKey) throw new Error('stripeApiKeyが存在しません');
 export const stripePromise = loadStripe(stripeApiKey);
-
+//
+if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled')
+  require('../service/mocks');
+//
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider firebaseAuth={firebaseAuth}>

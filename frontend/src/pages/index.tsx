@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 import { CenterLoading } from '../component/atom/center-loading';
 import { useAuthContext } from '../service/auth/auth-context';
 import { CustomLinkButton } from 'src/component/atom/custom-link-button';
-import { PAYMENT_URL } from 'src/service/url';
+import { MOCK_BOOK_URL, PAYMENT_URL } from 'src/service/url';
 import { useCustomSnackbar } from 'src/service/notification/use-custom-snackbar';
 
 // https://mui.com/material-ui/react-app-bar/
@@ -25,6 +25,7 @@ const Home: NextPage = () => {
       <Box>{currentUser ? 'ログイン済み' : 'ログインしていない'}</Box>
       <p>{currentUser?.type === 'verified' ? currentUser.user.email : '-'}</p>
       <CustomLinkButton link={PAYMENT_URL} text={'payment'} />
+      <CustomLinkButton link={MOCK_BOOK_URL} text={'mock-book'} />
     </>
   );
 };
