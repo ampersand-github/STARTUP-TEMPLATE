@@ -10,7 +10,7 @@ export class BorrowId extends UniqueEntityId {
     return new BorrowId(uuid());
   }
 
-  public static reBuild(value: string): BorrowId {
+  public static reConstruct(value: string): BorrowId {
     return new BorrowId(value);
   }
 }

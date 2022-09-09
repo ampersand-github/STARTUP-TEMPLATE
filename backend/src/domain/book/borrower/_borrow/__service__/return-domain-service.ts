@@ -1,5 +1,5 @@
-import { IBorrowRepository } from 'src/domain/borrow/__interface__/borrow-repository-interface';
-import { Borrow } from 'src/domain/borrow/borrow';
+import { IBorrowRepository } from 'src/domain/book/borrower/_borrow/__interface__/borrow-repository-interface';
+import { Borrow } from 'src/domain/book/borrower/_borrow/borrow';
 import { OpenBook } from 'src/domain/open-book/open-book';
 import { IOpenBookRepository } from 'src/domain/open-book/__interface__/open-book-repository-interface';
 import { OpenBookId } from 'src/domain/open-book/open-book-id/open-book-id';
@@ -19,7 +19,7 @@ export const returnDomainService = async (props: IReturnDomainService) => {
   //
   const borrow: Borrow = await props.borrowR.findOne(openBook.id);
   //
-  const updateBorrow = Borrow.reBuild(
+  const updateBorrow = Borrow.reConstruct(
     {
       userId: borrow.getUserId(),
       openBookId: borrow.getOpenBookId(),
@@ -29,7 +29,7 @@ export const returnDomainService = async (props: IReturnDomainService) => {
     borrow.id,
   );
   //
-  const updateOpenBook = OpenBook.reBuild(
+  const updateOpenBook = OpenBook.reConstruct(
     {
       bookId: openBook.getBookId(),
       borrowingId: undefined, // ここ、はずすことでレンタル終了を表現

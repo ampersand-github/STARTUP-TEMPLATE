@@ -1,4 +1,4 @@
-import { Borrow } from 'src/domain/borrow/borrow';
+import { Borrow } from 'src/domain/book/borrower/_borrow/borrow';
 import { UserId } from 'src/domain/user/user-id/user-id';
 import { OpenBookId } from 'src/domain/open-book/open-book-id/open-book-id';
 

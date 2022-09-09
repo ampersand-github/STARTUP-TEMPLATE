@@ -1,4 +1,4 @@
-import { BorrowId } from 'src/domain/borrow/borrow-id/borrow-id';
+import { BorrowId } from 'src/domain/book/borrower/_borrow/borrow-id/borrow-id';
 
 describe('BorrowId', () => {
   describe('create()', () => {
@@ -6,9 +6,9 @@ describe('BorrowId', () => {
       expect(BorrowId.create()).toEqual(expect.any(BorrowId));
     });
   });
-  describe('reBuild()', () => {
+  describe('reConstruct()', () => {
     it('オブジェクトが再生成ができる', () => {
-      expect(BorrowId.reBuild('test-id')).toEqual(expect.any(BorrowId));
+      expect(BorrowId.reConstruct('test-id')).toEqual(expect.any(BorrowId));
     });
   });
 });

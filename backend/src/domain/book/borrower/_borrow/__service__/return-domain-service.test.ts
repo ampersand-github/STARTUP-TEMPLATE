@@ -3,8 +3,8 @@ import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
 import { OpenBookRepository } from 'src/infrastructure/repository/open-book/open-book-repository';
 import { OpenBook } from 'src/domain/open-book/open-book';
 import { BookId } from 'src/domain/book/book-id/book-id';
-import { BorrowId } from 'src/domain/borrow/borrow-id/borrow-id';
-import { Borrow } from 'src/domain/borrow/borrow';
+import { BorrowId } from 'src/domain/book/borrower/_borrow/borrow-id/borrow-id';
+import { Borrow } from 'src/domain/book/borrower/_borrow/borrow';
 import { UserId } from 'src/domain/user/user-id/user-id';
 import { OpenBookId } from 'src/domain/open-book/open-book-id/open-book-id';
 import {

@@ -1,7 +1,7 @@
 import { UserId } from 'src/domain/user/user-id/user-id';
-import { IBorrowRepository } from 'src/domain/borrow/__interface__/borrow-repository-interface';
+import { IBorrowRepository } from 'src/domain/book/borrower/_borrow/__interface__/borrow-repository-interface';
 import { canAdditionalBorrowDS } from './can-additional-borrow-domain-service';
-import { Borrow } from 'src/domain/borrow/borrow';
+import { Borrow } from 'src/domain/book/borrower/_borrow/borrow';
 import { OpenBook } from 'src/domain/open-book/open-book';
 import { IOpenBookRepository } from 'src/domain/open-book/__interface__/open-book-repository-interface';
 import { OpenBookId } from 'src/domain/open-book/open-book-id/open-book-id';
@@ -32,7 +32,7 @@ export const borrowDomainService = async (props: IBorrowDomainService) => {
     endAt: undefined,
   });
 
-  const openBook = OpenBook.reBuild(
+  const openBook = OpenBook.reConstruct(
     {
       bookId: reBuildOpenBook.getBookId(),
       borrowingId: borrow.id,

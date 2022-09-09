@@ -1,5 +1,5 @@
 import { UserId } from 'src/domain/user/user-id/user-id';
-import { Borrow } from 'src/domain/borrow/borrow';
+import { Borrow } from 'src/domain/book/borrower/_borrow/borrow';
 import { BorrowRepository } from 'src/infrastructure/repository/borrow/borrow-repository';
 import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
 import { OpenBookId } from 'src/domain/open-book/open-book-id/open-book-id';
