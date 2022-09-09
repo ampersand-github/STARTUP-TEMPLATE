@@ -1,14 +1,12 @@
 import { BookId } from 'src/domain/book/book-id/book-id';
 
 describe('BookId', () => {
-  describe('create()', () => {
-    it('オブジェクトが生成ができる', () => {
-      expect(BookId.create()).toEqual(expect.any(BookId));
+  describe('オブジェクトが生成ができる', () => {
+    it('construct()', () => {
+      expect(BookId.construct()).toEqual(expect.any(BookId));
     });
-  });
-  describe('reBuild()', () => {
-    it('オブジェクトが再生成ができる', () => {
-      expect(BookId.reBuild('test-id')).toEqual(expect.any(BookId));
+    it('reConstruct()', () => {
+      expect(BookId.reConstruct('test-id')).toEqual(expect.any(BookId));
     });
   });
 });

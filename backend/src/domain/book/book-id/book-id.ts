@@ -6,11 +6,11 @@ export class BookId extends UniqueEntityId {
     super(value, 'BookId');
   }
 
-  public static create(): BookId {
+  public static construct(): BookId {
     return new BookId(uuid());
   }
 
-  public static reBuild(value: string): BookId {
+  public static reConstruct(value: string): BookId {
     return new BookId(value);
   }
 }

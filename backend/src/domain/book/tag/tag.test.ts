@@ -1,24 +1,9 @@
-import { ITag, TAG, Tag } from 'src/domain/book/tag/tag';
+import { BOOK_SIZE_TYPE, BookSize, IBookSize } from '../book-size/book-size';
 
-describe('Tag', () => {
-  describe('constructor', () => {
-    it('オブジェクトの生成ができる', () => {
-      const props: ITag = { name: TAG.ui };
-      const tag = new Tag(props);
-      expect(tag).toEqual(expect.any(Tag));
-    });
-    it('存在しないタグを生成しようとするとエラーになる', () => {
-      const props: ITag = { name: 'aaa' };
-      const actual = () => new Tag(props);
-      expect(actual).toThrowError('タグが存在しません');
-    });
-  });
-
-  describe('get', () => {
-    it('値の取得ができる', () => {
-      const props: ITag = { name: TAG.ui };
-      const tag = new Tag(props);
-      expect(tag.getValue()).toEqual(props.name);
-    });
+describe('BookSize', () => {
+  it('オブジェクトを生成して値を取得できる', () => {
+    const props: IBookSize = { value: BOOK_SIZE_TYPE.normalSize };
+    const bookSize = new BookSize(props);
+    expect(bookSize.value).toStrictEqual(BOOK_SIZE_TYPE.normalSize);
   });
 });

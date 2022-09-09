@@ -2,32 +2,24 @@ import { ValueObject } from 'src/domain/__shared__/value-object';
 import { Tag } from './tag';
 
 export interface ITagList {
-  tagsList: Tag[];
+  values: Tag[];
 }
 
 export class TagList extends ValueObject<ITagList> {
-  private readonly collection: ReadonlyArray<Tag>;
-
-  public getCollection() {
-    return this.collection;
-  }
-
-  public toString(): string[] {
-    return this.collection.map((one: Tag) => one.getValue());
-  }
+  public readonly collection: Tag[];
 
   public constructor(props: ITagList) {
     super(props);
-    this.collection = props.tagsList;
+    this.collection = props.values;
   }
 
   public add(tag: Tag): TagList {
     const tagList = [...this.collection].concat(tag);
-    return new TagList({ tagsList: tagList });
+    return new TagList({ values: tagList });
   }
 
   public remove(tag: Tag): TagList {
     const tagList = this.collection.filter((one: Tag) => one !== tag);
-    return new TagList({ tagsList: tagList });
+    return new TagList({ values: tagList });
   }
 }
