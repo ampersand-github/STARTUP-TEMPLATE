@@ -6,11 +6,11 @@ export class StripeCustomerId extends UniqueEntityId {
     super(value, 'StripeCustomerId');
   }
 
-  public static create(): StripeCustomerId {
+  public static construct(): StripeCustomerId {
     return new StripeCustomerId(uuid());
   }
 
-  public static reBuild(value: string): StripeCustomerId {
+  public static reConstruct(value: string): StripeCustomerId {
     return new StripeCustomerId(value);
   }
 }

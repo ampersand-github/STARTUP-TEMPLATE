@@ -7,21 +7,24 @@ describe('Book', () => {
     name: 'book1',
     author: 'author',
     bookSize: new BookSize({ value: BOOK_SIZE_TYPE.bigSize }),
-    borrower:undefined,
-    reservationList:undefined
+    borrower: undefined,
+    reservationList: undefined,
   };
 
   describe('インスタンスの生成', () => {
     const book = Book.construct(props);
-    it('construct()', () => {
-      expect(book).toStrictEqual(expect.any(Book));
-    });
-    it('reConstruct()', () => {
-      const id = '43145f95-2034-4fae-b88f-ca0bdf7890bd';
-      const bookId = BookId.reConstruct(id);
-      const book = Book.reConstruct(props, bookId);
-      expect(book.id).toStrictEqual(bookId);
-      expect(book).toStrictEqual(expect.any(Book));
+
+    describe('インスタンスの生成', () => {
+      it('construct()', () => {
+        expect(book).toStrictEqual(expect.any(Book));
+      });
+      it('reConstruct()', () => {
+        const id = '43145f95-2034-4fae-b88f-ca0bdf7890bd';
+        const bookId = BookId.reConstruct(id);
+        const book = Book.reConstruct(props, bookId);
+        expect(book.id).toStrictEqual(bookId);
+        expect(book).toStrictEqual(expect.any(Book));
+      });
     });
 
     describe('get()', () => {

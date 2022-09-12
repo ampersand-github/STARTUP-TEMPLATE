@@ -3,8 +3,9 @@ import { IUser, User } from 'src/domain/user/user';
 
 describe('User', () => {
   const props: IUser = {
-    name: "田中太郎",
-    tel:"09011112222"
+    stripeCustomerId: undefined,
+    name: '田中太郎',
+    tel: '09011112222',
   };
 
   describe('constructor', () => {
@@ -23,6 +24,7 @@ describe('User', () => {
   describe('get', () => {
     const user = User.construct(props);
     it('取得できる', () => {
+      expect(user.stripeCustomerId).toStrictEqual(props.stripeCustomerId);
       expect(user.name).toStrictEqual(props.name);
       expect(user.tel).toStrictEqual(props.tel);
     });

@@ -1,31 +1,32 @@
 import { AggregateRoot } from 'src/domain/__shared__/aggregate-root';
 import { BookId } from './book-id/book-id';
 import { BookSize } from './book-size/book-size';
-import { Borrower } from "./borrower/borrower";
+import { Borrower } from './borrower/borrower';
 
-class ReservationList {
-}
+class ReservationList {}
 
 export interface IBook {
   name: string;
   author: string;
   bookSize: BookSize;
-  borrower?:Borrower;
-  reservationList:ReservationList
+  borrower?: Borrower;
+  reservationList: ReservationList;
 }
 
 export class Book extends AggregateRoot<IBook, BookId> {
-  public readonly name: IBook["name"];
-  public readonly author: IBook["author"];
-  public readonly bookSize: IBook["bookSize"];
-  public readonly borrower: IBook["borrower"];
-  public readonly reservationList: IBook["reservationList"];
+  public readonly name: IBook['name'];
+  public readonly author: IBook['author'];
+  public readonly bookSize: IBook['bookSize'];
+  public readonly borrower: IBook['borrower'];
+  public readonly reservationList: IBook['reservationList'];
 
   private constructor(props: IBook, id: BookId) {
     super(props, id);
     this.name = props.name;
     this.author = props.author;
     this.bookSize = props.bookSize;
+    this.borrower = props.borrower;
+    this.reservationList = props.reservationList;
   }
 
   public static construct(props: IBook): Book {
