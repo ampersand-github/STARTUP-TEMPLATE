@@ -14,7 +14,7 @@ export interface IBookSize {
 }
 
 export class BookSize extends ValueObject<IBookSize> {
-  public readonly value: BookSizeType;
+  public readonly value: IBookSize["value"];
 
   public constructor(props: IBookSize) {
     super(props);
