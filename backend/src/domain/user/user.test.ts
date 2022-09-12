@@ -2,28 +2,29 @@ import { UserId } from 'src/domain/user/user-id/user-id';
 import { IUser, User } from 'src/domain/user/user';
 
 describe('User', () => {
-  const name = '田中太郎';
   const props: IUser = {
-    name: name,
+    name: "田中太郎",
+    tel:"09011112222"
   };
 
   describe('constructor', () => {
     it('createできる', () => {
-      const user = User.create(props);
-      expect(user).toEqual(expect.any(User));
+      const user = User.construct(props);
+      expect(user).toStrictEqual(expect.any(User));
     });
     it('reBuildできる', () => {
-      const userId = UserId.reBuild('43145f95-2034-4fae-b88f-ca0bdf7890bd');
-      const user = User.reBuild(props, userId);
-      expect(user).toEqual(expect.any(User));
-      expect(user.id).toEqual(userId);
+      const userId = UserId.reConstruct('43145f95-2034-4fae-b88f-ca0bdf7890bd');
+      const user = User.reConstruct(props, userId);
+      expect(user).toStrictEqual(expect.any(User));
+      expect(user.id).toStrictEqual(userId);
     });
   });
 
   describe('get', () => {
-    const user = User.create(props);
-    it('getName()', () => {
-      expect(user.getName()).toEqual(props.name);
+    const user = User.construct(props);
+    it('取得できる', () => {
+      expect(user.name).toStrictEqual(props.name);
+      expect(user.tel).toStrictEqual(props.tel);
     });
   });
 });

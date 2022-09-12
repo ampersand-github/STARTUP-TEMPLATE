@@ -3,25 +3,24 @@ import { AggregateRoot } from 'src/domain/__shared__/aggregate-root';
 
 export interface IUser {
   name: string;
+  tel:string;
 }
 
 export class User extends AggregateRoot<IUser, UserId> {
-  private readonly name: string;
-
-  public getName() {
-    return this.name;
-  }
+  public readonly name: string;
+  public readonly tel:string;
 
   private constructor(props: IUser, id: UserId) {
     super(props, id);
     this.name = props.name;
+    this.tel = props.tel
   }
 
-  public static create(props: IUser): User {
-    return new User(props, UserId.create());
+  public static construct(props: IUser): User {
+    return new User(props, UserId.construct());
   }
 
-  public static reBuild(props: IUser, id: UserId): User {
+  public static reConstruct(props: IUser, id: UserId): User {
     return new User(props, id);
   }
 }
