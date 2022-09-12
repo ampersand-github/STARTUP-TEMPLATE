@@ -1,13 +1,13 @@
 import { UserId } from '../user-id/user-id';
 import { faker } from '@faker-js/faker';
-import { IUser, User } from '../user';
+import { User } from '../user';
 import { StripeCustomerId } from '../stripe-customer-id/stripe-customer-id';
 
 export const createTestUser = (
   userId: UserId = UserId.construct(),
-    stripeCustomerId:StripeCustomerId = StripeCustomerId.construct(),
-    name:string = faker.name.fullName(),
-    tel:string = faker.phone.number(),
+  stripeCustomerId: StripeCustomerId = StripeCustomerId.construct(),
+  name: string = faker.name.fullName(),
+  tel: string = faker.phone.number(),
 ): User => {
   return User.reConstruct(
     {

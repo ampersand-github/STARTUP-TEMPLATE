@@ -15,7 +15,7 @@ export class User extends AggregateRoot<IUser, UserId> {
 
   private constructor(props: IUser, id: UserId) {
     super(props, id);
-    this.stripeCustomerId = props.stripeCustomerId
+    this.stripeCustomerId = props.stripeCustomerId;
     this.name = props.name;
     this.tel = props.tel;
   }
