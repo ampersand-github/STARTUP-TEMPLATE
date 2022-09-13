@@ -1,32 +1,42 @@
-/*
-import { createTestUser } from "./create-test-user";
-import { UserId } from "./user-id";
-import { User } from "./user";
+import { createTestBook } from './create-test-book';
+import { Book } from '../book';
+import { BookId } from '../book-id/book-id';
+import { BOOK_SIZE_TYPE, BookSize } from '../book-size/book-size';
+import { createTestBorrower } from './create-test-borrower';
+import { Borrower } from '../borrower/borrower';
 
-describe("createTestUser", () => {
-  it("デフォルト値の場合", () => {
-    const user = createTestUser();
-    expect(user).toEqual(expect.any(User));
+describe('createTestBook', () => {
+  it('値を何もしていしない場合', () => {
+    // given:
+    // when:
+    const actual = createTestBook();
+    // then:
+    expect(actual).toStrictEqual(expect.any(Book));
   });
 
-  it("すべての値を設定する場合", () => {
-    const userId = UserId.reBuild("dummy-uuid");
-    const userName = "山田次郎";
-    const tel = "12345678901";
-    const user = createTestUser(userId, userName, tel);
-    console.log(JSON.stringify(user));
-    expect(user.getName()).toStrictEqual(userName);
-    expect(user.getTel()).toStrictEqual(tel);
-    expect(user.id).toStrictEqual(userId);
-  });
+  it('値を付けたりつけなかった場合', () => {
+    // given:
+    const bookId = BookId.reConstruct('bookId');
+    const author = 'author';
+    const bookSize = new BookSize({ value: BOOK_SIZE_TYPE.bigSize });
+    const borrower: Borrower = createTestBorrower(undefined, bookId);
 
-  it("一部の値を設定する場合", () => {
-    const userName = "山田次郎";
-    const userId = UserId.reBuild("dummy-uuid");
-    const user = createTestUser(undefined, userName, undefined);
-    expect(user.getName()).toStrictEqual(userName);
-    expect(user.id).not.toStrictEqual(userId);
+    // when:
+    const actual = createTestBook(
+      bookId,
+      undefined,
+      author,
+      bookSize,
+      borrower,
+      undefined,
+    );
+
+    // then:
+    expect(actual).toEqual(expect.any(Book));
+    expect(actual.id).toStrictEqual(bookId);
+    expect(actual.author).toStrictEqual(author);
+    expect(actual.bookSize.value).toStrictEqual(BOOK_SIZE_TYPE.bigSize);
+    expect(actual.borrower).toStrictEqual(borrower);
+    expect(actual.reservationList.values).toStrictEqual([]);
   });
 });
-
- */
