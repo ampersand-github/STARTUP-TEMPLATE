@@ -6,7 +6,6 @@ export interface IBorrower {
   userId: UserId;
   bookId: BookId;
   startAt: Date;
-  returnAt?: Date;
   scheduledReturnAt?: Date;
 }
 
@@ -14,7 +13,6 @@ export class Borrower extends ValueObject<IBorrower> {
   public readonly userId: IBorrower['userId'];
   public readonly bookId: IBorrower['bookId'];
   public readonly startAt: IBorrower['startAt'];
-  public readonly returnAt: IBorrower['returnAt'];
   public readonly scheduledReturnAt: IBorrower['scheduledReturnAt'];
 
   public constructor(props: IBorrower) {
@@ -22,7 +20,6 @@ export class Borrower extends ValueObject<IBorrower> {
     this.userId = props.userId;
     this.bookId = props.bookId;
     this.startAt = props.startAt;
-    this.returnAt = props.returnAt;
     this.scheduledReturnAt = props.scheduledReturnAt;
   }
 }
