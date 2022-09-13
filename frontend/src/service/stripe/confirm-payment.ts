@@ -2,13 +2,13 @@ import { StripeError } from '@stripe/stripe-js/types/stripe-js/stripe';
 import * as stripeJs from '@stripe/stripe-js';
 import { StripeElements } from '@stripe/stripe-js';
 
-export interface IconfirmPayment {
+export interface IConfirmPayment {
   stripe: stripeJs.Stripe;
   elements: StripeElements;
 }
 
 export const confirmPayment = async (
-  props: IconfirmPayment,
+  props: IConfirmPayment,
 ): Promise<StripeError> => {
   const { error } = await props.stripe.confirmPayment({
     elements: props.elements,

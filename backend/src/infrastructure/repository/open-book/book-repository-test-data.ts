@@ -1,6 +1,6 @@
 import { BookId } from 'src/domain/book/book-id/book-id';
 import { OpenBook } from 'src/domain/open-book/open-book';
-import { BorrowId } from 'src/domain/borrow/borrow-id/borrow-id';
+import { BorrowerId } from 'src/domain/book/borrower/borrower-id/borrow-id';
 import { OpenBookId } from 'src/domain/open-book/open-book-id/open-book-id';
 import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
 
@@ -53,7 +53,7 @@ export const initOpenBookRepository2 = async (prismaService: PrismaService) => {
 export const updateOpenBook = OpenBook.reBuild(
   {
     bookId: BookId.reBuild('2422c514-4b06-aced-5ef3-3f869d299bd8'),
-    borrowingId: BorrowId.reBuild('48d76298-2149-e236-15cc-8d656bc642e9'),
+    borrowingId: BorrowerId.reBuild('48d76298-2149-e236-15cc-8d656bc642e9'),
   },
   OpenBookId.reBuild('2f5d11a19-2ba7-7f25-99a3-756e83d9b8d1'),
 );

@@ -1,8 +1,8 @@
 import { UserId } from 'src/domain/user/user-id/user-id';
 import { OpenBookId } from 'src/domain/open-book/open-book-id/open-book-id';
 import { IOpenBookRepository } from 'src/domain/open-book/__interface__/open-book-repository-interface';
-import { IBorrowRepository } from 'src/domain/borrow/__interface__/borrow-repository-interface';
-import { borrowDomainService } from 'src/domain/borrow/__service__/borrow-domain-service';
+import { IBorrowRepository } from 'src/domain/book/borrower/__interface__/borrow-repository-interface';
+import { borrowDomainService } from 'src/domain/book/borrower/_borrow/__service__/borrow-domain-service';
 
 export interface IBorrowBookUC {
   userId: UserId;

@@ -17,8 +17,8 @@ describe('userRepository', () => {
   });
 
   describe('save()/findOne()', () => {
-    const userId = UserId.reBuild('803298db-f5c4-2f7c-39a7-026da6c9ea03');
-    const user1 = User.reBuild(
+    const userId = UserId.reConstruct('803298db-f5c4-2f7c-39a7-026da6c9ea03');
+    const user1 = User.reConstruct(
       {
         name: 'user1',
       },
@@ -31,7 +31,7 @@ describe('userRepository', () => {
       expect(actual).toStrictEqual(user1);
     });
     test('更新できる', async () => {
-      const user1Update = User.reBuild(
+      const user1Update = User.reConstruct(
         {
           name: 'user1update',
         },

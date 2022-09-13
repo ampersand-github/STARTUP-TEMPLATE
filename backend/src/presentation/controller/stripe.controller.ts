@@ -1,22 +1,10 @@
-import {
-  Body,
-  Controller,
-  Get,
-  HttpException,
-  HttpStatus,
-  Param,
-  Post,
-} from '@nestjs/common';
-import {
-  CustomLoggerService,
-  ILog,
-} from 'src/module/logger/custom-logger.service';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { CustomLoggerService } from 'src/module/logger/custom-logger.service';
 import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
 import { StripeService } from 'src/module/stripe/stripe.service';
-import { findAndSyncOrCreateStripeCustomerId } from 'src/infrastructure/stripe/find-and-sync-or-create-stripe-customer-id';
+import { findAndSyncOrCreateStripeCustomerId } from 'src/module/stripe/functions/find-and-sync-or-create-stripe-customer-id';
 import { UserId } from 'src/domain/user/user-id/user-id';
 import { UserRepository } from 'src/infrastructure/repository/user/user-repository';
-import { resisterCreditCard } from 'src/infrastructure/stripe/resister-credit-card';
 import { Stripe } from 'stripe';
 
 @Controller('stripe')
@@ -48,31 +36,6 @@ export class StripeController {
       stripe: this.stripe,
       userR: new UserRepository(this.prismaService),
     });
-  }
-
-  @Post('add/:stripeCustomerId')
-  //  curl http://localhost:3001/stripe/[]
-  public async resisterCreditCard(@Param('stripeCustomerId') id: string) {
-    console.log('add/:stripeCustomerId');
-    console.log(id);
-    try {
-      return resisterCreditCard({
-        stripe: this.stripe,
-        customerId: id,
-        successUrl: 'http://localhost:3000',
-        cancelUrl: 'http://localhost:3000',
-      });
-    } catch (e) {
-      console.log(e);
-      const props: ILog = {
-        userId: '-',
-        message: e.message,
-        module: 'StripeController.',
-        method: 'post',
-      };
-      this.logger.error(props, e.toLocaleString());
-      throw new HttpException(e.message, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
   }
 
   @Post('payment')
@@ -118,63 +81,14 @@ export class StripeController {
       price: price,
     };
   }
+
+  @Post('fixPayment')
+  public async fixPayment(@Body('productId') productId: string) {
+    const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+
+    const subscription = await stripe.subscriptions.create({
+      customer: 'cus_LuudRJfOEJXqc7',
+      items: [{ price: 'price_1LD1yT2eZvKYlo2CQNE3RYRG' }],
+    });
+  }
 }
-/*
-  @Post('payment')
-  public async payment(@Param('accountId') id: string) {
-    const paymentIntent: Stripe.PaymentIntent =
-      await this.stripe.paymentIntents.create({
-        amount: 1000,
-        customer: 'cus_Lde2sYXXDC4b5x',
-        currency: 'jpy',
-        payment_method_types: ['card'],
-      });
-    console.log('------');
-    console.log(paymentIntent);
-    return paymentIntent.client_secret;
-  }
- */
-
-/*
-
-  @Post('payment2')
-  public async payment2() {
-    console.log('payment2');
-    try {
-      const product = await this.stripe.products.create({
-        name: 'Gold Special2',
-        images: [
-          'https://media.stripe.com/e9f5215acd5ba09c9096b07b616f99d2e6a0cd7e.png',
-        ],
-      });
-
-      const price = await this.stripe.prices.create({
-        unit_amount: 100,
-        currency: 'jpy',
-        product: product.id,
-      });
-
-      const session = await this.stripe.checkout.sessions.create({
-        mode: 'payment',
-        success_url: `http://localhost:3000/payment`,
-        cancel_url: `http://localhost:3000/payment`,
-        payment_method_types: ['card'],
-        customer: 'cus_Lde2sYXXDC4b5x',
-        line_items: [
-          {
-            price: price.id,
-            quantity: 1,
-          },
-        ],
-      });
-      console.log(session);
-      return {
-        session_id: session.id,
-        checkout_url: session.url,
-        customer_id: 'cus_Lde2sYXXDC4b5x',
-      };
-    } catch (e) {
-      console.log(e);
-    }
-  }
-   */

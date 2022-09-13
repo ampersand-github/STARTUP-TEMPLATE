@@ -1,4 +1,4 @@
-import { BorrowId } from 'src/domain/borrow/borrow-id/borrow-id';
+import { BorrowerId } from 'src/domain/book/borrower/borrower-id/borrow-id';
 import { IPrismaOpenBook } from './open-book-repository';
 import { openBookConverter } from './open-book-converter';
 import { OpenBook } from 'src/domain/open-book/open-book';
@@ -55,7 +55,7 @@ describe('openBookConverter', () => {
     const expected = OpenBook.reBuild(
       {
         bookId: BookId.reBuild(prismaOpenBook.book_id),
-        borrowingId: BorrowId.reBuild(prismaOpenBook.borrow_histories_id),
+        borrowingId: BorrowerId.reBuild(prismaOpenBook.borrow_histories_id),
       },
       OpenBookId.reBuild(prismaOpenBook.id),
     );

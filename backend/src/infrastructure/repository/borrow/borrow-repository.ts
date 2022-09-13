@@ -1,8 +1,8 @@
 import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
-import { IBorrowRepository } from 'src/domain/borrow/__interface__/borrow-repository-interface';
+import { IBorrowRepository } from 'src/domain/book/borrower/__interface__/borrow-repository-interface';
 import { UserId } from 'src/domain/user/user-id/user-id';
-import { Borrow } from 'src/domain/borrow/borrow';
-import { BorrowId } from 'src/domain/borrow/borrow-id/borrow-id';
+import { Borrow } from 'src/domain/book/borrower/_borrow/borrow';
+import { BorrowerId } from 'src/domain/book/borrower/borrower-id/borrow-id';
 import { borrow_histories } from '@prisma/client';
 import { borrowConverter } from './borrow-converter';
 
@@ -37,7 +37,7 @@ export class BorrowRepository implements IBorrowRepository {
     });
   }
 
-  async findOne(id: BorrowId): Promise<Borrow | null> {
+  async findOne(id: BorrowerId): Promise<Borrow | null> {
     const borrow: IPrismaBorrow = await this.prisma.borrow_histories.findUnique(
       {
         where: { id: id.toString() },

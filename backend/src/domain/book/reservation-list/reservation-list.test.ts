@@ -28,6 +28,6 @@ describe('ReservationList', () => {
 
     // then:
     // 予約日時が古い順
-    expect(actual.values).toStrictEqual([r3,r1,r2]);
+    expect(actual.values).toStrictEqual([r3, r1, r2]);
   });
 });

@@ -1,6 +1,6 @@
 import { rest, RestRequest } from 'msw';
 import { db } from './db';
-import { IBook, IBookWithoutId } from './db/models/book';
+import { IBookWithoutId } from './db/models/book';
 import { uuidv4 } from '@mswjs/interceptors/lib/utils/uuid';
 
 export const handlers = [
