@@ -11,8 +11,10 @@ export class ReservationList extends ValueObject<IReservationList> {
 
   public constructor(props: IReservationList) {
     super(props);
-    // todo 予約日順にソートする
-    this.values = props.values;
+
+    this.values = props.values.sort((a: Reservation, b: Reservation) => {
+      return a.reservationAt > b.reservationAt ? 1 : -1;
+    });
   }
 
   add(reservation: Reservation): ReservationList {
