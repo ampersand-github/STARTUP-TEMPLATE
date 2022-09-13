@@ -1,19 +1,12 @@
-import { BOOK_SIZE_TYPE, BookSize, IBookSize } from './book-size';
+import { BOOK_SIZE_TYPE, BookSize } from "./book-size";
 
 describe('BookSize', () => {
-  // given:
-  const props: IBookSize = {
-    value: BOOK_SIZE_TYPE.bigSize,
-  };
-  // when:
-  const expected = new BookSize(props);
-
-  it('construct()', () => {
-    // then:
-    expect(expected).toStrictEqual(expect.any(BookSize));
-  });
   it('get', () => {
+    // given:
+    const props = BOOK_SIZE_TYPE.bigSize
+    // when:
+    const actual = new BookSize({value:props})
     // then:
-    expect(expected.value).toStrictEqual(props.value);
+    expect(actual.value).toStrictEqual(props);
   });
 });
