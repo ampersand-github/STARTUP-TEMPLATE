@@ -1,7 +1,7 @@
 import { IPrismaBorrow } from './borrow-repository';
-import { Borrow, IBorrow } from 'src/domain/borrow/borrow';
+import { Borrow, IBorrow } from 'src/domain/book/borrower/_borrow/borrow';
 import { UserId } from 'src/domain/user/user-id/user-id';
-import { BorrowId } from 'src/domain/borrow/borrow-id/borrow-id';
+import { BorrowerId } from 'src/domain/book/borrower/borrower-id/borrow-id';
 import { OpenBookId } from 'src/domain/open-book/open-book-id/open-book-id';
 
 export const borrowConverter = (prismaBorrow: IPrismaBorrow): Borrow => {
@@ -12,6 +12,6 @@ export const borrowConverter = (prismaBorrow: IPrismaBorrow): Borrow => {
     endAt: prismaBorrow.end_at ? prismaBorrow.end_at : undefined,
   };
 
-  const borrowId = BorrowId.reBuild(prismaBorrow.id);
+  const borrowId = BorrowerId.reBuild(prismaBorrow.id);
   return Borrow.reBuild(props, borrowId);
 };

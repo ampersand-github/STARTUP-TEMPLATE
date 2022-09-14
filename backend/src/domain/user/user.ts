@@ -1,27 +1,30 @@
 import { UserId } from 'src/domain/user/user-id/user-id';
 import { AggregateRoot } from 'src/domain/__shared__/aggregate-root';
+import { StripeCustomerId } from './stripe-customer-id/stripe-customer-id';
 
 export interface IUser {
+  stripeCustomerId?: StripeCustomerId;
   name: string;
+  tel: string;
 }
 
 export class User extends AggregateRoot<IUser, UserId> {
-  private readonly name: string;
-
-  public getName() {
-    return this.name;
-  }
+  public readonly stripeCustomerId: IUser['stripeCustomerId'];
+  public readonly name: IUser['name'];
+  public readonly tel: IUser['tel'];
 
   private constructor(props: IUser, id: UserId) {
     super(props, id);
+    this.stripeCustomerId = props.stripeCustomerId;
     this.name = props.name;
+    this.tel = props.tel;
   }
 
-  public static create(props: IUser): User {
-    return new User(props, UserId.create());
+  public static construct(props: IUser): User {
+    return new User(props, UserId.construct());
   }
 
-  public static reBuild(props: IUser, id: UserId): User {
+  public static reConstruct(props: IUser, id: UserId): User {
     return new User(props, id);
   }
 }

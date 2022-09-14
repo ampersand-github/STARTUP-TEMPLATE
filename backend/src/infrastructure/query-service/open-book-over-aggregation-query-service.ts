@@ -22,7 +22,7 @@ export class OpenBookOAQS implements IOpenBookOAQS {
 
   private static converter(one: IPrismaOpenBookOAQS): IOpenBookOA {
     return {
-      id: OpenBookId.reBuild(one.id),
+      id: OpenBookId.reConstruct(one.id),
       book: bookConverter(one.books),
       borrowing: one.borrow_histories
         ? borrowConverter(one.borrow_histories)

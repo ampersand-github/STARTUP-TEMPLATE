@@ -2,10 +2,10 @@ import { PrismaService } from '../prisma/prisma.service';
 import { IOpenBookOA } from 'src/usecase/open-book-over-aggregation/__interface__/open-book-OA-interface';
 import { OpenBookId } from 'src/domain/open-book/open-book-id/open-book-id';
 import { Book } from 'src/domain/book/book';
-import { Borrow } from 'src/domain/borrow/borrow';
+import { Borrow } from 'src/domain/book/borrower/_borrow/borrow';
 import { TagList } from 'src/domain/book/tag/tag-list';
 import { BookId } from 'src/domain/book/book-id/book-id';
-import { BorrowId } from 'src/domain/borrow/borrow-id/borrow-id';
+import { BorrowerId } from 'src/domain/book/borrower/borrower-id/borrow-id';
 import { UserId } from 'src/domain/user/user-id/user-id';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -116,7 +116,7 @@ const expected1: IOpenBookOA = {
       startAt: new Date('2022-05-26T10:43:22.960Z'),
       endAt: undefined,
     },
-    BorrowId.reBuild(borrowId1),
+    BorrowerId.reBuild(borrowId1),
   ),
 };
 
@@ -137,7 +137,7 @@ const expected2: IOpenBookOA = {
       startAt: new Date('2022-05-26T10:43:22.960Z'),
       endAt: new Date('2022-05-26T10:43:22.960Z'),
     },
-    BorrowId.reBuild(borrowId2),
+    BorrowerId.reBuild(borrowId2),
   ),
 };
 

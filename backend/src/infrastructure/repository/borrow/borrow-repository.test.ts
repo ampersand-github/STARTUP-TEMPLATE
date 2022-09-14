@@ -1,9 +1,9 @@
 import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
 import { truncateAllTable } from 'src/infrastructure/__shared__/truncate-all-table';
 import { BorrowRepository } from './borrow-repository';
-import { Borrow } from 'src/domain/borrow/borrow';
+import { Borrow } from 'src/domain/book/borrower/_borrow/borrow';
 import { UserId } from 'src/domain/user/user-id/user-id';
-import { BorrowId } from 'src/domain/borrow/borrow-id/borrow-id';
+import { BorrowerId } from 'src/domain/book/borrower/borrower-id/borrow-id';
 import { OpenBookId } from 'src/domain/open-book/open-book-id/open-book-id';
 
 describe('BorrowRepository', () => {
@@ -34,7 +34,9 @@ describe('BorrowRepository', () => {
 
   describe('save()/findOne()', () => {
     test('習得できる', async () => {
-      const borrowId = BorrowId.reBuild('2422c514-4b06-aced-5ef3-3f869d299bd8');
+      const borrowId = BorrowerId.reBuild(
+        '2422c514-4b06-aced-5ef3-3f869d299bd8',
+      );
       const userId = UserId.reBuild('8e37f697-581a-3486-bb79-80348c153828');
       const bookId = OpenBookId.reBuild('64cd7892-966b-0238-72a9-e2b87b29c580');
 
@@ -63,7 +65,9 @@ describe('BorrowRepository', () => {
       expect(actual).toStrictEqual(borrow);
     });
     test('値がないのは習得できない', async () => {
-      const borrowId = BorrowId.reBuild('2422c514-4b06-aced-5ef3-3f869d299bd8');
+      const borrowId = BorrowerId.reBuild(
+        '2422c514-4b06-aced-5ef3-3f869d299bd8',
+      );
       const actual = await borrowRepository.findOne(borrowId);
       expect(actual).toStrictEqual(null);
     });

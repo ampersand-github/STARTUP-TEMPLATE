@@ -6,11 +6,11 @@ export class UserId extends UniqueEntityId {
     super(value, 'UserId');
   }
 
-  public static create(): UserId {
+  public static construct(): UserId {
     return new UserId(uuid());
   }
 
-  public static reBuild(value: string): UserId {
+  public static reConstruct(value: string): UserId {
     return new UserId(value);
   }
 }
